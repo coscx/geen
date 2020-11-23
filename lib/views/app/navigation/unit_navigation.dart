@@ -8,6 +8,7 @@ import 'package:flutter_unit/components/permanent/overlay_tool_wrapper.dart';
 import 'package:flutter_unit/views/app/navigation/unit_bottom_bar.dart';
 import 'package:flutter_unit/views/pages/category/collect_page.dart';
 import 'package:flutter_unit/views/pages/category/home_right_drawer.dart';
+import 'package:flutter_unit/views/pages/chat/conversation_list.dart';
 import 'package:flutter_unit/views/pages/home/home_drawer.dart';
 import 'package:flutter_unit/views/pages/home/home_page.dart';
 
@@ -60,6 +61,9 @@ class _UnitNavigationState extends State<UnitNavigation> {
               children: <Widget>[
                 HomePage(),
                 CollectPage(),
+                ImConversationListPage(),
+                CollectPage(),
+
               ],
             ),
           ),
@@ -83,15 +87,15 @@ class _UnitNavigationState extends State<UnitNavigation> {
     return FloatingActionButton(
       elevation: 2,
       backgroundColor: color,
-      child: const Icon(Icons.search),
+      child: const Icon(Icons.wc),
       onPressed: () => Navigator.of(context).pushNamed(UnitRouter.search),
     );
   }
 
   _onTapNav(int index) {
-    _controller.animateToPage(index, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+    _controller.jumpToPage(index);
     if (index == 1) {
-      BlocProvider.of<CollectBloc>(context).add(EventSetCollectData());
+      //BlocProvider.of<CollectBloc>(context).add(EventSetCollectData());
     }
   }
 }

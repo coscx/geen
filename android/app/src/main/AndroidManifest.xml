@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.gugu.mgr">
+    package="com.coscx.gold">
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
          In most cases you can leave this as-is, but you if you want to provide
@@ -13,10 +13,11 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="GUGU管理端"
+        android:label="GOLD"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/logo"
         tools:replace="android:label">
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

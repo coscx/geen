@@ -29,9 +29,17 @@ class _UnitBottomBarState extends State<UnitBottomBar> {
         color: widget.color,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: info
-              .map((e) => _buildChild(context, info.indexOf(e), widget.color))
-              .toList(),
+          children: <Widget>[
+
+            _buildChild(context, 0, 0,widget.color),
+            _buildChilds(context, 1, 1,widget.color),
+            SizedBox(
+              width: 20,
+            ),
+            _buildChilds(context, 0,2, widget.color),
+            _buildChild(context, 1, 3,widget.color)
+          ]
+          ,
         ));
   }
 
@@ -42,12 +50,12 @@ class _UnitBottomBarState extends State<UnitBottomBar> {
   final paddingTR = const EdgeInsets.only(top: 2, right: 2);
   final paddingTL = const EdgeInsets.only(top: 2, left: 2);
 
-  Widget _buildChild(BuildContext context, int i, Color color) {
-    final bool active = i == _position;
+  Widget _buildChild(BuildContext context, int i,int p, Color color) {
+    final bool active = p == _position;
     final bool left = i == 0;
 
     return GestureDetector(
-      onTap: () => _tapTab(i),
+      onTap: () => _tapTab(p),
       onLongPress: () => _onLongPress(context, i),
       child: Material(
         elevation: 2,
@@ -59,7 +67,7 @@ class _UnitBottomBarState extends State<UnitBottomBar> {
                 color: color.withAlpha(88),
                 borderRadius: left ? borderTR : borderTL),
             height: 45,
-            width: 100,
+            width: 80,
             child: Icon(
               widget.itemData[info[i]],
               color: active ? color : Colors.white,
@@ -68,7 +76,32 @@ class _UnitBottomBarState extends State<UnitBottomBar> {
       ),
     );
   }
+  Widget _buildChilds(BuildContext context, int i, int p,Color color) {
+    final bool active = p == _position;
+    final bool left = i == 0;
 
+    return GestureDetector(
+      onTap: () => _tapTab(p),
+      onLongPress: () => _onLongPress(context, i),
+      child: Material(
+        elevation: 2,
+        shape: RoundedRectangleBorder(borderRadius: left ? borderTR : borderTL),
+        child: Container(
+            margin: left ? paddingTR : paddingTL,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                color: color.withAlpha(88),
+                borderRadius: left ? borderTR : borderTL),
+            height: 45,
+            width: 50,
+            child: Icon(
+              i==0?Icons.chat_bubble_outline:Icons.access_alarm,
+              color: active ? color : Colors.white,
+              size: active ? 28 : 24,
+            )),
+      ),
+    );
+  }
   _tapTab(int i) {
     setState(() {
       _position = i;

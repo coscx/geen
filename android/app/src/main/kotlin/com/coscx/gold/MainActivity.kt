@@ -1,4 +1,4 @@
-package com.gugu.mgr
+package com.coscx.gold
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

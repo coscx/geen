@@ -43,6 +43,7 @@ dependencies:
   flt_im_plugin:
     git: 'git@e.coding.net:coscx/WanCloudIM/flt_im.git'
   flutter_plugin_android_lifecycle: ^1.0.2
+  badges: ^1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
