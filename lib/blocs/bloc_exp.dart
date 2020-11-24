@@ -33,7 +33,9 @@ export 'home/home_bloc.dart';
 export 'home/home_state.dart';
 export 'home/home_event.dart';
 
-
+export 'chat/chat_bloc.dart';
+export 'chat/chat_state.dart';
+export 'chat/chat_event.dart';
 
 export 'point/point_bloc.dart';
 export 'point/point_state.dart';

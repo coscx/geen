@@ -44,6 +44,12 @@ dependencies:
     git: 'git@e.coding.net:coscx/WanCloudIM/flt_im.git'
   flutter_plugin_android_lifecycle: ^1.0.2
   badges: ^1.1.0
+  video_player: ^1.0.1
+  video_thumbnail: ^0.2.4
+  flutter_plugin_record: ^0.3.4
+  audioplayers: ^0.17.0
+  permission_handler: '^4.4.0+hotfix.2'
+  image_picker: ^0.6.7+14
 dev_dependencies:
   flutter_test:
     sdk: flutter
