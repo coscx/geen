@@ -149,7 +149,7 @@ class ImConversationListPage extends StatelessWidget{
             return InkWell(
                 onTap: () {
                   BlocProvider.of<PeerBloc>(context).add(EventFirstLoadMessage("1",state.message[index].cid));
-                  Navigator.pushNamed(context, UnitRouter.to_chat, arguments: state.message[index]);
+                  Navigator.pushNamed(context, UnitRouter.to_chats, arguments: state.message[index]);
                 },
                 child: _buildListItem(state.message[index]));
           });

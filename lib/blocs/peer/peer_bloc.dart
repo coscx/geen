@@ -26,12 +26,28 @@ class PeerBloc extends Bloc<PeerEvent, PeerState> {
 
   @override
   Stream<PeerState> mapEventToState(PeerEvent event) async* {
-
-    if(event is PeerInital){
-
+    if (event is PeerInital) {
 
 
     }
+
+    if (event is EventSendNewMessage) {
+        FltImPlugin im = FltImPlugin();
+        Map result = await im.sendTextMessage(
+          secret: false,
+          sender: event.currentUID,
+          receiver: event.peerUID,
+          rawContent: event.content ?? 'hello world',
+        );
+          List<Message> newMessage =[];
+          Map response = await im.loadData();
+          var  messages = ValueUtil.toArr(response["data"]).map((e) => Message.fromMap((e))).toList();
+
+          newMessage.addAll(messages.reversed.toList());
+
+        yield PeerMessageSuccess(newMessage,event.peerUID);
+      }
+
     if (event is EventReceiveNewMessage) {
 
       try {
@@ -45,9 +61,8 @@ class PeerBloc extends Bloc<PeerEvent, PeerState> {
                return;
             }
             List<Message> history=state.props.elementAt(0);
-
-            newMessage.addAll(history);
             newMessage.add(mess);
+            newMessage.addAll(history);
 
           }else{
             FltImPlugin im = FltImPlugin();
@@ -58,7 +73,7 @@ class PeerBloc extends Bloc<PeerEvent, PeerState> {
             Map response = await im.loadData();
             var  messages = ValueUtil.toArr(response["data"]).map((e) => Message.fromMap((e))).toList();
 
-            newMessage.addAll(messages);
+            newMessage.addAll(messages.reversed.toList());
           }
 
 
@@ -69,6 +84,7 @@ class PeerBloc extends Bloc<PeerEvent, PeerState> {
       }
 
     }
+
 
     if (event is EventFirstLoadMessage) {
 
@@ -81,7 +97,7 @@ class PeerBloc extends Bloc<PeerEvent, PeerState> {
             peerUID: event.peerUID,
           );
           Map response = await im.loadData();
-          var  messages = ValueUtil.toArr(response["data"]).map((e) => Message.fromMap(ValueUtil.toMap(e))).toList();
+          var  messages = ValueUtil.toArr(response["data"]).map((e) => Message.fromMap(ValueUtil.toMap(e))).toList().reversed.toList();
 
         yield PeerMessageSuccess(messages,event.peerUID);
       } catch (err) {

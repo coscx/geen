@@ -27,3 +27,12 @@ class EventReceiveNewMessage extends PeerEvent {
   EventReceiveNewMessage(this.message);
 
 }
+
+class EventSendNewMessage extends PeerEvent {
+
+  final String currentUID;
+  final String peerUID;
+  final String content;
+  EventSendNewMessage(this.currentUID,this.peerUID,this.content,);
+
+}
