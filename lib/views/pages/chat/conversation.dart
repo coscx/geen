@@ -1,7 +1,14 @@
 import 'dart:io';
+import 'package:flt_im_plugin/conversion.dart';
+import 'package:flt_im_plugin/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_plugin_record/voice_widget.dart';
+import 'package:flutter_unit/blocs/bloc_exp.dart';
+import 'package:flutter_unit/blocs/home/home_state.dart';
+import 'package:flutter_unit/blocs/peer/peer_bloc.dart';
+import 'package:flutter_unit/blocs/peer/peer_state.dart';
 import 'file:///C:/flutter/geen/lib/views/pages/chat/view/util/user.dart';
 import 'package:flutter_unit/views/pages/chat/view/emoji/emoji_picker.dart';
 import 'package:flutter_unit/views/pages/chat/view/util/message.dart';
@@ -20,14 +27,13 @@ const String CONVERSATION_MESSAGE_CHANNEL = "flutter_lc_im/messages";
  * 支持文本、图片、语音和视频消息的发送
  */
 class ImConversationPage extends StatefulWidget {
-  final ImUser currentUser;
-  final ImUser toUser;
+  final Conversion conversion;
   final Color color;
   ImConversationPage(
       {Key key,
-      this.currentUser,
-      this.toUser,
-      this.color = const Color(0xfffdd82c)})
+      this.conversion,
+      this.color = const Color(0xfffdd82c)}
+      )
       : super(key: key);
 
   @override
@@ -69,14 +75,15 @@ class _ImConversationPageState extends State<ImConversationPage> {
 
   //只有下拉加载更多数据
   void _onRefresh() async {
+    BlocProvider.of<PeerBloc>(context).add(EventLoadMoreMessage());
     //如果首次加载的message没有limit条表示没有历史数据，不能刷新
-    if (_messages.length >= _limit) {
-      ImMessage firstMessage = _messages[0];
-      FlutterLcIm.queryHistoryConversationMessages(
-          _limit, firstMessage.messageId, firstMessage.timestamp);
-    } else {
+    // if (_messages.length >= _limit) {
+    //   ImMessage firstMessage = _messages[0];
+    //   FlutterLcIm.queryHistoryConversationMessages(
+    //       _limit, firstMessage.messageId, firstMessage.timestamp);
+    // } else {
       _refreshController.refreshCompleted();
-    }
+    //}
   }
 
   Widget imRefreshHeader() {
@@ -97,13 +104,6 @@ class _ImConversationPageState extends State<ImConversationPage> {
     //检测需要聊天的权限
     checkConversationPermission();
 
-    //加入到会话中
-    FlutterLcIm.createConversation(widget.toUser.uid, attributes: {
-      'users': [
-        widget.toUser.toJson(),
-        widget.currentUser.toJson(),
-      ]
-    });
     _focusNode.addListener(_focusNodeListener); // 初始化一个listener
   }
 
@@ -172,9 +172,17 @@ class _ImConversationPageState extends State<ImConversationPage> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: widget.color,
-        title: Text(widget.toUser.username),
+        title: Text("widget.conversion.name"),
       ),
-      body: Builder(builder: (BuildContext context) {
+      body: BlocListener<PeerBloc, PeerState>(
+          listener: (ctx, state) {
+            if (state is PeerMessageSuccess) {
+
+              _scrollToBottom();
+
+            }
+          },
+     child:BlocBuilder<PeerBloc, PeerState>(builder: (ctx, state) {
         return Container(
           margin: const EdgeInsets.only(top: 30),
           child: Column(children: <Widget>[
@@ -197,14 +205,9 @@ class _ImConversationPageState extends State<ImConversationPage> {
                   header: imRefreshHeader(),
                   controller: _refreshController,
                   onRefresh: _onRefresh,
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    physics: BouncingScrollPhysics(),
-                    itemCount: _messages.length,
-                    itemBuilder: (context, i) {
-                      return _buildMessageRow(_messages[i], i);
-                    },
-                  ),
+                  child: _buildContent(ctx, state),
+
+
                 ),
               ),
             ),
@@ -230,9 +233,42 @@ class _ImConversationPageState extends State<ImConversationPage> {
                     child: _buildExpandedPanelComposer()),
           ]),
         );
-      }),
+      })),
     );
   }
+
+
+  Widget _buildContent(BuildContext context, PeerState state) {
+    if (state is PeerMessageSuccess) {
+      return   ListView.builder(
+        controller: _scrollController,
+        physics: BouncingScrollPhysics(),
+        itemCount: state.messageList.length,
+        itemBuilder: (context, i) {
+          return _buildMessageRow(state.messageList[i], i);
+        },
+      );
+    }
+    if (state is LoadMorePeerMessageSuccess) {
+      return   ListView.builder(
+        controller: _scrollController,
+        physics: BouncingScrollPhysics(),
+        itemCount: state.messageList.length,
+        itemBuilder: (context, i) {
+          return _buildMessageRow(state.messageList[i], i);
+        },
+      );
+    }
+    return Container();
+  }
+
+
+
+
+
+
+
+
 
 /*
  * 文字输入框
@@ -316,7 +352,7 @@ class _ImConversationPageState extends State<ImConversationPage> {
     );
   }
 
-  Widget _buildMessageRow(ImMessage message, int index) {
+  Widget _buildMessageRow(Message message, int index) {
     bool isShowMessageTime = index % _limit == 0 ? true : false;
     return Column(
       children: <Widget>[
@@ -325,10 +361,10 @@ class _ImConversationPageState extends State<ImConversationPage> {
             : SizedBox(),
         ImMessageItemView(
           message: message,
-          avatarUrl: message.ioType == ImMessageIOType.messageIOTypeOut
-              ? widget.currentUser.avatarUrl
-              : widget.toUser.avatarUrl,
-          messageAlign: message.ioType == ImMessageIOType.messageIOTypeOut
+          avatarUrl: message.type == ImMessageIOType.messageIOTypeOut
+              ? ''
+              : '',
+          messageAlign: message.sender== "1"
               ? MessageRightAlign
               : MessageLeftAlign,
         )
@@ -518,15 +554,15 @@ class _ImConversationPageState extends State<ImConversationPage> {
 
     _textController.clear();
 
-    ImMessage message = ImMessage(
-        fromUser: widget.currentUser,
-        toUser: widget.toUser,
-        text: text,
-        ioType: ImMessageIOType.messageIOTypeOut,
-        messageType: ImMessageType.text);
-    setState(() {
-      _messages.add(message);
-    });
+    // ImMessage message = ImMessage(
+    //     fromUser: widget.currentUser,
+    //     toUser: widget.toUser,
+    //     text: text,
+    //     ioType: ImMessageIOType.messageIOTypeOut,
+    //     messageType: ImMessageType.text);
+    // setState(() {
+    //   _messages.add(message);
+    // });
 
     // _scrollToBottom();
 
@@ -542,15 +578,15 @@ class _ImConversationPageState extends State<ImConversationPage> {
       return;
     }
 
-    ImMessage message = ImMessage(
-        fromUser: widget.currentUser,
-        toUser: widget.toUser,
-        url: path,
-        ioType: ImMessageIOType.messageIOTypeOut,
-        messageType: ImMessageType.image);
-    setState(() {
-      _messages.add(message);
-    });
+    // ImMessage message = ImMessage(
+    //     fromUser: widget.currentUser,
+    //     toUser: widget.toUser,
+    //     url: path,
+    //     ioType: ImMessageIOType.messageIOTypeOut,
+    //     messageType: ImMessageType.image);
+    // setState(() {
+    //   _messages.add(message);
+    // });
 
     _scrollToBottom(offset: _imageScrollHeight);
     //发送到服务器
@@ -565,17 +601,17 @@ class _ImConversationPageState extends State<ImConversationPage> {
       return;
     }
 
-    ImMessage message = ImMessage(
-        fromUser: widget.currentUser,
-        toUser: widget.toUser,
-        url: path,
-        messageId: DateTime.now().millisecondsSinceEpoch.toString(),
-        duration: duration.ceil(),
-        ioType: ImMessageIOType.messageIOTypeOut,
-        messageType: ImMessageType.audio);
-    setState(() {
-      _messages.add(message);
-    });
+    // ImMessage message = ImMessage(
+    //     fromUser: widget.currentUser,
+    //     toUser: widget.toUser,
+    //     url: path,
+    //     messageId: DateTime.now().millisecondsSinceEpoch.toString(),
+    //     duration: duration.ceil(),
+    //     ioType: ImMessageIOType.messageIOTypeOut,
+    //     messageType: ImMessageType.audio);
+    // setState(() {
+    //   _messages.add(message);
+    // });
 
     _scrollToBottom();
 
@@ -595,16 +631,16 @@ class _ImConversationPageState extends State<ImConversationPage> {
     await controller.initialize();
     int seconds = controller.value.duration.inSeconds;
 
-    ImMessage message = ImMessage(
-        fromUser: widget.currentUser,
-        toUser: widget.toUser,
-        url: video.path,
-        duration: seconds,
-        ioType: ImMessageIOType.messageIOTypeOut,
-        messageType: ImMessageType.video);
-    setState(() {
-      _messages.add(message);
-    });
+    // ImMessage message = ImMessage(
+    //     fromUser: widget.currentUser,
+    //     toUser: widget.toUser,
+    //     url: video.path,
+    //     duration: seconds,
+    //     ioType: ImMessageIOType.messageIOTypeOut,
+    //     messageType: ImMessageType.video);
+    // setState(() {
+    //   _messages.add(message);
+    // });
 
     _scrollToBottom();
 

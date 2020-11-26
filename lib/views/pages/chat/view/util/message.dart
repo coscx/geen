@@ -1,3 +1,4 @@
+import 'package:flt_im_plugin/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -23,7 +24,7 @@ AudioPlayer audioPlayer = AudioPlayer();
 class ImMessageItemView extends StatefulWidget {
   final String avatarUrl;
   final Color color;
-  final ImMessage message;
+  final Message message;
   final int messageAlign;
 
   ImMessageItemView(
@@ -45,28 +46,28 @@ class _ImMessageItemViewState extends State<ImMessageItemView> {
   }
 
   Widget _messageView(BuildContext context) {
-    if (widget.message.messageType == ImMessageType.text) {
+    if (widget.message.type == MessageType.MESSAGE_TEXT) {
       return TextMessage(
         message: widget.message,
         messageAlign: widget.messageAlign,
         color: widget.color,
         avatarUrl: widget.avatarUrl,
       );
-    } else if (widget.message.messageType == ImMessageType.image) {
+    } else if (widget.message.type == MessageType.MESSAGE_IMAGE) {
       return ImageMessage(
         message: widget.message,
         messageAlign: widget.messageAlign,
         color: widget.color,
         avatarUrl: widget.avatarUrl,
       );
-    } else if (widget.message.messageType == ImMessageType.audio) {
+    } else if (widget.message.type == MessageType.MESSAGE_AUDIO) {
       return AudioMessage(
         message: widget.message,
         messageAlign: widget.messageAlign,
         color: widget.color,
         avatarUrl: widget.avatarUrl,
       );
-    } else if (widget.message.messageType == ImMessageType.video) {
+    } else if (widget.message.type == MessageType.MESSAGE_VIDEO) {
       return VideoMessage(
         message: widget.message,
         messageAlign: widget.messageAlign,

@@ -160,7 +160,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "85172c5b7e126af621aba5b7ad914477d0abb003"
+      resolved-ref: db25274e20a2be4d92739a2c37149daaad20e0d3
       url: "git@e.coding.net:coscx/WanCloudIM/flt_im.git"
     source: git
     version: "1.0.0"

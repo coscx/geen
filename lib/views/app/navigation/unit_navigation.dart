@@ -205,7 +205,7 @@ class _UnitNavigationState extends State<UnitNavigation> {
   }
 
   void onPeerMessage(result) {
-
+    BlocProvider.of<PeerBloc>(context).add(EventReceiveNewMessage(Map<String, dynamic>.from(result)));
   }
 
   void onPeerSecretMessage(result) {

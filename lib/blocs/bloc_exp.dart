@@ -37,6 +37,13 @@ export 'chat/chat_bloc.dart';
 export 'chat/chat_state.dart';
 export 'chat/chat_event.dart';
 
+
+export 'peer/peer_bloc.dart';
+export 'peer/peer_state.dart';
+export 'peer/peer_event.dart';
+
+
+
 export 'point/point_bloc.dart';
 export 'point/point_state.dart';
 export 'point/point_event.dart';

@@ -1,3 +1,4 @@
+import 'package:flt_im_plugin/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_unit/views/pages/chat/view/util/message.dart';
 
@@ -5,7 +6,7 @@ import '../util/ImMessage.dart';
 import '../util/avatar.dart';
 
 class TextMessage extends StatefulWidget {
-  final ImMessage message;
+  final Message message;
   final int messageAlign;
   final String avatarUrl;
   final Color color;
@@ -44,7 +45,7 @@ class _TextMessageState extends State<TextMessage> {
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(6)),
               ),
-              child: Text(widget.message.text,
+              child: Text(widget.message.content['text'],
                   textAlign: TextAlign.left, style: TextStyle(fontSize: 16.0)),
             ),
           ],
@@ -62,10 +63,10 @@ class _TextMessageState extends State<TextMessage> {
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               constraints: BoxConstraints(maxWidth: 250),
               decoration: BoxDecoration(
-                color: widget.color,
+                color: Colors.green,
                 borderRadius: BorderRadius.all(Radius.circular(6)),
               ),
-              child: Text(widget.message.text,
+              child:Text(widget.message.content['text'],
                   textAlign: TextAlign.left, style: TextStyle(fontSize: 16.0)),
             ),
             Container(

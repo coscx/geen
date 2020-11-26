@@ -5,8 +5,12 @@ import 'package:flutter/services.dart';
 
 import 'package:badges/badges.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_unit/app/router.dart';
 import 'package:flutter_unit/blocs/chat/chat_bloc.dart';
 import 'package:flutter_unit/blocs/chat/chat_state.dart';
+import 'package:flutter_unit/blocs/peer/peer_bloc.dart';
+import 'package:flutter_unit/blocs/peer/peer_event.dart';
+import 'package:flutter_unit/blocs/peer/peer_state.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flt_im_plugin/flt_im_plugin.dart';
 import 'package:flt_im_plugin/conversion.dart';
@@ -144,7 +148,8 @@ class ImConversationListPage extends StatelessWidget{
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
                 onTap: () {
-
+                  BlocProvider.of<PeerBloc>(context).add(EventFirstLoadMessage("1",state.message[index].cid));
+                  Navigator.pushNamed(context, UnitRouter.to_chat, arguments: state.message[index]);
                 },
                 child: _buildListItem(state.message[index]));
           });

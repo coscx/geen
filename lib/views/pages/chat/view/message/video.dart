@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flt_im_plugin/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_unit/views/pages/chat/view/gallery/video.dart';
@@ -12,7 +13,7 @@ import '../util/avatar.dart';
 class VideoMessage extends StatefulWidget {
   final String avatarUrl;
   final Color color;
-  final ImMessage message;
+  final Message message;
   final int messageAlign;
 
   VideoMessage(
@@ -47,15 +48,15 @@ class _VideoMessageState extends State<VideoMessage> {
               ),
             ),
             GestureDetector(
-              onTap: () => _pushToVideoPlayer(widget.message.url, context),
+              onTap: () => _pushToVideoPlayer(widget.message.rawContent, context),
               child: Container(
                 height: 200,
                 width: 100,
                 margin: const EdgeInsets.only(bottom: 10, left: 4),
-                child: widget.message.thumbnailUrl == null
+                child: widget.message.rawContent == null
                     ? SizedBox()
                     : Image(
-                        image: FileImage(File(widget.message.thumbnailUrl)),
+                        image: FileImage(File(widget.message.rawContent)),
                         fit: BoxFit.cover,
                       ),
               ),
@@ -65,7 +66,7 @@ class _VideoMessageState extends State<VideoMessage> {
       );
     } else {
       return GestureDetector(
-        onTap: () => _pushToVideoPlayer(widget.message.url, context),
+        onTap: () => _pushToVideoPlayer(widget.message.rawContent, context),
         child: Container(
           margin: const EdgeInsets.only(right: 10, top: 10),
           child: Row(
@@ -76,7 +77,7 @@ class _VideoMessageState extends State<VideoMessage> {
                 height: 200,
                 width: 100,
                 margin: const EdgeInsets.only(bottom: 10, right: 4),
-                child: widget.message.thumbnailUrl == null
+                child: widget.message.rawContent == null
                     ? SizedBox()
                     : Stack(
                         fit: StackFit.expand,
@@ -84,7 +85,7 @@ class _VideoMessageState extends State<VideoMessage> {
                           Positioned(
                             child: Image(
                               image: FileImage(
-                                  File(widget.message.thumbnailUrl)),
+                                  File(widget.message.rawContent)),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -92,7 +93,7 @@ class _VideoMessageState extends State<VideoMessage> {
                             left: 4,
                             bottom: 2,
                             child: Text(
-                              '00:${widget.message.duration}',
+                              '00:${widget.message.flags}',
                               style: TextStyle(
                                   fontSize: 10, color: Colors.white),
                             ),
@@ -110,17 +111,17 @@ class _VideoMessageState extends State<VideoMessage> {
     }
   }
 
-  void _buildVideo(ImMessage message) async {
+  void _buildVideo(Message message) async {
     final thumbnailPath = await VideoThumbnail.thumbnailFile(
-      video: message.url,
+      video: message.rawContent,
       thumbnailPath: (await getTemporaryDirectory()).path,
       imageFormat: ImageFormat.JPEG,
       maxWidth: 100,
       quality: 25,
     );
 
-    if (message.thumbnailUrl == null && thumbnailPath != null) {
-      message.thumbnailUrl = thumbnailPath;
+    if (message.rawContent == null && thumbnailPath != null) {
+      message.rawContent = thumbnailPath;
       setState(() {});
     }
   }

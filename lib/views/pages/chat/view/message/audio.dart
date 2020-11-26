@@ -1,3 +1,4 @@
+import 'package:flt_im_plugin/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_unit/views/pages/chat/view/util/message.dart';
@@ -5,7 +6,7 @@ import '../util/ImMessage.dart';
 import '../util/avatar.dart';
 
 class AudioMessage extends StatefulWidget {
-  final ImMessage message;
+  final Message message;
   final int messageAlign;
   final String avatarUrl;
   final Color color;
@@ -40,7 +41,7 @@ class _AudioMessageState extends State<AudioMessage> {
             ),
             GestureDetector(
               onTap: () =>
-                  _speakVoice(widget.message.messageId, widget.message.url),
+                  _speakVoice(widget.message.msgId.toString(), widget.message.rawContent),
               child: Container(
                 margin: const EdgeInsets.only(bottom: 10, right: 10),
                 padding:
@@ -58,7 +59,7 @@ class _AudioMessageState extends State<AudioMessage> {
                       height: 20,
                     ),
                     Container(
-                        child: Text(''' ${widget.message.duration}'' ''')),
+                        child: Text(''' ${widget.message.flags}'' ''')),
                   ],
                 ),
               ),
@@ -68,7 +69,7 @@ class _AudioMessageState extends State<AudioMessage> {
       );
     } else {
       return GestureDetector(
-        onTap: () => _speakVoice(widget.message.messageId, widget.message.url),
+        onTap: () => _speakVoice(widget.message.msgId.toString(), widget.message.rawContent),
         child: Container(
           margin: const EdgeInsets.only(right: 10, top: 10),
           child: Row(
@@ -76,7 +77,7 @@ class _AudioMessageState extends State<AudioMessage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Container(
-                width: 80.0 + widget.message.duration,
+                width: 80.0 + widget.message.flags,
                 margin: const EdgeInsets.only(bottom: 10, right: 10),
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -89,7 +90,7 @@ class _AudioMessageState extends State<AudioMessage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Container(
-                        child: Text(''' ${widget.message.duration}'' ''')),
+                        child: Text(''' ${widget.message.flags}'' ''')),
                     Image.asset(
                       'assets/images/speak_right.png',
                       width: 20,

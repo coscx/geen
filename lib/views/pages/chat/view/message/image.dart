@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flt_im_plugin/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_unit/views/pages/chat/view/gallery/photo.dart';
@@ -9,7 +10,7 @@ import '../util/ImMessage.dart';
 import '../util/avatar.dart';
 
 class ImageMessage extends StatefulWidget {
-  final ImMessage message;
+  final Message message;
   final int messageAlign;
   final String avatarUrl;
   final Color color;
@@ -41,15 +42,15 @@ class _ImageMessageState extends State<ImageMessage> {
               ),
             ),
             GestureDetector(
-              onTap: () => _pushToFullImage(context, widget.message.url),
+              onTap: () => _pushToFullImage(context, widget.message.rawContent),
               child: Container(
                 height: 200,
                 width: 200,
                 margin: const EdgeInsets.only(bottom: 10, left: 4),
                 child: Image(
-                  image: widget.message.url.contains("http")
-                      ? NetworkImage(widget.message.url + ImageSize)
-                      : FileImage(File(widget.message.url)),
+                  image: widget.message.rawContent.contains("http")
+                      ? NetworkImage(widget.message.rawContent + ImageSize)
+                      : FileImage(File(widget.message.rawContent)),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -59,7 +60,7 @@ class _ImageMessageState extends State<ImageMessage> {
       );
     } else {
       return GestureDetector(
-        onTap: () => _pushToFullImage(context, widget.message.url),
+        onTap: () => _pushToFullImage(context, widget.message.rawContent),
         child: Container(
           margin: const EdgeInsets.only(right: 10, top: 10),
           child: Row(
@@ -71,9 +72,9 @@ class _ImageMessageState extends State<ImageMessage> {
                 width: 200,
                 margin: const EdgeInsets.only(bottom: 10, right: 4),
                 child: Image(
-                  image: widget.message.url.contains("http")
-                      ? NetworkImage(widget.message.url + ImageSize)
-                      : FileImage(File(widget.message.url)),
+                  image: widget.message.rawContent.contains("http")
+                      ? NetworkImage(widget.message.rawContent + ImageSize)
+                      : FileImage(File(widget.message.rawContent)),
                   fit: BoxFit.cover,
                 ),
               ),
