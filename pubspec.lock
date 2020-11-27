@@ -335,13 +335,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.16.1"
-  keyboard_visibility:
-    dependency: "direct main"
-    description:
-      name: keyboard_visibility
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.5.6"
   markdown:
     dependency: transitive
     description:

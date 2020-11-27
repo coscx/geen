@@ -30,7 +30,9 @@ def keystorePropertiesFile = rootProject.file("key.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 //add------------------end
-
+configurations.all {
+    resolutionStrategy.force 'com.android.support:support-v4:27.1.0'
+}
 android {
     compileSdkVersion 28
 

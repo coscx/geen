@@ -30,6 +30,7 @@ class PeerMessageSuccess extends PeerState {
 class LoadMorePeerMessageSuccess extends PeerState {
 
   final List<Message> messageList;
+
   const LoadMorePeerMessageSuccess(this.messageList);
   @override
   List<Object> get props => [messageList];

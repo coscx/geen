@@ -27,7 +27,11 @@ class EventReceiveNewMessage extends PeerEvent {
   EventReceiveNewMessage(this.message);
 
 }
+class EventReceiveNewMessageAck extends PeerEvent {
+  final Map<String,dynamic> message;
+  EventReceiveNewMessageAck(this.message);
 
+}
 class EventSendNewMessage extends PeerEvent {
 
   final String currentUID;

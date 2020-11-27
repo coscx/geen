@@ -175,7 +175,9 @@ class _UnitNavigationState extends State<UnitNavigation> {
     }
   }
 
-  void onPeerMessageACK(result, int error) {}
+  void onPeerMessageACK(result, int error) {
+    //BlocProvider.of<PeerBloc>(context).add(EventReceiveNewMessageAck(Map<String, dynamic>.from(result)));
+  }
   onPeerMessageFailure(Map result) {
     // IMMessage
   }

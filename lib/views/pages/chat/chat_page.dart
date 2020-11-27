@@ -21,7 +21,6 @@ import 'package:flutter_unit/views/pages/utils/functions.dart';
 import 'package:flutter_unit/views/pages/utils/image_util.dart';
 import 'package:flutter_unit/views/pages/utils/object_util.dart';
 import 'package:flutter_record/flutter_record.dart';
-import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vibration/vibration.dart';
 
@@ -79,7 +78,7 @@ class ChatsState extends State<ChatsPage> {
     _flutterRecord = FlutterRecord();
     _fixedPlayer = new AudioPlayer();
     _audioPlayer = new AudioCache(fixedPlayer: _fixedPlayer);
-
+    _textFieldNode.addListener(_focusNodeListener); // 初始化一个listener
     _getLocalMessage();
     _initData();
     _checkBlackList();
@@ -93,9 +92,22 @@ class ChatsState extends State<ChatsPage> {
     _fixedPlayer.stop();
     super.dispose();
     _first = false;
-
+    _textFieldNode.removeListener(_focusNodeListener); // 页面消失时必须取消这个listener！！
   }
-
+  Future<Null> _focusNodeListener() async {
+    if (_textFieldNode.hasFocus) {
+      Future.delayed(Duration(milliseconds: 300), () {
+        setState(() {
+          _isShowTools = false;
+          _isShowFace = false;
+          _isShowVoice = false;
+          try {
+            _scrollController.position.jumpTo(0);
+          } catch (e) {}
+        });
+      });
+    }
+  }
   _getPermission() {
     //请求读写权限
     ObjectUtil.getPermissions([
@@ -126,18 +138,18 @@ class ChatsState extends State<ChatsPage> {
     _popString.add('清空记录');
     _popString.add('删除好友');
     _popString.add('加入黑名单');
-    KeyboardVisibilityNotification().addNewListener(
-      onChange: (bool visible) {
-        if (visible) {
-          _isShowTools = false;
-          _isShowFace = false;
-          _isShowVoice = false;
-          try {
-            _scrollController.position.jumpTo(0);
-          } catch (e) {}
-        }
-      },
-    );
+    // KeyboardVisibilityNotification().addNewListener(
+    //   onChange: (bool visible) {
+    //     if (visible) {
+    //       _isShowTools = false;
+    //       _isShowFace = false;
+    //       _isShowVoice = false;
+    //       try {
+    //         _scrollController.position.jumpTo(0);
+    //       } catch (e) {}
+    //     }
+    //   },
+    // );
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
@@ -219,6 +231,7 @@ class ChatsState extends State<ChatsPage> {
               listener: (ctx, state) {
                 if (state is PeerMessageSuccess) {
                   //_scrollToBottom();
+                  _scrollController.position.jumpTo(0);
                 }
               },
               child:BlocBuilder<PeerBloc, PeerState>(builder: (ctx, state) {
@@ -335,7 +348,10 @@ class ChatsState extends State<ChatsPage> {
                       }
                     });
                   }),
-              new Flexible(child: _enterWidget()),
+              new Flexible(
+
+                  child: _enterWidget()
+              ),
               IconButton(
                   icon: _isShowFace
                       ? Icon(Icons.keyboard)
@@ -813,14 +829,8 @@ class ChatsState extends State<ChatsPage> {
     return Container();
   }
   Future<Null> _onRefresh() async {
-    await _getLocalMessage();
-//    if (_isLoadAll) {
-//      if (_messageList.length < 1) {
-//        DialogUtil.buildToast('没有历史消息');
-//      } else {
-//        DialogUtil.buildToast('已加载全部历史消息');
-//      }
-//    }
+
+    BlocProvider.of<PeerBloc>(context).add(EventLoadMoreMessage());
   }
 
   Widget _messageListViewItem(List<Message>messageList, int index) {

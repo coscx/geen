@@ -88,8 +88,6 @@ class ChatItemWidgets {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-
-
                     GestureDetector(
                       child: _contentWidget(entity),
                       onTap: () {
@@ -131,33 +129,33 @@ class ChatItemWidgets {
                       },
                     ),
                     //显示是否重发1、发送2中按钮，发送成功0或者null不显示
-                    entity.flags == '1'
-                        ? IconButton(
-                        icon: Icon(Icons.refresh, color: Colors.red, size: 18),
-                        onPressed: () {
-                          if (null != onResend) {
-                            onResend(entity);
-                          }
-                        })
-                        : (entity.flags == '2'
-                        ? Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.only(top: 20, right: 20),
-                      width: 32.0,
-                      height: 32.0,
-                      child: SizedBox(
-                          width: 12.0,
-                          height: 12.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(
-                                ObjectUtil.getThemeSwatchColor()),
-                            strokeWidth: 2,
-                          )),
-                    )
-                        : SizedBox(
-                      width: 0,
-                      height: 0,
-                    )),
+                    // entity.flags == 11
+                    //     ? IconButton(
+                    //     icon: Icon(Icons.refresh, color: Colors.red, size: 18),
+                    //     onPressed: () {
+                    //       if (null != onResend) {
+                    //         onResend(entity);
+                    //       }
+                    //     })
+                    //     : (entity.flags == 10
+                    //     ? Container(
+                    //   alignment: Alignment.center,
+                    //   padding: EdgeInsets.only(top: 20, right: 20),
+                    //   width: 32.0,
+                    //   height: 32.0,
+                    //   child: SizedBox(
+                    //       width: 12.0,
+                    //       height: 12.0,
+                    //       child: CircularProgressIndicator(
+                    //         valueColor: AlwaysStoppedAnimation(
+                    //             ObjectUtil.getThemeSwatchColor()),
+                    //         strokeWidth: 2,
+                    //       )),
+                    // )
+                    //     : SizedBox(
+                    //   width: 0,
+                    //   height: 0,
+                    // )),
                   ],
                 )),
             SizedBox(width: 10),
