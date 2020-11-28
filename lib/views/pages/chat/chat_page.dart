@@ -96,7 +96,7 @@ class ChatsState extends State<ChatsPage> {
   }
   Future<Null> _focusNodeListener() async {
     if (_textFieldNode.hasFocus) {
-      Future.delayed(Duration(milliseconds: 300), () {
+      Future.delayed(Duration(milliseconds: 500), () {
         setState(() {
           _isShowTools = false;
           _isShowFace = false;
