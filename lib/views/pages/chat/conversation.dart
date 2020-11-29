@@ -9,7 +9,6 @@ import 'package:flutter_unit/blocs/bloc_exp.dart';
 import 'package:flutter_unit/blocs/home/home_state.dart';
 import 'package:flutter_unit/blocs/peer/peer_bloc.dart';
 import 'package:flutter_unit/blocs/peer/peer_state.dart';
-import 'file:///C:/flutter/geen/lib/views/pages/chat/view/util/user.dart';
 import 'package:flutter_unit/views/pages/chat/view/emoji/emoji_picker.dart';
 import 'package:flutter_unit/views/pages/chat/view/util/message.dart';
 import 'package:flutter_unit/views/pages/chat/view/util/permission.dart';

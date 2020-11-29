@@ -17,11 +17,10 @@ import 'package:flutter_unit/views/pages/setting/code_style_setting.dart';
 import 'package:flutter_unit/views/pages/setting/font_setting.dart';
 import 'package:flutter_unit/views/pages/setting/item_style_setting.dart';
 import 'package:flutter_unit/views/pages/setting/theme_color_setting.dart';
-import 'package:flutter_unit/views/pages/unit_todo/attr_unit_page.dart';
-import 'package:flutter_unit/views/pages/unit_todo/point_unit_page.dart';
+
 
 import 'package:flutter_unit/views/pages/widget_detail/widget_detail_page.dart';
-import 'package:flutter_unit/views/pages/unit_todo/layout_unit_page.dart';
+
 import 'package:flutter_unit/views/pages/setting/setting_page.dart';
 
 import 'utils/router_utils.dart';
@@ -91,14 +90,10 @@ class UnitRouter {
       case login:
         return Right2LeftRouter(child: LoginPage());
 
-      case attr:
-        return Right2LeftRouter(child: AttrUnitPage());
-      case bug:
-        return Right2LeftRouter(child: BugUnitPage());
+
       case galley:
         return Right2LeftRouter(child: GalleryPage());
-      case layout:
-        return Right2LeftRouter(child: LayoutUnitPage());
+
       case about_app:
         return Right2LeftRouter(child: AboutAppPage());
       case about_me:

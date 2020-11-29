@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'file:///C:/flutter/geen/lib/views/pages/chat/view/util/user.dart';
 import 'package:flt_im_plugin/value_util.dart';
+
+import 'user.dart';
 
 
 class ImMessageType {

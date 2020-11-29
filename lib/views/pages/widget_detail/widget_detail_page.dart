@@ -11,7 +11,6 @@ import 'package:flutter_unit/components/project/widget_node_panel.dart';
 import 'package:flutter_unit/model/node_model.dart';
 import 'package:flutter_unit/model/widget_model.dart';
 import 'package:flutter_unit/views/pages/widget_detail/category_end_drawer.dart';
-import 'package:flutter_unit/views/widgets/widgets_map.dart';
 import 'package:flutter_unit/app/router.dart';
 class WidgetDetailPage extends StatefulWidget {
   final WidgetModel model;
@@ -115,23 +114,7 @@ class _WidgetDetailPageState extends State<WidgetDetailPage> {
 
   final List<int> colors = Cons.tabColors;
 
-  Widget _buildNodes(List<NodeModel> nodes, String name) {
-    GlobalState globalState = BlocProvider.of<GlobalBloc>(context).state;
-    return Column(
-        children: nodes
-            .asMap()
-            .keys
-            .map((i) => WidgetNodePanel(
-                  codeStyle: Cons.codeThemeSupport.keys
-                      .toList()[globalState.codeStyleIndex],
-                  codeFamily: 'Inconsolata',
-                  text: nodes[i].name,
-                  subText: nodes[i].subtitle,
-                  code: nodes[i].code,
-                  show: WidgetsMap.map(name)[i],
-                ))
-            .toList());
-  }
+
 
   Future<bool> _whenPop(BuildContext context) async {
     if (Scaffold.of(context).isEndDrawerOpen) return true;
