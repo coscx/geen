@@ -22,7 +22,7 @@ class DetailWithData extends DetailState {
   const DetailWithData({this.widgetModel, this.nodes,this.links,this.userdetails});
 
   @override
-  List<Object> get props => [widgetModel,nodes];
+  List<Object> get props => [widgetModel,links,nodes,userdetails];
 
   @override
   String toString() {

@@ -164,15 +164,13 @@ packages:
       url: "git@e.coding.net:coscx/WanCloudIM/flt_im.git"
     source: git
     version: "1.0.0"
-  flukit:
+  flui:
     dependency: "direct main"
     description:
-      path: "package_src/"
-      ref: HEAD
-      resolved-ref: b525b20733b722008b8fd5bd37cc8300e8e77cbc
-      url: "git://github.com/flutterchina/flukit.git"
-    source: git
-    version: "1.0.3"
+      name: flui
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.9.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -335,6 +333,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.16.1"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.1.1"
   markdown:
     dependency: transitive
     description:
@@ -585,6 +590,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.19-nullsafety.2"
+  timeline_list:
+    dependency: "direct main"
+    description:
+      name: timeline_list
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.5"
   timezone:
     dependency: transitive
     description:

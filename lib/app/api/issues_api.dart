@@ -74,6 +74,15 @@ class IssuesApi {
 
     return datas;
   }
+  static Future<Map<String,dynamic>> getTimeLine( String memberId) async {
+    var ss = await LocalStorage.get("token");
+    var token =ss.toString();
+    var data={'memberId':memberId,'token':token};
+    Response<dynamic> rep = await dio.post('/admin/user/gettimeline.html',queryParameters:data );
+    var datas = json.decode(rep.data);
+
+    return datas;
+  }
   static Future<Repository> getRepoFlutterUnit() async {
     Response<dynamic> rep = await dio.get('/repository/name/FlutterUnit');
     dynamic repoStr = rep.data['data']['repositoryData'];

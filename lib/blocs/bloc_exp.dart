@@ -43,6 +43,9 @@ export 'peer/peer_state.dart';
 export 'peer/peer_event.dart';
 
 
+export 'timeline/time_bloc.dart';
+export 'timeline/time_state.dart';
+export 'timeline/time_event.dart';
 
 export 'point/point_bloc.dart';
 export 'point/point_state.dart';

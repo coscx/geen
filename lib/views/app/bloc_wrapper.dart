@@ -60,6 +60,9 @@ class _BlocWrapperState extends State<BlocWrapper> {
           BlocProvider<ChatBloc>(create: (_) => ChatBloc()),
 
           BlocProvider<PeerBloc>(create: (_) => PeerBloc()),
+
+          BlocProvider<TimeBloc>(create: (_) => TimeBloc()),
+
         ], child: widget.child);
   }
 

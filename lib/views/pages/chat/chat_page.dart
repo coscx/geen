@@ -6,7 +6,7 @@ import 'package:flt_im_plugin/message.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flukit/flukit.dart';
+import 'package:flutter_unit/views/pages/chat/widget/Swipers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_unit/blocs/peer/peer_bloc.dart';
 import 'package:flutter_unit/blocs/peer/peer_event.dart';

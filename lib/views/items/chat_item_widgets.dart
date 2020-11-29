@@ -78,7 +78,7 @@ class ChatItemWidgets {
     if (entity.receiver == "1") {
       //对方的消息
       return Container(
-        margin: EdgeInsets.only(left: 10, right: 90, bottom: 30, top: 4),
+        margin: EdgeInsets.only(left: 10, right: 40, bottom: 6.5, top: 6.5),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -107,7 +107,7 @@ class ChatItemWidgets {
     } else {
       //自己的消息
       return Container(
-        margin: EdgeInsets.only(left: 90, right: 10, bottom: 20, top: 4),
+        margin: EdgeInsets.only(left: 40, right: 10, bottom: 6.5, top: 6.5),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -216,13 +216,14 @@ class ChatItemWidgets {
   }
 
   static Widget buildTextWidget(Message entity) {
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(8.0),
       child: Container(
-        padding: EdgeInsets.only(left: 20, right: 20, top: 12, bottom: 12),
+        padding: EdgeInsets.only(left: 6, right: 6, top: 8, bottom: 8),
         color: entity.sender == "1"
-            ? Colors.white
-            : Color.fromARGB(255, 158, 234, 106),
+            ?Color.fromARGB(255, 158, 234, 106)
+            : Colors.white,
         child: Text(
           entity.content['text'],
           style: TextStyle(fontSize: 16, color: Colors.black),

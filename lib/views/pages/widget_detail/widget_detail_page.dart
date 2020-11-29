@@ -12,7 +12,7 @@ import 'package:flutter_unit/model/node_model.dart';
 import 'package:flutter_unit/model/widget_model.dart';
 import 'package:flutter_unit/views/pages/widget_detail/category_end_drawer.dart';
 import 'package:flutter_unit/views/widgets/widgets_map.dart';
-
+import 'package:flutter_unit/app/router.dart';
 class WidgetDetailPage extends StatefulWidget {
   final WidgetModel model;
 
@@ -24,7 +24,7 @@ class WidgetDetailPage extends StatefulWidget {
 
 class _WidgetDetailPageState extends State<WidgetDetailPage> {
   List<WidgetModel> _modelStack = [];
-
+  String memberId ;
   @override
   void initState() {
     _modelStack.add(widget.model);
@@ -53,7 +53,6 @@ class _WidgetDetailPageState extends State<WidgetDetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             BlocBuilder<DetailBloc, DetailState>(builder: _buildTitle),
-
             BlocBuilder<DetailBloc, DetailState>(builder: _buildDetail)
           ],
         ),
@@ -70,15 +69,23 @@ class _WidgetDetailPageState extends State<WidgetDetailPage> {
 
   Widget _buildCollectButton(WidgetModel model, BuildContext context) {
     //监听 CollectBloc 伺机弹出toast
-    return BlocListener<CollectBloc, CollectState>(
+    return BlocListener<DetailBloc, DetailState>(
         listener: (ctx, st) {
+          if (st is DetailWithData){
+            Map<String,dynamic> user=st.props.elementAt(3);
+            memberId= user['user']['memberId'].toString();
+          }
+
          // bool collected = st.widgets.contains(model);
          // String msg = collected ? "收藏【${model.name}】组件成功!" : "已取消【${model.name}】组件收藏!";
          // _showToast(ctx, msg, collected);
         },
         child: FeedbackWidget(
-          onPressed: () => BlocProvider.of<CollectBloc>(context)
-              .add(ToggleCollectEvent(id: model.id)),
+
+          onPressed: () {
+            BlocProvider.of<TimeBloc>(context).add(EventGetTimeLine(memberId??"12221"));
+            Navigator.pushNamed(context, UnitRouter.time_line, arguments: memberId);
+          } ,
           child: BlocBuilder<CollectBloc, CollectState>(
               builder: (_, s) => Padding(
                     padding: const EdgeInsets.only(right: 20.0),
