@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 class UnitDrawerHeader extends StatelessWidget {
   final Color color;
+  final String id;
 
-
-  UnitDrawerHeader({this.color});
+  UnitDrawerHeader({this.color,this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class UnitDrawerHeader extends StatelessWidget {
             height: 15,
           ),
           Text(
-            'Flutter',
+            id,
             style: TextStyle(fontSize: 15, color: Colors.white, shadows: [
               Shadow(color: color, offset: Offset(.5, .5), blurRadius: 1)
             ]),

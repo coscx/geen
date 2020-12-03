@@ -1,8 +1,12 @@
+import 'package:flt_im_plugin/flt_im_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_unit/app/router.dart';
 import 'package:flutter_unit/app/res/toly_icon.dart';
 import 'package:flutter_unit/blocs/bloc_exp.dart';
+import 'package:flutter_unit/storage/dao/local_storage.dart';
+import 'package:flutter_unit/views/dialogs/delete_category_dialog.dart';
+import 'package:flutter_unit/views/pages/login/login_page.dart';
 
 class SettingPage extends StatelessWidget {
   @override
@@ -66,8 +70,62 @@ class SettingPage extends StatelessWidget {
             trailing: _nextIcon(context),
             onTap: () => Navigator.of(context).pushNamed(UnitRouter.version_info),
           ),
+
+          Divider(),
+          SizedBox(
+            height: 20,
+          ),
+          buildButton(context,"退出登录",Colors.blue),
         ],
       ),
+    );
+  }
+  _exit(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (ctx) => Dialog(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: Container(
+            width: 50,
+            child: DeleteCategoryDialog(
+              title: '退出登录',
+              content: '是否确定继续执行?',
+              onSubmit: () {
+                FltImPlugin im = FltImPlugin();
+                im.logout();
+                Future.delayed(Duration(milliseconds: 1)).then((e) async {
+                  var ss = await LocalStorage.remove("im_token");
+                  var memberId = await LocalStorage.remove("memberId");
+                  var sss = await LocalStorage.remove("token");
+                  Navigator.pushNamed(context, UnitRouter.login);
+                });
+                // Navigator.of(context).pushAndRemoveUntil(
+                //     new MaterialPageRoute(builder: (context) => LoginPage()
+                //     ), (route) => route == null);
+
+              },
+            ),
+          ),
+        ));
+  }
+  Widget buildButton(BuildContext context,String txt,MaterialColor color){
+    return    Column(
+      children: [
+
+        RaisedButton(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5))),
+          color: color,
+          onPressed: (){
+            _exit(context);
+          },
+          child: Text(txt,
+              style: TextStyle(color: Colors.white, fontSize: 18)),
+        ),
+      ],
     );
   }
 

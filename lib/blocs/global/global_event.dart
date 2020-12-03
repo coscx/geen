@@ -92,7 +92,14 @@ class EventSetIndexSex extends GlobalEvent {
   @override
   List<Object> get props => [sex];
 }
+class EventSetMemberId extends GlobalEvent {
+  final String memberId;
 
+  const EventSetMemberId(this.memberId);
+
+  @override
+  List<Object> get props => [memberId];
+}
 class EventSetIndexMode extends GlobalEvent {
   final int mode;
 

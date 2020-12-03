@@ -28,6 +28,7 @@ class GlobalState extends Equatable {
   /// [headNum] 首页照片审核图
   final List<String> headNum;
   final int sex;
+  final String memberId;
   const GlobalState({
     this.fontFamily = 'ComicNeue',
     this.themeColor = Colors.blue,
@@ -38,7 +39,8 @@ class GlobalState extends Equatable {
     this.indexPhotoPage =1,
     this.headNum,
     this.sex=1,
-    this.currentPhotoMode=1
+    this.currentPhotoMode=1,
+    this.memberId="0"
   });
 
   @override
@@ -52,7 +54,8 @@ class GlobalState extends Equatable {
         indexPhotoPage,
         headNum,
         sex,
-        currentPhotoMode
+        currentPhotoMode,
+        memberId
       ];
 
   GlobalState copyWith({
@@ -66,7 +69,8 @@ class GlobalState extends Equatable {
     int  indexPhotoPage,
     List<String> headNum,
     int sex,
-    int currentPhotoMode
+    int currentPhotoMode,
+    String memberId
   }) =>
       GlobalState(
         fontFamily: fontFamily ?? this.fontFamily,
@@ -78,11 +82,12 @@ class GlobalState extends Equatable {
         indexPhotoPage:  indexPhotoPage ?? this.indexPhotoPage,
           headNum:headNum??this.headNum,
           sex:sex??this.sex,
-          currentPhotoMode:currentPhotoMode??this.currentPhotoMode
+          currentPhotoMode:currentPhotoMode??this.currentPhotoMode,
+          memberId: memberId?? this.memberId
       );
 
   @override
   String toString() {
-    return 'GlobalState{fontFamily: $fontFamily, themeColor: $themeColor, showBackGround: $showBackGround, codeStyleIndex: $codeStyleIndex, itemStyleIndex: $itemStyleIndex, showPerformanceOverlay: $showPerformanceOverlay}, indexPhotoPage: $indexPhotoPage}, headNum: $headNum, sex: $sex,currentPhotoMode:$currentPhotoMode}';
+    return 'GlobalState{fontFamily: $fontFamily, themeColor: $themeColor, showBackGround: $showBackGround, codeStyleIndex: $codeStyleIndex, itemStyleIndex: $itemStyleIndex, showPerformanceOverlay: $showPerformanceOverlay}, indexPhotoPage: $indexPhotoPage}, headNum: $headNum, sex: $sex,currentPhotoMode:$currentPhotoMode},memberId:$memberId}';
   }
 }

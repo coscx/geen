@@ -102,7 +102,7 @@ class UnitRouter {
         return Right2LeftRouter(child: ImConversationPage());
         return Right2LeftRouter(child: AboutMePage());
       case to_chats:
-        return Right2LeftRouter(child: ChatsPage());
+        return Right2LeftRouter(child: ChatsPage(model: settings.arguments,));
       case point_detail:
         return Right2LeftRouter(child: IssuesDetailPage());
       case time_line:

@@ -85,7 +85,10 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
       var sex = event.sex;
       yield state.copyWith(sex: sex);
     }
-
+    if (event is EventSetMemberId) {
+      var memberId = event.memberId;
+      yield state.copyWith(memberId: memberId);
+    }
     if (event is EventSetIndexMode) {
       var mode = event.mode;
       yield state.copyWith(currentPhotoMode: mode);

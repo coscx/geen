@@ -34,8 +34,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
      if  (result['code']==200){
 
        LocalStorage.save("token", result['msg']['token']);
-
-
+       LocalStorage.save("memberId", result['msg']['id'].toString());
+       LocalStorage.save("im_token", result['msg']['im_token'].toString());
        yield LoginSuccess();
      } else{
        yield LoginFailed(reason: result['msg']);

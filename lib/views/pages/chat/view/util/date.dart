@@ -3,12 +3,20 @@ String tranFormatTime(int timestamp) {
     return "";
   }
   var date = DateTime.fromMillisecondsSinceEpoch(timestamp*1000);
+
+
   String formatTime =
-      '${date.year}-${date.month}-${date.day} ${date.hour}:${date.minute}';
+      numberUtils(date.year) +'-'+numberUtils(date.month) +'-'+numberUtils(date.day)+' '+numberUtils(date.hour)+':'+numberUtils(date.minute)+':'+numberUtils(date.second);
   return formatTime;
 }
-
+ String numberUtils(int number) {
+  if (number < 10) {
+    return "0${number.toString()}";
+  }
+  return number.toString();
+}
 String tranImTime(String time) {
+  if (time == "") return "";
   String duration;
   int minute = 60;
   int hour = minute * 60;

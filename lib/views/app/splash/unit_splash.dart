@@ -49,7 +49,7 @@ class _UnitSplashState extends State<UnitSplash> with TickerProviderStateMixin {
     if (status == AnimationStatus.completed) {
       setState(() {
         _animEnd = true;
-        Future.delayed(Duration(milliseconds: 500)).then((e) async {
+        Future.delayed(Duration(milliseconds: 100)).then((e) async {
           var ss = await LocalStorage.get("token");
           var sss =ss.toString();
           if(sss == "" || ss == null){

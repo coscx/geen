@@ -23,13 +23,13 @@ class HomeDrawer extends StatelessWidget {
   Widget _buildChild(BuildContext context) {
 
     final Color color = BlocProvider.of<HomeBloc>(context).activeHomeColor;
-
+    final String id =  BlocProvider.of<GlobalBloc>(context).state.memberId;
     return Container(
         color: color.withAlpha(33),
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            UnitDrawerHeader(color: color),
+            UnitDrawerHeader(color: color,id: id,),
             _buildItem(context, TolyIcon.icon_them, '应用设置', UnitRouter.setting),
             _buildItem(context, TolyIcon.icon_layout, '数据统计', null),
             Divider(height: 1),

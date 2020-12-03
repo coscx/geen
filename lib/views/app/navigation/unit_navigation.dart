@@ -6,6 +6,7 @@ import 'package:flutter_unit/app/res/cons.dart';
 import 'package:flutter_unit/app/router.dart';
 import 'package:flutter_unit/blocs/bloc_exp.dart';
 import 'package:flutter_unit/components/permanent/overlay_tool_wrapper.dart';
+import 'package:flutter_unit/storage/dao/local_storage.dart';
 import 'package:flutter_unit/views/app/navigation/unit_bottom_bar.dart';
 import 'package:flutter_unit/views/pages/category/collect_page.dart';
 import 'package:flutter_unit/views/pages/category/home_right_drawer.dart';
@@ -26,18 +27,39 @@ class _UnitNavigationState extends State<UnitNavigation> {
   PageController _controller; //页面控制器，初始0
   //List<Conversion> conversions = [];
   FltImPlugin im = FltImPlugin();
-  String tfSender;
+  static String tfSender = "";
   @override
   void initState() {
     super.initState();
     FltImPlugin().init(host: "mm.3dsqq.com", apiURL: "http://mm.3dsqq.com:8000");
     _controller = PageController();
-    tfSender = ValueUtil.toStr(1);
-    login(success: () {
+    tfSender = ValueUtil.toStr(2);
+    Future.delayed(Duration(milliseconds: 1)).then((e) async {
+      var ss = await LocalStorage.get("im_token");
+      var memberId = await LocalStorage.get("memberId");
+      if(memberId != "" && memberId != null){
+        tfSender=memberId.toString();
+      }
+      if(ss !="" || ss != null){
 
+        login(success: () {
+
+        });
+
+      }else{
+
+        login(success: () {
+
+        });
+      }
+      BlocProvider.of<ChatBloc>(context).add(EventNewMessage(null));
+      BlocProvider.of<GlobalBloc>(context).add(EventSetMemberId(tfSender));
     });
+
+
+
     listenNative();
-    BlocProvider.of<ChatBloc>(context).add(EventNewMessage(null));
+
   }
 
   @override
@@ -54,7 +76,7 @@ class _UnitNavigationState extends State<UnitNavigation> {
       builder: (_, state) {
 
         final Color color =  BlocProvider.of<HomeBloc>(context).activeHomeColor;
-
+        final String id =  BlocProvider.of<GlobalBloc>(context).state.memberId;
 
         return Scaffold(
           drawer: HomeDrawer(),
@@ -71,7 +93,7 @@ class _UnitNavigationState extends State<UnitNavigation> {
               children: <Widget>[
                 HomePage(),
                 CollectPage(),
-                ImConversationListPage(),
+                ImConversationListPage(memberId: id,),
                 CollectPage(),
 
               ],
@@ -90,6 +112,29 @@ class _UnitNavigationState extends State<UnitNavigation> {
       return;
     }
     final res = await FltImPlugin().login(uid: tfSender);
+    print(res);
+    int code = ValueUtil.toInt(res['code']);
+    if (code == 0) {
+      success?.call();
+      tfSender = null;
+
+    } else {
+      String message = ValueUtil.toStr(res['message']);
+      print(message);
+    }
+  }
+
+  Future<String> getImToken() async {
+    var ss = await LocalStorage.get("token");
+    var sss =ss.toString();
+    return sss;
+  }
+  loginByToken(String token,{void Function() success}) async {
+    if (tfSender == null || tfSender.length == 0) {
+      print('发送用户id 必须填写');
+      return;
+    }
+    final res = await FltImPlugin().login(uid: tfSender,token: token);
     print(res);
     int code = ValueUtil.toInt(res['code']);
     if (code == 0) {

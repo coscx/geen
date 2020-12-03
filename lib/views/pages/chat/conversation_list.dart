@@ -11,6 +11,7 @@ import 'package:flutter_unit/blocs/chat/chat_state.dart';
 import 'package:flutter_unit/blocs/peer/peer_bloc.dart';
 import 'package:flutter_unit/blocs/peer/peer_event.dart';
 import 'package:flutter_unit/blocs/peer/peer_state.dart';
+import 'package:flutter_unit/views/pages/chat/view/util/date.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flt_im_plugin/flt_im_plugin.dart';
 import 'package:flt_im_plugin/conversion.dart';
@@ -20,7 +21,8 @@ import 'package:flt_im_plugin/conversion.dart';
  */
 class ImConversationListPage extends StatelessWidget{
 
-
+  final String memberId;
+  ImConversationListPage({Key key, this.memberId}) : super(key: key);
   RefreshController _refreshController =
   RefreshController(initialRefresh: false);
 
@@ -79,10 +81,10 @@ class ImConversationListPage extends StatelessWidget{
                 width: 46,
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.circular(6.0),
+                  borderRadius: BorderRadius.circular(23.0),
                   // image url 去要到自己的服务器上去请求回来再赋值，这里使用一张默认值即可
                   image: DecorationImage(
-                      image: NetworkImage(conversation.avatarURL)),
+                      image: NetworkImage(conversation.avatarURL==""?"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606922115065&di=29da8ee4b3f8b33012622f12141fea1d&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202007%2F08%2F20200708231202_ucvgx.thumb.400_0.jpeg":conversation.avatarURL)),
                 ),
               )
                   : Badge(
@@ -105,25 +107,28 @@ class ImConversationListPage extends StatelessWidget{
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 6, top: 4),
+                margin: EdgeInsets.only(left: 6, top: 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsets.only(top: 8),
+                      constraints: BoxConstraints(maxWidth: 260),
+                      margin: EdgeInsets.only(top: 2),
                       child: Text(
-                        conversation.detail,
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                        conversation.name,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black, fontSize: 15),
                       ),
                     ),
                     Container(
-                      constraints: BoxConstraints(maxWidth: 280),
+                      constraints: BoxConstraints(maxWidth: 260),
                       margin: EdgeInsets.only(top: 8),
-                      child: Text(conversation.message.rawContent,
+                      child: Text(conversation.detail,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: TextStyle(color: Colors.grey, fontSize: 12)),
+                          style: TextStyle(color: Colors.grey, fontSize: 15)),
                     ),
                   ],
                 ),
@@ -132,7 +137,7 @@ class ImConversationListPage extends StatelessWidget{
           ),
           Container(
             margin: EdgeInsets.only(right: 14, bottom: 18),
-            child: Text(conversation.timestamp.toString(),
+            child: Text(tranImTime(tranFormatTime(conversation.message.timestamp)),
                 style: TextStyle(color: Colors.grey, fontSize: 11)),
           )
         ],
@@ -148,7 +153,7 @@ class ImConversationListPage extends StatelessWidget{
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
                 onTap: () {
-                  BlocProvider.of<PeerBloc>(context).add(EventFirstLoadMessage("1",state.message[index].cid));
+                  BlocProvider.of<PeerBloc>(context).add(EventFirstLoadMessage(memberId,state.message[index].cid));
                   Navigator.pushNamed(context, UnitRouter.to_chats, arguments: state.message[index]);
                 },
                 child: _buildListItem(state.message[index]));
