@@ -125,7 +125,7 @@ class ImConversationListPage extends StatelessWidget{
                     Container(
                       constraints: BoxConstraints(maxWidth: 260),
                       margin: EdgeInsets.only(top: 8),
-                      child: Text(conversation.detail,
+                      child: Text((conversation.detail.contains('assets/images/face') || conversation.detail.contains('assets/images/figure'))?'[表情消息]':conversation.detail,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(color: Colors.grey, fontSize: 15)),

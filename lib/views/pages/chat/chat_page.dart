@@ -738,7 +738,15 @@ class ChatsState extends State<ChatsPage> {
     _widgets1.add(MoreWidgets.buildIcon(Icons.folder, '文件'));
     _guideToolsList.add(GridView.count(
         crossAxisCount: 4, padding: EdgeInsets.all(0.0), children: _widgets1));
-
+    return Swiper(
+        autoStart: false,
+        circular: false,
+        indicator: CircleSwiperIndicator(
+            radius: 3.0,
+            padding: EdgeInsets.only(top: 10.0, bottom: 10),
+            itemColor: ColorT.gray_99,
+            itemActiveColor: ObjectUtil.getThemeSwatchColor()),
+        children: _guideToolsList);
   }
 
   _gridView(int crossAxisCount, List<String> list) {
@@ -1038,7 +1046,13 @@ class ChatsState extends State<ChatsPage> {
     Widget widget;
     if (entity.type == MessageType.MESSAGE_TEXT) {
       //文本
-      widget = buildTextWidget(entity,tfSender);
+      if (entity.content['text'].contains('assets/images/face') ||
+          entity.content['text'].contains('assets/images/figure')) {
+        widget = buildImageWidget(entity,tfSender);
+      } else {
+        widget = buildTextWidget(entity,tfSender);
+      }
+
     } else if (entity.type == MessageType.MESSAGE_IMAGE) {
       //文本
       widget = buildImageWidget(entity,tfSender);
@@ -1076,6 +1090,7 @@ class ChatsState extends State<ChatsPage> {
   }
 
   Widget buildImageWidget(Message message,String  tfSender) {
+    int isFace =0;
     //图像
     double width = ValueUtil.toDouble(message.content['width']);
     double height = ValueUtil.toDouble(message.content['height']);
@@ -1083,11 +1098,41 @@ class ChatsState extends State<ChatsPage> {
     if (imageURL == null || imageURL.length == 0) {
       imageURL = ValueUtil.toStr(message.content['url']);
     }
-
+    double size = 120;
+    Widget image;
+    if (message.type== MessageType.MESSAGE_TEXT&&
+        message.content['text'].contains('assets/images/face')) {
+      //assets/images/face中的表情
+      size = 32;
+      image = Image.asset(message.content['text'], width: size, height: size);
+      isFace=1;
+    } else if (message.type== MessageType.MESSAGE_TEXT &&
+        message.content['text'].contains('assets/images/figure')) {
+      //assets/images/figure中的表情
+      size = 90;
+      image = Image.asset(message.content['text'], width: size, height: size);
+      isFace=1;
+    }
     return _buildWrapper(
       isSelf: message.sender== tfSender,
       message: message,
-      child: Container(
+      child: isFace==1?
+
+      ClipRRect(
+        borderRadius: BorderRadius.circular(8.0),
+        child: Container(
+          padding: EdgeInsets.all((message.content['text'].isNotEmpty &&
+              message.content['text'].contains('assets/images/face'))
+              ? 10
+              : 0),
+          color: message.sender == tfSender
+              ? Colors.white
+              : Color.fromARGB(255, 158, 234, 106),
+          child: image,
+        ),
+      ):
+
+      Container(
         color: Color(0xfff7f7f7),
         width: 100,
         height: 120,
@@ -1182,21 +1227,25 @@ class ChatsState extends State<ChatsPage> {
     if (imageFile == null || imageFile.path.isEmpty) {
       return;
     }
+    _buildImageMessage(imageFile, false);return;
     DialogUtil.showBaseDialog(context, '是否发送原图？',
         title: '', right: '原图', left: '压缩图', rightClick: (res) {
       _buildImageMessage(imageFile, true);
     }, leftClick: (res) {
       _buildImageMessage(imageFile, false);
     });
+
   }
 
-  _buildImageMessage(File file, bool sendOriginalImage) {
+  _buildImageMessage(File file, bool sendOriginalImage)  {
+   file.readAsBytes().then((content) =>
+       BlocProvider.of<PeerBloc>(context).add(EventSendNewImageMessage(tfSender,widget.model.cid,content))
+      );
 
-
-    setState(() {
-
+    //setState(() {
+       _isShowTools = false;
       _controller.clear();
-    });
+    //});
 
   }
 
@@ -1246,3 +1295,21 @@ class ChatsState extends State<ChatsPage> {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

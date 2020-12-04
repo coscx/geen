@@ -34,7 +34,7 @@ class _UnitNavigationState extends State<UnitNavigation> {
     FltImPlugin().init(host: "mm.3dsqq.com", apiURL: "http://mm.3dsqq.com:8000");
     _controller = PageController();
     tfSender = ValueUtil.toStr(2);
-    Future.delayed(Duration(milliseconds: 1)).then((e) async {
+    Future.delayed(Duration(milliseconds: 500)).then((e) async {
       var ss = await LocalStorage.get("im_token");
       var memberId = await LocalStorage.get("memberId");
       if(memberId != "" && memberId != null){

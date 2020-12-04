@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:equatable/equatable.dart';
 import 'package:flt_im_plugin/message.dart';
 
@@ -38,5 +39,14 @@ class EventSendNewMessage extends PeerEvent {
   final String peerUID;
   final String content;
   EventSendNewMessage(this.currentUID,this.peerUID,this.content,);
+
+}
+
+class EventSendNewImageMessage extends PeerEvent {
+
+  final String currentUID;
+  final String peerUID;
+  final Uint8List content;
+  EventSendNewImageMessage(this.currentUID,this.peerUID,this.content,);
 
 }
