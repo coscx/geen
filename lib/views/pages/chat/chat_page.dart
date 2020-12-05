@@ -833,6 +833,7 @@ class ChatsState extends State<ChatsPage> {
           //所以应该让listView高度由内容决定
           shrinkWrap: true,
           controller: _scrollController,
+          physics: BouncingScrollPhysics(),
           itemCount: state.messageList.length);
     }
     if (state is LoadMorePeerMessageSuccess) {
@@ -847,6 +848,7 @@ class ChatsState extends State<ChatsPage> {
           //所以应该让listView高度由内容决定
           shrinkWrap: true,
           controller: _scrollController,
+          physics: BouncingScrollPhysics(),
           itemCount: state.messageList.length);
     }
     return Container();
