@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_unit/storage/dao/local_storage.dart';
+import 'package:flutter_unit/views/pages/chat/view/emoji/emoji_picker.dart';
 import 'package:flutter_unit/views/pages/chat/view/util/ImMessage.dart';
 import 'package:flutter_unit/views/pages/chat/widget/Swipers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,6 +77,7 @@ class ChatsState extends State<ChatsPage> {
   AudioCache _audioPlayer;
   AudioPlayer _fixedPlayer;
   String tfSender="0" ;
+  FltImPlugin im = FltImPlugin();
   @override
   void initState() {
     // TODO: implement initState
@@ -111,7 +113,7 @@ class ChatsState extends State<ChatsPage> {
   }
   Future<Null> _focusNodeListener() async {
     if (_textFieldNode.hasFocus) {
-      Future.delayed(Duration(milliseconds: 500), () {
+      Future.delayed(Duration(milliseconds: 5), () {
         setState(() {
           _isShowTools = false;
           _isShowFace = false;
@@ -429,7 +431,7 @@ class ChatsState extends State<ChatsPage> {
       ),
       (_isShowTools || _isShowFace || _isShowVoice)
           ? Container(
-              height: 210,
+              height: 252,
               child: _bottomWidget(),
             )
           : SizedBox(
@@ -639,15 +641,30 @@ class ChatsState extends State<ChatsPage> {
             ),
             Offstage(
               offstage: !_isFaceFirstList,
-              child: Swiper(
-                  autoStart: false,
-                  circular: false,
-                  indicator: CircleSwiperIndicator(
-                      radius: 3.0,
-                      padding: EdgeInsets.only(top: 20.0),
-                      itemColor: ColorT.gray_99,
-                      itemActiveColor: ObjectUtil.getThemeSwatchColor()),
-                  children: _guideFaceList),
+              child: EmojiPicker(
+                rows: 3,
+                columns: 7,
+                //recommendKeywords: ["racing", "horse"],
+                numRecommended: 10,
+                onEmojiSelected: (emoji, category) {
+                  _controller.text = _controller.text + emoji.emoji;
+                  _controller.selection =
+                      TextSelection.fromPosition(
+                          TextPosition(offset: _controller.text.length));
+
+                  if (_isShowSend == false){
+
+                    setState(() {
+                      if (_controller.text.isNotEmpty) {
+                        _isShowSend = true;
+                      } else {
+                        _isShowSend = false;
+                      }
+                    });
+
+                  }
+                },
+              ),
             )
 
           ],
@@ -776,7 +793,12 @@ class ChatsState extends State<ChatsPage> {
       shadowColor: ObjectUtil.getThemeLightColor(),
       color: ColorT.gray_f0,
       elevation: 0,
-      child: new TextField(
+      child: Container(
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(3.0)),
+          constraints: BoxConstraints(minHeight: 30.0, maxHeight: 150.0),
+          child:new TextField(
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
           focusNode: _textFieldNode,
           textInputAction: TextInputAction.send,
           controller: _controller,
@@ -804,7 +826,9 @@ class ChatsState extends State<ChatsPage> {
               return;
             }
             _buildTextMessage(_controller.text);
-          }),
+          }
+          )
+      ),
     );
   }
 
@@ -942,7 +966,7 @@ class ChatsState extends State<ChatsPage> {
                       child: _contentWidget(entity,tfSender),
                       onTap: () {
                         if (null != onItemClick) {
-                          onItemClick(entity);
+                          //onItemClick(entity);
                         }
                       },
                       onLongPress: () {
@@ -971,7 +995,7 @@ class ChatsState extends State<ChatsPage> {
                       child: _contentWidget(entity,tfSender),
                       onTap: () {
                         if (null != onItemClick) {
-                          onItemClick(entity);
+                          //onItemClick(entity);
                         }
                       },
                       onLongPress: () {
@@ -1138,29 +1162,31 @@ class ChatsState extends State<ChatsPage> {
         color: Color(0xfff7f7f7),
         width: 100,
         height: 120,
-        child: FutureBuilder(
-          future: getLocalCacheImage(url: imageURL),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState != ConnectionState.done) {
-              return Container();
-            }
-            if (snapshot.hasData) {
-              return Image.memory(snapshot.data);
-            } else {
-              if (imageURL.startsWith("http://localhost")) {
-                return Container();
-              } else if (imageURL.startsWith('file:/')) {
-                return Image.file(File(imageURL));
-              }
-              return Image.network(imageURL);
-            }
-          },
-        ),
+        child: Image.network(imageURL)
+
+        // FutureBuilder(
+        //   future: getLocalCacheImage(url: imageURL),
+        //   builder: (context, snapshot) {
+        //     if (snapshot.connectionState != ConnectionState.done) {
+        //       return Container();
+        //     }
+        //     if (snapshot.hasData) {
+        //       return Image.memory(snapshot.data);
+        //     } else {
+        //       if (imageURL.startsWith("http://localhost")) {
+        //         return Container();
+        //       } else if (imageURL.startsWith('file:/')) {
+        //         return Image.file(File(imageURL));
+        //       }
+        //       return Image.network(imageURL);
+        //     }
+        //   },
+        // ),
       ),
     );
   }
   Future<Uint8List> getLocalCacheImage({String url}) async {
-    FltImPlugin im = FltImPlugin();
+
     Map result = await im.getLocalCacheImage(url: url);
     NativeResponse response = NativeResponse.fromMap(result);
     return response.data;
@@ -1282,19 +1308,7 @@ class ChatsState extends State<ChatsPage> {
   @override
   void updateData(Message entity) {
     // TODO: implement updateData
-    if (null == entity) {
-      return;
-    }
-    if (entity.sender == "0" || _first) {
-      //自己发的消息，通知消息页面刷新的时候，这里也会收到，但是这些不处理
-      _first = false;
-      return;
-    } else if (entity.type == MessageType.MESSAGE_TEXT) {
 
-      setState(() {
-        _messageList.insert(0, entity);
-      });
-    }
   }
 }
 
