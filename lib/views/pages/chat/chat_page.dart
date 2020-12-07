@@ -965,9 +965,9 @@ class ChatsState extends State<ChatsPage> {
                     GestureDetector(
                       child: _contentWidget(entity,tfSender),
                       onTap: () {
-                        if (null != onItemClick) {
+                        //if (null != onItemClick) {
                           //onItemClick(entity);
-                        }
+                        //}
                       },
                       onLongPress: () {
                         DialogUtil.buildToast('长按了消息');
@@ -1162,26 +1162,26 @@ class ChatsState extends State<ChatsPage> {
         color: Color(0xfff7f7f7),
         width: 100,
         height: 120,
-        child: Image.network(imageURL)
+        child: //Image.network(imageURL)
 
-        // FutureBuilder(
-        //   future: getLocalCacheImage(url: imageURL),
-        //   builder: (context, snapshot) {
-        //     if (snapshot.connectionState != ConnectionState.done) {
-        //       return Container();
-        //     }
-        //     if (snapshot.hasData) {
-        //       return Image.memory(snapshot.data);
-        //     } else {
-        //       if (imageURL.startsWith("http://localhost")) {
-        //         return Container();
-        //       } else if (imageURL.startsWith('file:/')) {
-        //         return Image.file(File(imageURL));
-        //       }
-        //       return Image.network(imageURL);
-        //     }
-        //   },
-        // ),
+        FutureBuilder(
+          future: getLocalCacheImage(url: imageURL),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return Container();
+            }
+            if (snapshot.hasData) {
+              return Image.memory(snapshot.data);
+            } else {
+              if (imageURL.startsWith("http://localhost")) {
+                return Container();
+              } else if (imageURL.startsWith('file:/')) {
+                return Image.file(File(imageURL));
+              }
+              return Image.network(imageURL);
+            }
+          },
+        ),
       ),
     );
   }

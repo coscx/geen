@@ -8,6 +8,7 @@ import 'package:flutter_unit/views/pages/category/category_detail.dart';
 import 'package:flutter_unit/views/pages/category/collect_page.dart';
 import 'package:flutter_unit/views/pages/chat/chat_page.dart';
 import 'package:flutter_unit/views/pages/chat/conversation.dart';
+import 'package:flutter_unit/views/pages/chat/conversation_list.dart';
 import 'package:flutter_unit/views/pages/gallery/gallery_page.dart';
 import 'package:flutter_unit/views/pages/issues_point/issues_detail.dart';
 import 'package:flutter_unit/views/pages/issues_point/issues_point_page.dart';
@@ -56,7 +57,7 @@ class UnitRouter {
   static const String to_chat = 'ToChatPage';
   static const String to_chats = 'ChatsPage';
   static const String time_line = 'TimeLine';
-
+  static const String chat_list = 'ChatList';
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       //根据名称跳转相应页面
@@ -107,6 +108,8 @@ class UnitRouter {
         return Right2LeftRouter(child: IssuesDetailPage());
       case time_line:
         return Right2LeftRouter(child: TimelinePage(title: settings.arguments,));
+      case chat_list:
+        return Right2LeftRouter(child: ImConversationListPage(memberId: settings.arguments,));
       case category_show:
         return Right2LeftRouter(
             child: CategoryShow(

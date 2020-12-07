@@ -9,7 +9,7 @@ class UnitBottomBar extends StatefulWidget {
   final Function(int) onItemClick;
 
   UnitBottomBar(
-      {this.color = Colors.blue,
+      {this.color = Colors.white,
       @required this.itemData,
       @required this.onItemClick});
 
@@ -17,8 +17,17 @@ class UnitBottomBar extends StatefulWidget {
   _UnitBottomBarState createState() => _UnitBottomBarState();
 }
 
-class _UnitBottomBarState extends State<UnitBottomBar> {
+class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProviderStateMixin{
   int _position = 0;
+  AnimationController _ctrl0;
+
+  int first =0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    _ctrl0= AnimationController(vsync:this,duration: Duration(milliseconds: 300),);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +40,7 @@ class _UnitBottomBarState extends State<UnitBottomBar> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
 
-            _buildChild(context, 0, 0,widget.color),
+            _buildChild(context, 0, 0,widget.color, ),
             _buildChilds(context, 1, 1,widget.color),
             SizedBox(
               width: 20,
@@ -58,21 +67,37 @@ class _UnitBottomBarState extends State<UnitBottomBar> {
       onTap: () => _tapTab(p),
       onLongPress: () => _onLongPress(context, i),
       child: Material(
-        elevation: 2,
+        elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: left ? borderTR : borderTL),
         child: Container(
             margin: left ? paddingTR : paddingTL,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color: color.withAlpha(88),
+                color: Colors.white,
                 borderRadius: left ? borderTR : borderTL),
             height: 45,
             width: 80,
-            child: Icon(
+            child: first==0 ?Icon(
               widget.itemData[info[i]],
-              color: active ? color : Colors.white,
-              size: active ? 28 : 24,
-            )),
+              color: active ? Colors.black : Colors.black,
+              size: active ? 28 : 28,
+            ):(active ? ScaleTransition(
+              scale: CurvedAnimation(
+                parent: _ctrl0,
+                curve: Curves.linear,
+              ),
+              child: Icon(
+                widget.itemData[info[i]],
+                color: active ? Colors.black : Colors.black,
+                size: active ? 28 : 28,
+              ),
+            ):Icon(
+              widget.itemData[info[i]],
+              color: active ? Colors.black : Colors.black,
+              size: active ? 28 : 28,
+            ))
+
+            ),
       ),
     );
   }
@@ -84,27 +109,48 @@ class _UnitBottomBarState extends State<UnitBottomBar> {
       onTap: () => _tapTab(p),
       onLongPress: () => _onLongPress(context, i),
       child: Material(
-        elevation: 2,
+        elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: left ? borderTR : borderTL),
         child: Container(
             margin: left ? paddingTR : paddingTL,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color: color.withAlpha(88),
+                color: Colors.white,
                 borderRadius: left ? borderTR : borderTL),
             height: 45,
             width: 50,
-            child: Icon(
-              i==0?Icons.chat_bubble_outline:Icons.access_alarm,
-              color: active ? color : Colors.white,
-              size: active ? 28 : 24,
-            )),
+            child:
+          first==0 ?Icon(
+            i==0?Icons.chat_bubble_outline:Icons.access_alarm,
+            color: active ? Colors.black : Colors.black,
+            size: active ? 28 : 28,
+          ):(active ? ScaleTransition(
+          scale: CurvedAnimation(
+          parent: _ctrl0,
+            curve: Curves.linear,
+          ),
+          child: Icon(
+            i==0?Icons.chat_bubble_outline:Icons.access_alarm,
+            color: active ? Colors.black : Colors.black,
+            size: active ? 28 : 28,
+          ),
+        ):Icon(
+            i==0?Icons.chat_bubble_outline:Icons.access_alarm,
+            color: active ? Colors.black : Colors.black,
+            size: active ? 28 : 28,
+          ))
+
+
+        ),
       ),
     );
   }
   _tapTab(int i) {
+    first++;
     setState(() {
       _position = i;
+      _ctrl0.reset();
+      _ctrl0.forward();
       if (widget.onItemClick != null) {
         widget.onItemClick(_position);
       }

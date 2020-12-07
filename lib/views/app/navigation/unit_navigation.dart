@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flt_im_plugin/flt_im_plugin.dart';
 import 'package:flt_im_plugin/value_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_unit/app/res/cons.dart';
 import 'package:flutter_unit/app/router.dart';
 import 'package:flutter_unit/blocs/bloc_exp.dart';
@@ -24,6 +27,7 @@ class UnitNavigation extends StatefulWidget {
 }
 
 class _UnitNavigationState extends State<UnitNavigation> {
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   PageController _controller; //页面控制器，初始0
   //List<Conversion> conversions = [];
   FltImPlugin im = FltImPlugin();
@@ -83,8 +87,7 @@ class _UnitNavigationState extends State<UnitNavigation> {
           //左滑页
           endDrawer: HomeRightDrawer(),
           //右滑页
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
           floatingActionButton: _buildSearchButton(color),
           body: wrapOverlayTool(
             child: PageView(
@@ -100,7 +103,7 @@ class _UnitNavigationState extends State<UnitNavigation> {
             ),
           ),
           bottomNavigationBar: UnitBottomBar(
-              color: color,
+              color: Colors.white,
               itemData: Cons.ICONS_MAP,
               onItemClick: _onTapNav));
       },
@@ -207,8 +210,8 @@ class _UnitNavigationState extends State<UnitNavigation> {
   Widget _buildSearchButton(Color color) {
     return FloatingActionButton(
       elevation: 2,
-      backgroundColor: color,
-      child: const Icon(Icons.wc),
+      backgroundColor: Colors.white,
+      child: const Icon(Icons.wc,color: Colors.black,),
       onPressed: () => Navigator.of(context).pushNamed(UnitRouter.search),
     );
   }
@@ -218,6 +221,42 @@ class _UnitNavigationState extends State<UnitNavigation> {
     if (index == 1) {
       //BlocProvider.of<CollectBloc>(context).add(EventSetCollectData());
     }
+  }
+  // 系统通知栏消息推送
+  void _showNotification(String title, String body) async {
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    var initializationSettingsAndroid = AndroidInitializationSettings('ic_launcher');
+    var initializationSettingsIOS = IOSInitializationSettings(onDidReceiveLocalNotification: (int id, String title, String body, String payload) async => null);
+    var initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+
+    flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: (String payload) async {
+      if (payload != null) {
+        print('notification payload: ' + payload);
+      }
+      // 点击通知栏跳转的页面(暂为空白)
+      var memberId = await LocalStorage.get("memberId");
+      Navigator.pushNamed(context, UnitRouter.chat_list, arguments: memberId);
+    });
+
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      '0', title, body,
+      importance: Importance.max, priority: Priority.high, ticker: 'ticker',
+    );
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+        randomBit(8, type: 'num'), title, body, platformChannelSpecifics,
+        payload: body
+    );
+  }
+  // 生成随机串
+  static dynamic randomBit(int len, { String type }) {
+    String character = type == 'num' ? '0123456789' : 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+    String left = '';
+    for (var i = 0; i < len; i++) {
+      left = left + character[Random().nextInt(character.length)];
+    }
+    return type == 'num' ? int.parse(left) : left;
   }
 
   void onPeerMessageACK(result, int error) {
@@ -252,7 +291,21 @@ class _UnitNavigationState extends State<UnitNavigation> {
   }
 
   void onPeerMessage(result) {
-    BlocProvider.of<PeerBloc>(context).add(EventReceiveNewMessage(Map<String, dynamic>.from(result)));
+    Map<String, dynamic> message= Map<String, dynamic>.from(result);
+    String title="通知";
+    String content="消息";
+    var type =message['type'];
+    if(type == "MESSAGE_TEXT"){
+      title="通知";
+      content= message['content']['text'];
+    }else{
+      title="通知";
+      content= '聊天消息';
+    }
+
+
+    //_showNotification(title,content);
+    BlocProvider.of<PeerBloc>(context).add(EventReceiveNewMessage(message));
   }
 
   void onPeerSecretMessage(result) {
