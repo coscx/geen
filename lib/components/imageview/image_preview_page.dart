@@ -191,6 +191,8 @@ class _ImagePreviewPageState extends State<ImagePreviewPage> with SingleTickerPr
     final url = widget.images[index].url;
     if (url.startsWith('http')) {
       return CachedNetworkImageProvider(url);
+    } else if (url.startsWith('file:/')) {
+      return FileImage(File(url.substring(6)));
     } else {
       return FileImage(File(url));
     }

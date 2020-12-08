@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flt_im_plugin/conversion.dart';
 import 'package:flt_im_plugin/flt_im_plugin.dart';
 import 'package:flt_im_plugin/message.dart';
@@ -1262,7 +1263,13 @@ class ChatsState extends State<ChatsPage> {
        } else if (imageURL.startsWith('file:/')) {
               return Image.file(File(imageURL.substring(6)));
        }
-              return Image.network(imageURL);
+              return CachedNetworkImage(
+                imageUrl: imageURL,
+               // placeholder: (context, url) => new CircularProgressIndicator(),
+                errorWidget: (context, url, error) => new Icon(Icons.error),
+              );
+
+                Image.network(imageURL);
 
   }
 
