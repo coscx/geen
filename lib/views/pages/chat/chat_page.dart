@@ -10,6 +10,8 @@ import 'package:flt_im_plugin/value_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_unit/components/imageview/image_preview_page.dart';
+import 'package:flutter_unit/components/imageview/image_preview_view.dart';
 import 'package:flutter_unit/storage/dao/local_storage.dart';
 import 'package:flutter_unit/views/pages/chat/view/emoji/emoji_picker.dart';
 import 'package:flutter_unit/views/pages/chat/view/util/ImMessage.dart';
@@ -431,7 +433,7 @@ class ChatsState extends State<ChatsPage> {
       ),
       (_isShowTools || _isShowFace || _isShowVoice)
           ? Container(
-              height: 252,
+              height: 342,
               child: _bottomWidget(),
             )
           : SizedBox(
@@ -1159,32 +1161,111 @@ class ChatsState extends State<ChatsPage> {
       ):
 
       Container(
-        color: Color(0xfff7f7f7),
+        decoration: new BoxDecoration(
+          //背景Colors.transparent 透明
+          color: Colors.transparent,
+          //设置四周圆角 角度
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          //设置四周边框
+
+        ),
+
         width: 100,
         height: 120,
         child: //Image.network(imageURL)
+        GestureDetector(
+           child:
+            //FutureBuilder(
+          //   future: getLocalCacheImage(url: imageURL),
+          //   builder: (context, snapshot) {
+          //     if (snapshot.connectionState != ConnectionState.done) {
+          //       return Container();
+          //     }
+          //     if (snapshot.hasData) {
+          //       return Image.memory(snapshot.data);
+          //     } else {
+          //       if (imageURL.startsWith("http://localhost")) {
+          //         return Container();
+          //       } else if (imageURL.startsWith('file:/')) {
+          //         return Image.file(File(imageURL));
+          //       }
+          //       return Image.network(imageURL);
+          //     }
+          //   },
+          // ),
+           buildLocalImageWidget(imageURL),
+           // Image.network(imageURL),
+          onTap: () {
 
-        FutureBuilder(
-          future: getLocalCacheImage(url: imageURL),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState != ConnectionState.done) {
-              return Container();
-            }
-            if (snapshot.hasData) {
-              return Image.memory(snapshot.data);
-            } else {
-              if (imageURL.startsWith("http://localhost")) {
-                return Container();
-              } else if (imageURL.startsWith('file:/')) {
-                return Image.file(File(imageURL));
-              }
-              return Image.network(imageURL);
-            }
+              ImagePreview.preview(
+                context,
+                images: List.generate(1, (index) {
+                  return ImageOptions(
+                    url: imageURL,
+                    tag: imageURL,
+                  );
+                }),
+                // bottomBarBuilder: (context, int index) {
+                //   if (index % 4 == 1) {
+                //     return SizedBox.shrink();
+                //   }
+                //   return Container(
+                //     height: index.isEven ? null : MediaQuery.of(context).size.height / 2,
+                //     padding: EdgeInsets.symmetric(
+                //       horizontal: 16,
+                //       vertical: 10,
+                //     ),
+                //     child: SafeArea(
+                //       top: false,
+                //       child: Column(
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           Text(
+                //             '测试标题',
+                //             style: TextStyle(
+                //               color: CupertinoDynamicColor.resolve(
+                //                 CupertinoColors.label,
+                //                 context,
+                //               ),
+                //             ),
+                //           ),
+                //           Text(
+                //             '测试内容',
+                //             style: TextStyle(
+                //               fontSize: 15,
+                //               color: CupertinoDynamicColor.resolve(
+                //                 CupertinoColors.secondaryLabel,
+                //                 context,
+                //               ),
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   );
+                // },
+              );
+
           },
-        ),
+          onLongPress: () {
+            DialogUtil.buildToast('长按了消息');
+          },
+        )
+
       ),
     );
   }
+
+  Widget buildLocalImageWidget(String imageURL) {
+    if (imageURL.startsWith("http://localhost")) {
+              return Container();
+       } else if (imageURL.startsWith('file:/')) {
+              return Image.file(File(imageURL.substring(6)));
+       }
+              return Image.network(imageURL);
+
+  }
+
   Future<Uint8List> getLocalCacheImage({String url}) async {
 
     Map result = await im.getLocalCacheImage(url: url);
