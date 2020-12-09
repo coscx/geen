@@ -63,7 +63,20 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       }
 
     }
+    if (event is EventFreshMessage) {
 
+      try {
+        FltImPlugin im = FltImPlugin();
+        Map response = await im.getConversations();
+        var  conversions = ValueUtil.toArr(response["data"]).map((e) => Conversion.fromMap(ValueUtil.toMap(e))).toList();
+
+        yield ChatMessageSuccess(conversions);
+      } catch (err) {
+        print(err);
+        yield GetChatFailed();
+      }
+
+    }
   }
 
 

@@ -434,7 +434,7 @@ class ChatsState extends State<ChatsPage> {
       ),
       (_isShowTools || _isShowFace || _isShowVoice)
           ? Container(
-              height: 342,
+              height: 251.4,
               child: _bottomWidget(),
             )
           : SizedBox(

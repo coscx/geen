@@ -18,3 +18,7 @@ class EventNewMessage extends ChatEvent {
   EventNewMessage(this.message);
 
 }
+
+class EventFreshMessage extends ChatEvent {
+  EventFreshMessage();
+}
