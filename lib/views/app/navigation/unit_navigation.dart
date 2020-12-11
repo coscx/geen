@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flt_im_plugin/flt_im_plugin.dart';
 import 'package:flt_im_plugin/value_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_unit/app/res/cons.dart';
@@ -17,6 +18,7 @@ import 'package:flutter_unit/views/pages/chat/conversation_list.dart';
 import 'package:flutter_unit/views/pages/chat/view/util/ImMessage.dart';
 import 'package:flutter_unit/views/pages/home/home_drawer.dart';
 import 'package:flutter_unit/views/pages/home/home_page.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
 
 
 /// 说明: 主题结构 左右滑页 + 底部导航栏
@@ -30,7 +32,9 @@ class _UnitNavigationState extends State<UnitNavigation> {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   PageController _controller; //页面控制器，初始0
   //List<Conversion> conversions = [];
+  String debugLable = 'Unknown';
   FltImPlugin im = FltImPlugin();
+  JPush jpush = new JPush();
   static String tfSender = "";
   @override
   void initState() {
@@ -58,14 +62,74 @@ class _UnitNavigationState extends State<UnitNavigation> {
       }
       BlocProvider.of<ChatBloc>(context).add(EventNewMessage(null));
       BlocProvider.of<GlobalBloc>(context).add(EventSetMemberId(tfSender));
+
+
+
     });
 
 
-
+    initPlatformState();
     listenNative();
 
   }
+// Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initPlatformState() async {
+    String platformVersion;
 
+    try {
+      jpush.addEventHandler(
+          onReceiveNotification: (Map<String, dynamic> message) async {
+            print("flutter onReceiveNotification: $message");
+            setState(() {
+               debugLable = "flutter onReceiveNotification: $message";
+            });
+          }, onOpenNotification: (Map<String, dynamic> message) async {
+        print("flutter onOpenNotification: $message");
+        setState(() {
+          debugLable = "flutter onOpenNotification: $message";
+        });
+      }, onReceiveMessage: (Map<String, dynamic> message) async {
+        print("flutter onReceiveMessage: $message");
+        setState(() {
+          debugLable = "flutter onReceiveMessage: $message";
+        });
+      }, onReceiveNotificationAuthorization:
+          (Map<String, dynamic> message) async {
+        print("flutter onReceiveNotificationAuthorization: $message");
+        setState(() {
+          debugLable = "flutter onReceiveNotificationAuthorization: $message";
+        });
+      });
+    } on PlatformException {
+      platformVersion = 'Failed to get platform version.';
+    }
+
+    jpush.setup(
+      appKey: "334db8731c1e38a9c7c3f512", //你自己应用的 AppKey
+      channel: "theChannel",
+      production: false,
+      debug: true,
+    );
+    jpush.applyPushAuthority(
+        new NotificationSettingsIOS(sound: true, alert: true, badge: true));
+
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    jpush.getRegistrationID().then((rid) {
+      print("flutter get registration id : $rid");
+      setState(() {
+        debugLable = "flutter getRegistrationID: $rid";
+      });
+    });
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      debugLable = platformVersion;
+    });
+  }
   @override
   void dispose() {
     _controller.dispose(); //释放控制器
