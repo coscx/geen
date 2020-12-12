@@ -174,8 +174,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: db25274e20a2be4d92739a2c37149daaad20e0d3
-      url: "git@e.coding.net:coscx/WanCloudIM/flt_im.git"
+      resolved-ref: "4a8511a3aec692ac8f08052415266dc3aec4d4c2"
+      url: "https://github.com/coscx/lat.git"
     source: git
     version: "1.0.0"
   flui:
