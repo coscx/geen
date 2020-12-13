@@ -99,7 +99,7 @@ class _WidgetDetailPageState extends State<WidgetDetailPage> {
   }
 
   _showToast(BuildContext ctx, String msg, bool collected) {
-    Toast.toast(
+    Toasts.toast(
       ctx,
       msg,
       duration: Duration(milliseconds: collected ? 1500 : 600),

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Toast {
+class Toasts {
   static toast(BuildContext context, String msg,
       {duration = const Duration(milliseconds: 600),SnackBarAction action}) {
     Scaffold.of(context).showSnackBar(SnackBar(

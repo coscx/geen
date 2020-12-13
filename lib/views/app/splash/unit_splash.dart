@@ -121,9 +121,21 @@ class _UnitSplashState extends State<UnitSplash> with TickerProviderStateMixin {
             Navigator.of(context).pushReplacementNamed(UnitRouter.login);
           } else{
             //LocalStorage.save("token", '');
-            showDialog(context: context, builder: (ctx) => _buildDialog());
-            Navigator.of(context).pushReplacementNamed(UnitRouter.nav);
+            var agree = await LocalStorage.get("agree");
+            var agrees =agree.toString();
+            if(agrees == "1"){
+              Navigator.of(context).pushReplacementNamed(UnitRouter.nav);
+
+            } else{
+              //LocalStorage.save("token", '');
+              showDialog(context: context, builder: (ctx) => _buildDialog());
+            }
+
+            //
           }
+
+
+
 
         });
       });

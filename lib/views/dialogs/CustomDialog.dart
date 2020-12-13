@@ -1,3 +1,4 @@
+import 'package:flui/flui.dart';
 /// 说明:
 ///
 //    {
@@ -12,7 +13,11 @@
 //    }
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_geen/app/router.dart';
+import 'package:flutter_geen/app/utils/Toast.dart';
+import 'package:flutter_geen/storage/dao/local_storage.dart';
 import 'package:flutter_geen/views/pages/home/home_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CustomDialog extends StatelessWidget {
   @override
@@ -72,7 +77,7 @@ class DeleteDialog extends StatelessWidget {
   Widget _buildTitle() {
     return Text(
       '温馨提示',
-      style: TextStyle(color: Colors.black, fontSize: 24),
+      style: TextStyle(color: Colors.black, fontSize: 20),
     );
   }
 
@@ -87,20 +92,27 @@ class DeleteDialog extends StatelessWidget {
                  child:Column(
                     children: <Widget>[
                        Text("温馨提示温馨提示温馨提示温馨馨提! \n示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温"
-                          "馨提示温馨", style: new TextStyle(color: Colors.black54,fontSize: 16),),
+                          "馨提示温馨", style:  TextStyle(color: Colors.black54,fontSize: 16),),
                        Text("温馨提示温馨提示温馨提示温馨馨提! \n示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温"
-                          "馨提示温馨", style: new TextStyle(color: Colors.black54,fontSize: 16),),
-                        Row(children: <Widget>[
+                          "馨提示温馨", style:  TextStyle(color: Colors.black54,fontSize: 16),),
+            Wrap(
+                alignment: WrapAlignment.start,
+                runAlignment: WrapAlignment.end,
+                children: <Widget>[
+              Text("和和和和和和和和", style:  TextStyle(color: Colors.black54,fontSize: 16),),
                           InkWell(
                               onTap: (){},
-                              child:Text("用户服务协议", style: new TextStyle(color: Colors.blue,fontSize: 16,decoration: TextDecoration.underline,
+                              child:Text("用户服务协议", style:  TextStyle(color: Colors.blue,fontSize: 16,decoration: TextDecoration.underline,
                                 decorationColor:  Colors.blue,),)),
                           Text("和", style: new TextStyle(color: Colors.black54,fontSize: 16),),
                           InkWell(
                               onTap: (){},
-                              child:Text("隐私政策", style: new TextStyle(color: Colors.blue,fontSize: 16,decoration: TextDecoration.underline,
+                              child:Text("隐私政策", style:  TextStyle(color: Colors.blue,fontSize: 16,decoration: TextDecoration.underline,
                                 decorationColor:  Colors.blue,),)),
+                          Text("和和和和和", style:  TextStyle(color: Colors.black54,fontSize: 16),),
+
                         ])
+
                     ],
                 )
              )));
@@ -108,44 +120,59 @@ class DeleteDialog extends StatelessWidget {
 
   Widget _buildFooter(context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 15.0, top: 10,left: 10,right: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          InkWell(
-            onTap: ()=>Navigator.of(context).pop(),
-            child: Container(
-              alignment: Alignment.center,
-              height: 40,
-              width: 100,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: Colors.black12
+        padding: const EdgeInsets.only(bottom: 15.0, top: 10,left: 10,right: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            InkWell(
+              onTap: (){
+                        Fluttertoast.showToast(
+                        msg: "请同意用户服务协议和隐私政策后我们才能继续为您提供服务",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 2,
+                        backgroundColor: Colors.black87,
+                        textColor: Colors.white,
+                        fontSize: 14.0);
+              },
+              child: Container(
+                alignment: Alignment.center,
+                height: 40,
+                width: 100,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    color: Colors.black12
+                ),
+
+                child: Text('不同意',
+                    style: TextStyle(color: Colors.black, fontSize: 14)),
               ),
-
-              child: Text('不同意',
-                  style: TextStyle(color: Colors.black, fontSize: 16)),
             ),
-          ),
-          InkWell(
-            onTap: ()=>Navigator.of(context).pop(),
-            child: Container(
-              alignment: Alignment.center,
-              height: 40,
-              width: 100,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: Colors.blue
+            InkWell(
+              onTap: () {
+                LocalStorage.save("agree", '1');
+                Navigator.of(context).pushReplacementNamed(UnitRouter.nav);
+              },
+              child: Container(
+                alignment: Alignment.center,
+                height: 40,
+                width: 100,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    color: Colors.blue
+                ),
+
+                child: Text('同意',
+                    style: TextStyle(color: Colors.white, fontSize: 14)),
               ),
-
-              child: Text('同意',
-                  style: TextStyle(color: Colors.white, fontSize: 16)),
             ),
-          ),
 
-        ],
-      ),
-    );
+          ],
+        ),
+
+    )
+
+    ;
   }
 
   _buildBar(context) => Container(
