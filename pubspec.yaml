@@ -63,6 +63,9 @@ dependencies:
   jpush_flutter: 0.6.1
   fluwx: ^2.4.2
   getwidget: ^1.2.4
+  flutter_screenutil: ^0.5.3
+  jverify: 0.6.22
+  flutter_easyrefresh: ^2.1.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

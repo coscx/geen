@@ -53,6 +53,8 @@ class _BlocWrapperState extends State<BlocWrapper> {
       BlocProvider<SearchBloc>(
           create: (_) => SearchBloc(repository: repository)),
       BlocProvider<PointBloc>(create: (_) => PointBloc()),
+          BlocProvider<DataBloc>(create: (_) => DataBloc()),
+          BlocProvider<BigDataBloc>(create: (_) => BigDataBloc()),
       BlocProvider<PointCommentBloc>(create: (_) => PointCommentBloc()),
 
           BlocProvider<LoginBloc>(create: (_) => LoginBloc()),

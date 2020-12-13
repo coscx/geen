@@ -218,6 +218,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.4.2"
+  flutter_easyrefresh:
+    dependency: "direct main"
+    description:
+      name: flutter_easyrefresh
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.7"
   flutter_local_notifications:
     dependency: "direct main"
     description:
@@ -267,6 +274,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.7"
+  flutter_screenutil:
+    dependency: "direct main"
+    description:
+      name: flutter_screenutil
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.5.3"
   flutter_spinkit:
     dependency: "direct main"
     description:
@@ -375,6 +389,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.1"
+  jverify:
+    dependency: "direct main"
+    description:
+      name: jverify
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.6.22"
   markdown:
     dependency: transitive
     description:

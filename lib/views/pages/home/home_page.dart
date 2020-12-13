@@ -323,20 +323,55 @@ class _HomePageState extends State<HomePage>
       List<WidgetModel> items = state.widgets;
       List<dynamic>  photos=state.photos;
       if (items.isEmpty) return EmptyPage();
-      return SliverList(
+      return photos.isNotEmpty?SliverList(
         delegate: SliverChildBuilderDelegate(
             (_, int index) => _buildHomeItem(items[0],photos[index]),
             childCount: photos.length),
-      );
+      ):Center(child: Container(
+        alignment: FractionalOffset.center,
+        child:  Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Icon(Icons.airplay, color: Colors.orangeAccent, size: 120.0),
+            Container(
+              padding:  EdgeInsets.only(top: 16.0),
+              child:  Text(
+                "暂时没有需要审核的用户了，(""^ _ ^)/~┴┴",
+                style:  TextStyle(
+                  fontSize: 20,
+                  color: Colors.orangeAccent,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),);
     }
 
     if (state is WidgetsLoadFailed) {
       return SliverToBoxAdapter(
         child: Container(
-          child: Text(
-
-              '加载数据异常'
-          ),
+          child: Center(child: Container(
+            alignment: FractionalOffset.center,
+            child:  Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Icon(Icons.event_busy, color: Colors.orangeAccent, size: 120.0),
+                Container(
+                  padding:  EdgeInsets.only(top: 16.0),
+                  child:  Text(
+                    "数据异常，(≡ _ ≡)/~┴┴",
+                    style:  TextStyle(
+                      fontSize: 20,
+                      color: Colors.orangeAccent,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),),
         ),
       );
     }
@@ -344,21 +379,59 @@ class _HomePageState extends State<HomePage>
       List<WidgetModel> items = state.widgets;
       List<dynamic>  photos=state.photos;
       if (items.isEmpty) return EmptyPage();
-      return SliverList(
+      return photos.isNotEmpty?SliverList(
         delegate: SliverChildBuilderDelegate(
                 (_, int index) => _buildHomeItem(items[index],photos[index]),
             childCount: photos.length),
-      );
+      ):Center(child: Container(
+        alignment: FractionalOffset.center,
+        child:  Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Icon(Icons.airplay, color: Colors.orangeAccent, size: 120.0),
+            Container(
+              padding:  EdgeInsets.only(top: 16.0),
+              child:  Text(
+                "暂时没有需要审核的用户了，(""^ _ ^)/~┴┴",
+                style:  TextStyle(
+                  fontSize: 20,
+                  color: Colors.orangeAccent,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),);
     }
     if (state is DelImgSuccess) {
       List<WidgetModel> items = state.widgets;
       List<dynamic>  photos=state.photos;
       if (items.isEmpty) return EmptyPage();
-      return SliverList(
+      return photos.isNotEmpty?SliverList(
         delegate: SliverChildBuilderDelegate(
                 (_, int index) => _buildHomeItem(items[index],photos[index]),
             childCount: photos.length),
-      );
+      ):Center(child: Container(
+        alignment: FractionalOffset.center,
+        child:  Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Icon(Icons.airplay, color: Colors.orangeAccent, size: 120.0),
+            Container(
+              padding:  EdgeInsets.only(top: 16.0),
+              child:  Text(
+                "暂时没有需要审核的用户了，(""^ _ ^)/~┴┴",
+                style:  TextStyle(
+                  fontSize: 20,
+                  color: Colors.orangeAccent,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),);
     }
     return SliverToBoxAdapter(
       child: Container(),

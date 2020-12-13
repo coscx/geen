@@ -160,7 +160,7 @@ class ImConversationListPage extends StatelessWidget{
                   BlocProvider.of<PeerBloc>(context).add(EventFirstLoadMessage(memberId,state.message[index].cid));
                   if (state.message[index].newMsgCount>0){
                     FltImPlugin im = FltImPlugin();
-                    //im.clearReadCount(cid:state.message[index].cid);
+                    im.clearReadCount(cid:state.message[index].cid);
                     BlocProvider.of<ChatBloc>(context).add(EventFreshMessage());
                   }
                   Navigator.pushNamed(context, UnitRouter.to_chats, arguments: state.message[index]);

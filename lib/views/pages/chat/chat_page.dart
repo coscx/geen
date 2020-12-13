@@ -11,6 +11,8 @@ import 'package:flt_im_plugin/value_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_unit/components/imageview/image_preview_page.dart';
 import 'package:flutter_unit/components/imageview/image_preview_view.dart';
 import 'package:flutter_unit/storage/dao/local_storage.dart';
@@ -836,7 +838,7 @@ class ChatsState extends State<ChatsPage> {
   }
 
   _messageListView(BuildContext context, PeerState peerState) {
-    return Container(
+     return Container(
         color: ColorT.gray_f0,
         child: Column(
           //如果只有一条数据，listView的高度由内容决定了，所以要加列，让listView看起来是满屏的
@@ -849,6 +851,7 @@ class ChatsState extends State<ChatsPage> {
   }
   Widget _buildContent(BuildContext context, PeerState state) {
     if (state is PeerMessageSuccess) {
+
       return   ListView.builder(
           itemBuilder: (BuildContext context, int index) {
             return _messageListViewItem(state.messageList,index,tfSender);
@@ -864,6 +867,7 @@ class ChatsState extends State<ChatsPage> {
           itemCount: state.messageList.length);
     }
     if (state is LoadMorePeerMessageSuccess) {
+
       return   ListView.builder(
           itemBuilder: (BuildContext context, int index) {
             return _messageListViewItem(state.messageList,index,tfSender);

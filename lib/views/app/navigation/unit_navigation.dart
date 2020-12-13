@@ -16,6 +16,9 @@ import 'package:flutter_unit/views/pages/category/collect_page.dart';
 import 'package:flutter_unit/views/pages/category/home_right_drawer.dart';
 import 'package:flutter_unit/views/pages/chat/conversation_list.dart';
 import 'package:flutter_unit/views/pages/chat/view/util/ImMessage.dart';
+import 'package:flutter_unit/views/pages/data/big.dart';
+import 'package:flutter_unit/views/pages/data/card.dart';
+import 'package:flutter_unit/views/pages/data/info.dart';
 import 'package:flutter_unit/views/pages/home/home_drawer.dart';
 import 'package:flutter_unit/views/pages/home/home_page.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
@@ -159,7 +162,7 @@ class _UnitNavigationState extends State<UnitNavigation> {
               controller: _controller,
               children: <Widget>[
                 HomePage(),
-                CollectPage(),
+                FocusPage(),
                 ImConversationListPage(memberId: id,),
                 CollectPage(),
 

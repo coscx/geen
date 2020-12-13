@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_unit/app/router.dart';
 import 'package:flutter_unit/storage/dao/local_storage.dart';
 import 'unit_paint.dart';
-
+import 'package:jverify/jverify.dart';
 /// 说明: app 闪屏页
 
 class UnitSplash extends StatefulWidget {
@@ -23,6 +23,24 @@ class _UnitSplashState extends State<UnitSplash> with TickerProviderStateMixin {
   Animation _curveAnim;
 
   bool _animEnd = false;
+  bool _getPreLoginSuccess = false;
+  /// 统一 key
+  final String f_result_key = "result";
+  /// 错误码
+  final  String  f_code_key = "code";
+  /// 回调的提示信息，统一返回 flutter 为 message
+  final  String  f_msg_key  = "message";
+  /// 运营商信息
+  final  String  f_opr_key  = "operator";
+
+
+  String _platformVersion = 'Unknown';
+  String _result = "token=";
+  var controllerPHone = new TextEditingController();
+  final Jverify jverify = new Jverify();
+  bool _loading = false;
+  String _token;
+
 
   @override
   void initState() {
@@ -37,11 +55,57 @@ class _UnitSplashState extends State<UnitSplash> with TickerProviderStateMixin {
 
     _curveAnim = CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn);
     super.initState();
+    initPlatformState();
   }
 
   void _listenAnimation() {
     setState(() {
       return _factor = _curveAnim.value;
+    });
+  }
+  Future<void> initPlatformState() async {
+    String platformVersion;
+
+    // 初始化 SDK 之前添加监听
+    jverify.addSDKSetupCallBackListener((JVSDKSetupEvent event){
+      print("receive sdk setup call back event :${event.toMap()}");
+
+      jverify.isInitSuccess().then((map) {
+        bool result = map[f_result_key];
+        print(_result);
+        jverify.checkVerifyEnable().then((map) {
+          bool result = map[f_result_key];
+          if (result) {
+            jverify.preLogin().then((map) {
+              print("预取号接口回调：${map.toString()}");
+              int code = map[f_code_key];
+              String message = map[f_msg_key];
+              _getPreLoginSuccess=true;
+
+            });
+          }else {
+
+              _result = "[2016],msg = 当前网络环境不支持认证";
+               print(_result);
+          }
+        });
+
+
+      });
+
+    });
+
+    jverify.setDebugMode(true); // 打开调试模式
+    jverify.setup(
+        appKey: "334db8731c1e38a9c7c3f512",//"你自己应用的 AppKey",
+        channel: "devloper-default"); // 初始化sdk,  appKey 和 channel 只对ios设置有效
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+    /// 授权页面点击时间监听
+    jverify.addAuthPageEventListener((JVAuthPageEvent event) {
+      print("receive auth page event :${event.toMap()}");
     });
   }
 
