@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flt_im_plugin/conversion.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_unit/app/enums.dart';
-import 'package:flutter_unit/model/widget_model.dart';
+import 'package:flutter_geen/app/enums.dart';
+import 'package:flutter_geen/model/widget_model.dart';
 
 /// 说明: 主页状态类
 

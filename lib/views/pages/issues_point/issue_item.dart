@@ -1,11 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_unit/app/res/toly_icon.dart';
-import 'package:flutter_unit/app/utils/convert_man.dart';
-import 'package:flutter_unit/components/permanent/circle_image.dart';
-import 'package:flutter_unit/components/permanent/color_wrapper.dart';
-import 'package:flutter_unit/model/github/issue.dart';
+import 'package:flutter_geen/app/res/toly_icon.dart';
+import 'package:flutter_geen/app/utils/convert_man.dart';
+import 'package:flutter_geen/components/permanent/circle_image.dart';
+import 'package:flutter_geen/components/permanent/color_wrapper.dart';
+import 'package:flutter_geen/model/github/issue.dart';
 
 
 /// 说明: 

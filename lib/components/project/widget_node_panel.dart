@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_unit/app/res/toly_icon.dart';
+import 'package:flutter_geen/app/res/toly_icon.dart';
 
-import 'package:flutter_unit/components/permanent/circle.dart';
-import 'package:flutter_unit/components/permanent/code/code_widget.dart';
-import 'package:flutter_unit/components/permanent/panel.dart';
+import 'package:flutter_geen/components/permanent/circle.dart';
+import 'package:flutter_geen/components/permanent/code/code_widget.dart';
+import 'package:flutter_geen/components/permanent/panel.dart';
 import 'package:share/share.dart';
 import 'package:toggle_rotate/toggle_rotate.dart';
 

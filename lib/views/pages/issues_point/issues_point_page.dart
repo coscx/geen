@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_unit/app/api/issues_api.dart';
-import 'package:flutter_unit/app/router.dart';
-import 'package:flutter_unit/blocs/bloc_exp.dart';
-import 'package:flutter_unit/model/github/issue.dart';
-import 'package:flutter_unit/model/github/repository.dart';
+import 'package:flutter_geen/app/api/issues_api.dart';
+import 'package:flutter_geen/app/router.dart';
+import 'package:flutter_geen/blocs/bloc_exp.dart';
+import 'package:flutter_geen/model/github/issue.dart';
+import 'package:flutter_geen/model/github/repository.dart';
 
 import 'issue_item.dart';
 import 'repo_widget.dart';

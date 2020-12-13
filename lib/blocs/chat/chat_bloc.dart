@@ -6,11 +6,11 @@ import 'package:flt_im_plugin/value_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_unit/app/api/issues_api.dart';
-import 'package:flutter_unit/app/enums.dart';
-import 'package:flutter_unit/app/res/cons.dart';
-import 'package:flutter_unit/repositories/itf/widget_repository.dart';
-import 'package:flutter_unit/storage/dao/local_storage.dart';
+import 'package:flutter_geen/app/api/issues_api.dart';
+import 'package:flutter_geen/app/enums.dart';
+import 'package:flutter_geen/app/res/cons.dart';
+import 'package:flutter_geen/repositories/itf/widget_repository.dart';
+import 'package:flutter_geen/storage/dao/local_storage.dart';
 
 import 'chat_event.dart';
 import 'chat_state.dart';

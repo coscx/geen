@@ -1,4 +1,4 @@
-import 'package:flutter_unit/model/time_line_model_entity.dart';
+import 'package:flutter_geen/model/time_line_model_entity.dart';
 
 timeLineModelEntityFromJson(TimeLineModelEntity data, Map<String, dynamic> json) {
 	if (json['code'] != null) {

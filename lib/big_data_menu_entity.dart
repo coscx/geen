@@ -1,4 +1,4 @@
-import 'package:flutter_unit/generated/json/base/json_convert_content.dart';
+import 'package:flutter_geen/generated/json/base/json_convert_content.dart';
 
 class BigDataMenuEntity with JsonConvert<BigDataMenuEntity> {
 	int code;

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_unit/app/router.dart';
-import 'package:flutter_unit/blocs/bloc_exp.dart';
-import 'package:flutter_unit/components/permanent/circle.dart';
+import 'package:flutter_geen/app/router.dart';
+import 'package:flutter_geen/blocs/bloc_exp.dart';
+import 'package:flutter_geen/components/permanent/circle.dart';
 
-import 'package:flutter_unit/model/category_model.dart';
-import 'package:flutter_unit/views/dialogs/delete_category_dialog.dart';
-import 'package:flutter_unit/views/items/category_list_item.dart';
+import 'package:flutter_geen/model/category_model.dart';
+import 'package:flutter_geen/views/dialogs/delete_category_dialog.dart';
+import 'package:flutter_geen/views/items/category_list_item.dart';
 
 import 'edit_category_panel.dart';
 

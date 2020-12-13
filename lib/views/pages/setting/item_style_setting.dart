@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_unit/blocs/bloc_exp.dart';
-import 'package:flutter_unit/components/permanent/feedback_widget.dart';
-import 'package:flutter_unit/components/permanent/circle.dart';
-import 'package:flutter_unit/views/items/home_item_support.dart';
+import 'package:flutter_geen/blocs/bloc_exp.dart';
+import 'package:flutter_geen/components/permanent/feedback_widget.dart';
+import 'package:flutter_geen/components/permanent/circle.dart';
+import 'package:flutter_geen/views/items/home_item_support.dart';
 
 
 

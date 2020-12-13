@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_unit/model/category_model.dart';
-import 'package:flutter_unit/model/widget_model.dart';
+import 'package:flutter_geen/model/category_model.dart';
+import 'package:flutter_geen/model/widget_model.dart';
 
 
 

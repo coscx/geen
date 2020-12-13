@@ -2,8 +2,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_unit/app/router.dart';
-import 'package:flutter_unit/storage/dao/local_storage.dart';
+import 'package:flutter_geen/app/router.dart';
+import 'package:flutter_geen/storage/dao/local_storage.dart';
+import 'package:flutter_geen/views/dialogs/CustomDialog.dart';
 import 'unit_paint.dart';
 import 'package:jverify/jverify.dart';
 /// 说明: app 闪屏页
@@ -120,13 +121,24 @@ class _UnitSplashState extends State<UnitSplash> with TickerProviderStateMixin {
             Navigator.of(context).pushReplacementNamed(UnitRouter.login);
           } else{
             //LocalStorage.save("token", '');
-            Navigator.of(context).pushReplacementNamed(UnitRouter.nav);
+            showDialog(context: context, builder: (ctx) => _buildDialog());
+            //Navigator.of(context).pushReplacementNamed(UnitRouter.nav);
           }
 
         });
       });
     }
   }
+  static Widget _buildDialog() => Dialog(
+    backgroundColor: Colors.white,
+    elevation: 5,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10))),
+    child: Container(
+      width: 50,
+      child: DeleteDialog(),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {

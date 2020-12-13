@@ -1,4 +1,4 @@
-import 'package:flutter_unit/big_data_menu_entity.dart';
+import 'package:flutter_geen/big_data_menu_entity.dart';
 
 bigDataMenuEntityFromJson(BigDataMenuEntity data, Map<String, dynamic> json) {
 	if (json['code'] != null) {

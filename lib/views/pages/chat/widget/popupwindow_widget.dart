@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_unit/views/pages/utils/functions.dart';
-import 'package:flutter_unit/views/pages/utils/image_util.dart';
+import 'package:flutter_geen/views/pages/utils/functions.dart';
+import 'package:flutter_geen/views/pages/utils/image_util.dart';
 
 import 'more_widgets.dart';
 

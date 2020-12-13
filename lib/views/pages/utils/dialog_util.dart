@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_unit/views/pages/resource/colors.dart';
+import 'package:flutter_geen/views/pages/resource/colors.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'functions.dart';

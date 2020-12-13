@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_unit/model/widget_model.dart';
+import 'package:flutter_geen/model/widget_model.dart';
 
 
 /// 说明: 详情事件

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_unit/app/api/issues_api.dart';
-import 'package:flutter_unit/generated/json/big_data_menu_entity_helper.dart';
-import 'package:flutter_unit/generated/json/big_datas_entity_helper.dart';
+import 'package:flutter_geen/app/api/issues_api.dart';
+import 'package:flutter_geen/generated/json/big_data_menu_entity_helper.dart';
+import 'package:flutter_geen/generated/json/big_datas_entity_helper.dart';
 import '../../big_data_menu_entity.dart';
 import '../../big_datas_entity.dart';
 import 'big_data_event.dart';

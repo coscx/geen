@@ -1,4 +1,4 @@
-import 'package:flutter_unit/big_datas_entity.dart';
+import 'package:flutter_geen/big_datas_entity.dart';
 
 bigDatasEntityFromJson(BigDatasEntity data, Map<String, dynamic> json) {
 	if (json['code'] != null) {

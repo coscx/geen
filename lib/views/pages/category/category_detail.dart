@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_star/flutter_star.dart';
-import 'package:flutter_unit/app/router.dart';
-import 'package:flutter_unit/blocs/bloc_exp.dart';
-import 'package:flutter_unit/components/permanent/circle_image.dart';
-import 'package:flutter_unit/components/permanent/circle_text.dart';
-import 'package:flutter_unit/components/permanent/feedback_widget.dart';
-import 'package:flutter_unit/model/category_model.dart';
-import 'package:flutter_unit/model/widget_model.dart';
+import 'package:flutter_geen/app/router.dart';
+import 'package:flutter_geen/blocs/bloc_exp.dart';
+import 'package:flutter_geen/components/permanent/circle_image.dart';
+import 'package:flutter_geen/components/permanent/circle_text.dart';
+import 'package:flutter_geen/components/permanent/feedback_widget.dart';
+import 'package:flutter_geen/model/category_model.dart';
+import 'package:flutter_geen/model/widget_model.dart';
 
 /// 说明:
 

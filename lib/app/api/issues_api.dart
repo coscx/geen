@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_unit/model/github/issue_comment.dart';
-import 'package:flutter_unit/model/github/issue.dart';
-import 'package:flutter_unit/model/github/repository.dart';
-import 'package:flutter_unit/storage/dao/local_storage.dart';
+import 'package:flutter_geen/model/github/issue_comment.dart';
+import 'package:flutter_geen/model/github/issue.dart';
+import 'package:flutter_geen/model/github/repository.dart';
+import 'package:flutter_geen/storage/dao/local_storage.dart';
 
 
 const kBaseUrl = 'http://as.gugu2019.com';

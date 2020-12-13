@@ -1,4 +1,4 @@
-import 'package:flutter_unit/model/github/github_user.dart';
+import 'package:flutter_geen/model/github/github_user.dart';
 
 part 'g/issue_comment.g.dart';
 

@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:flt_im_plugin/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_unit/views/pages/chat/view/gallery/video.dart';
-import 'package:flutter_unit/views/pages/chat/view/util/message.dart';
+import 'package:flutter_geen/views/pages/chat/view/gallery/video.dart';
+import 'package:flutter_geen/views/pages/chat/view/util/message.dart';
 
 import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:path_provider/path_provider.dart';

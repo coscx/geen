@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_unit/views/app/navigation/unit_navigation.dart';
-import 'package:flutter_unit/views/pages/about/about_me_page.dart';
-import 'package:flutter_unit/views/pages/about/about_app_page.dart';
-import 'package:flutter_unit/views/pages/about/recommendedCard.dart';
-import 'package:flutter_unit/views/pages/about/time_line.dart';
-import 'package:flutter_unit/views/pages/about/version_info.dart';
-import 'package:flutter_unit/views/pages/category/category_detail.dart';
-import 'package:flutter_unit/views/pages/category/collect_page.dart';
-import 'package:flutter_unit/views/pages/chat/chat_page.dart';
-import 'package:flutter_unit/views/pages/chat/conversation.dart';
-import 'package:flutter_unit/views/pages/chat/conversation_list.dart';
-import 'package:flutter_unit/views/pages/data/brower.dart';
-import 'package:flutter_unit/views/pages/data/card.dart';
-import 'package:flutter_unit/views/pages/gallery/gallery_page.dart';
-import 'package:flutter_unit/views/pages/issues_point/issues_detail.dart';
-import 'package:flutter_unit/views/pages/issues_point/issues_point_page.dart';
-import 'package:flutter_unit/views/pages/login/login_page.dart';
-import 'package:flutter_unit/views/pages/search/serach_page.dart';
-import 'package:flutter_unit/views/pages/setting/code_style_setting.dart';
-import 'package:flutter_unit/views/pages/setting/font_setting.dart';
-import 'package:flutter_unit/views/pages/setting/item_style_setting.dart';
-import 'package:flutter_unit/views/pages/setting/theme_color_setting.dart';
+import 'package:flutter_geen/views/app/navigation/unit_navigation.dart';
+import 'package:flutter_geen/views/pages/about/about_me_page.dart';
+import 'package:flutter_geen/views/pages/about/about_app_page.dart';
+import 'package:flutter_geen/views/pages/about/recommendedCard.dart';
+import 'package:flutter_geen/views/pages/about/time_line.dart';
+import 'package:flutter_geen/views/pages/about/version_info.dart';
+import 'package:flutter_geen/views/pages/category/category_detail.dart';
+import 'package:flutter_geen/views/pages/category/collect_page.dart';
+import 'package:flutter_geen/views/pages/chat/chat_page.dart';
+import 'package:flutter_geen/views/pages/chat/conversation.dart';
+import 'package:flutter_geen/views/pages/chat/conversation_list.dart';
+import 'package:flutter_geen/views/pages/data/brower.dart';
+import 'package:flutter_geen/views/pages/data/card.dart';
+import 'package:flutter_geen/views/pages/gallery/gallery_page.dart';
+import 'package:flutter_geen/views/pages/issues_point/issues_detail.dart';
+import 'package:flutter_geen/views/pages/issues_point/issues_point_page.dart';
+import 'package:flutter_geen/views/pages/login/login_page.dart';
+import 'package:flutter_geen/views/pages/search/serach_page.dart';
+import 'package:flutter_geen/views/pages/setting/code_style_setting.dart';
+import 'package:flutter_geen/views/pages/setting/font_setting.dart';
+import 'package:flutter_geen/views/pages/setting/item_style_setting.dart';
+import 'package:flutter_geen/views/pages/setting/theme_color_setting.dart';
 
 
-import 'package:flutter_unit/views/pages/widget_detail/widget_detail_page.dart';
+import 'package:flutter_geen/views/pages/widget_detail/widget_detail_page.dart';
 
-import 'package:flutter_unit/views/pages/setting/setting_page.dart';
+import 'package:flutter_geen/views/pages/setting/setting_page.dart';
 
 import 'utils/router_utils.dart';
 

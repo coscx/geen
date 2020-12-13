@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_unit/big_datas_entity.dart';
-import 'package:flutter_unit/blocs/data/data_bloc.dart';
-import 'package:flutter_unit/blocs/data/data_state.dart';
+import 'package:flutter_geen/big_datas_entity.dart';
+import 'package:flutter_geen/blocs/data/data_bloc.dart';
+import 'package:flutter_geen/blocs/data/data_state.dart';
 
 class ItemModel {
   String title;

@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_star/flutter_star.dart';
-import 'package:flutter_unit/app/res/cons.dart';
-import 'package:flutter_unit/app/res/style/shape/techno_shape.dart';
-import 'package:flutter_unit/blocs/collect/collect_bloc.dart';
-import 'package:flutter_unit/blocs/collect/collect_state.dart';
-import 'package:flutter_unit/components/permanent/circle_image.dart';
-import 'package:flutter_unit/components/permanent/circle_text.dart';
-import 'package:flutter_unit/components/permanent/tag.dart';
-import 'package:flutter_unit/model/widget_model.dart';
+import 'package:flutter_geen/app/res/cons.dart';
+import 'package:flutter_geen/app/res/style/shape/techno_shape.dart';
+import 'package:flutter_geen/blocs/collect/collect_bloc.dart';
+import 'package:flutter_geen/blocs/collect/collect_state.dart';
+import 'package:flutter_geen/components/permanent/circle_image.dart';
+import 'package:flutter_geen/components/permanent/circle_text.dart';
+import 'package:flutter_geen/components/permanent/tag.dart';
+import 'package:flutter_geen/model/widget_model.dart';
 
 class TechnoWidgetListItem extends StatelessWidget {
   final WidgetModel data;

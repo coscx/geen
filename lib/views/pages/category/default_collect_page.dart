@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_unit/app/router.dart';
-import 'package:flutter_unit/blocs/bloc_exp.dart';
-import 'package:flutter_unit/model/widget_model.dart';
-import 'package:flutter_unit/views/items/collect_widget_list_item.dart';
+import 'package:flutter_geen/app/router.dart';
+import 'package:flutter_geen/blocs/bloc_exp.dart';
+import 'package:flutter_geen/model/widget_model.dart';
+import 'package:flutter_geen/views/items/collect_widget_list_item.dart';
 
 /// 说明: 
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_unit/views/pages/resource/colors.dart';
-import 'package:flutter_unit/views/pages/utils/functions.dart';
+import 'package:flutter_geen/views/pages/resource/colors.dart';
+import 'package:flutter_geen/views/pages/utils/functions.dart';
 
 /*
 *  loading page

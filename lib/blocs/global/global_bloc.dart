@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_unit/app/api/issues_api.dart';
-import 'package:flutter_unit/storage/app_storage.dart';
-import 'package:flutter_unit/app/res/cons.dart';
-import 'package:flutter_unit/app/res/sp.dart';
+import 'package:flutter_geen/app/api/issues_api.dart';
+import 'package:flutter_geen/storage/app_storage.dart';
+import 'package:flutter_geen/app/res/cons.dart';
+import 'package:flutter_geen/app/res/sp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'global_event.dart';

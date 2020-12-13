@@ -1,7 +1,7 @@
 
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter_unit/model/widget_model.dart';
+import 'package:flutter_geen/model/widget_model.dart';
 
 abstract class SearchState extends Equatable{//基态
   const SearchState();

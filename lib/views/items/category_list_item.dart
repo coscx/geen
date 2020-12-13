@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_unit/components/permanent/circle_text.dart';
-import 'package:flutter_unit/components/permanent/feedback_widget.dart';
-import 'package:flutter_unit/model/category_model.dart';
+import 'package:flutter_geen/components/permanent/circle_text.dart';
+import 'package:flutter_geen/components/permanent/feedback_widget.dart';
+import 'package:flutter_geen/model/category_model.dart';
 
 /// 说明: 
 

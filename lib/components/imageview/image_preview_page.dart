@@ -9,8 +9,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_unit/components/imageview/primitive_navigation_bar.dart';
-import 'package:flutter_unit/components/imageview/support_activity_indicator.dart';
+import 'package:flutter_geen/components/imageview/primitive_navigation_bar.dart';
+import 'package:flutter_geen/components/imageview/support_activity_indicator.dart';
 
 import 'image_preview_route.dart';
 import 'image_preview_view.dart';

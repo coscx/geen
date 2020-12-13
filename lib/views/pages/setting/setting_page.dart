@@ -1,12 +1,12 @@
 import 'package:flt_im_plugin/flt_im_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_unit/app/router.dart';
-import 'package:flutter_unit/app/res/toly_icon.dart';
-import 'package:flutter_unit/blocs/bloc_exp.dart';
-import 'package:flutter_unit/storage/dao/local_storage.dart';
-import 'package:flutter_unit/views/dialogs/delete_category_dialog.dart';
-import 'package:flutter_unit/views/pages/login/login_page.dart';
+import 'package:flutter_geen/app/router.dart';
+import 'package:flutter_geen/app/res/toly_icon.dart';
+import 'package:flutter_geen/blocs/bloc_exp.dart';
+import 'package:flutter_geen/storage/dao/local_storage.dart';
+import 'package:flutter_geen/views/dialogs/delete_category_dialog.dart';
+import 'package:flutter_geen/views/pages/login/login_page.dart';
 
 class SettingPage extends StatelessWidget {
   @override

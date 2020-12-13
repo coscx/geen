@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_unit/blocs/home/home_state.dart';
-import 'package:flutter_unit/blocs/timeline/time_bloc.dart';
-import 'package:flutter_unit/blocs/timeline/time_state.dart';
-import 'package:flutter_unit/components/permanent/feedback_widget.dart';
-import 'package:flutter_unit/model/time_line_model_entity.dart';
+import 'package:flutter_geen/blocs/home/home_state.dart';
+import 'package:flutter_geen/blocs/timeline/time_bloc.dart';
+import 'package:flutter_geen/blocs/timeline/time_state.dart';
+import 'package:flutter_geen/components/permanent/feedback_widget.dart';
+import 'package:flutter_geen/model/time_line_model_entity.dart';
 import 'package:timeline_list/timeline.dart';
 import 'package:timeline_list/timeline_model.dart';
-import 'package:flutter_unit/app/router.dart';
-import 'package:flutter_unit/blocs/detail/detail_bloc.dart';
-import 'package:flutter_unit/blocs/detail/detail_event.dart';
+import 'package:flutter_geen/app/router.dart';
+import 'package:flutter_geen/blocs/detail/detail_bloc.dart';
+import 'package:flutter_geen/blocs/detail/detail_event.dart';
 class TimelinePage extends StatefulWidget {
   TimelinePage({Key key, this.title}) : super(key: key);
   final String title;

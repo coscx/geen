@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_unit/components/permanent/circle.dart';
+import 'package:flutter_geen/components/permanent/circle.dart';
 
 import '../math_runner.dart';
 

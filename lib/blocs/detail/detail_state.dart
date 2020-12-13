@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_unit/model/node_model.dart';
-import 'package:flutter_unit/model/widget_model.dart';
+import 'package:flutter_geen/model/node_model.dart';
+import 'package:flutter_geen/model/widget_model.dart';
 
 
 

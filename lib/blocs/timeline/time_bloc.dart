@@ -7,12 +7,12 @@ import 'package:flt_im_plugin/value_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_unit/app/api/issues_api.dart';
-import 'package:flutter_unit/app/res/cons.dart';
-import 'package:flutter_unit/model/time_line_model_entity.dart';
+import 'package:flutter_geen/app/api/issues_api.dart';
+import 'package:flutter_geen/app/res/cons.dart';
+import 'package:flutter_geen/model/time_line_model_entity.dart';
 import 'time_event.dart';
 import 'time_state.dart';
-import 'package:flutter_unit/generated/json/time_line_model_entity_helper.dart';
+import 'package:flutter_geen/generated/json/time_line_model_entity_helper.dart';
 
 
 class TimeBloc extends Bloc<TimeEvent, TimeState> {

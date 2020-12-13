@@ -2,10 +2,10 @@ import 'package:flt_im_plugin/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter_unit/views/pages/chat/view/message/audio.dart';
-import 'package:flutter_unit/views/pages/chat/view/message/image.dart';
-import 'package:flutter_unit/views/pages/chat/view/message/text.dart';
-import 'package:flutter_unit/views/pages/chat/view/message/video.dart';
+import 'package:flutter_geen/views/pages/chat/view/message/audio.dart';
+import 'package:flutter_geen/views/pages/chat/view/message/image.dart';
+import 'package:flutter_geen/views/pages/chat/view/message/text.dart';
+import 'package:flutter_geen/views/pages/chat/view/message/video.dart';
 
 import 'ImMessage.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_unit/views/pages/data/card.dart';
+import 'package:flutter_geen/views/pages/data/card.dart';
 
 
 typedef OnPressCallback = void Function(Widget selectedItem);

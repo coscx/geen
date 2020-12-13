@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_unit/model/github/issue_comment.dart';
-import 'package:flutter_unit/model/github/issue.dart';
+import 'package:flutter_geen/model/github/issue_comment.dart';
+import 'package:flutter_geen/model/github/issue.dart';
 
 /// 说明: 
 

@@ -1,9 +1,9 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_unit/app/api/issues_api.dart';
-import 'package:flutter_unit/app/utils/convert.dart';
-import 'package:flutter_unit/repositories/itf/widget_repository.dart';
+import 'package:flutter_geen/app/api/issues_api.dart';
+import 'package:flutter_geen/app/utils/convert.dart';
+import 'package:flutter_geen/repositories/itf/widget_repository.dart';
 
 import 'search_event.dart';
 import 'search_state.dart';

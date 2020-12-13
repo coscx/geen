@@ -6,7 +6,7 @@ import 'package:flt_im_plugin/value_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_unit/app/res/cons.dart';
+import 'package:flutter_geen/app/res/cons.dart';
 import 'peer_event.dart';
 import 'peer_state.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_unit/app/api/issues_api.dart';
-import 'package:flutter_unit/model/widget_model.dart';
-import 'package:flutter_unit/repositories/itf/widget_repository.dart';
+import 'package:flutter_geen/app/api/issues_api.dart';
+import 'package:flutter_geen/model/widget_model.dart';
+import 'package:flutter_geen/repositories/itf/widget_repository.dart';
 
 import 'detail_event.dart';
 import 'detail_state.dart';

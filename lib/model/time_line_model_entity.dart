@@ -1,5 +1,5 @@
-import 'package:flutter_unit/generated/json/base/json_convert_content.dart';
-import 'package:flutter_unit/generated/json/base/json_field.dart';
+import 'package:flutter_geen/generated/json/base/json_convert_content.dart';
+import 'package:flutter_geen/generated/json/base/json_field.dart';
 
 class TimeLineModelEntity with JsonConvert<TimeLineModelEntity> {
 	int code;
