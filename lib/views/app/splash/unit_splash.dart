@@ -122,7 +122,7 @@ class _UnitSplashState extends State<UnitSplash> with TickerProviderStateMixin {
           } else{
             //LocalStorage.save("token", '');
             showDialog(context: context, builder: (ctx) => _buildDialog());
-            //Navigator.of(context).pushReplacementNamed(UnitRouter.nav);
+            Navigator.of(context).pushReplacementNamed(UnitRouter.nav);
           }
 
         });

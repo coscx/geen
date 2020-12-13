@@ -327,7 +327,8 @@ class _HomePageState extends State<HomePage>
         delegate: SliverChildBuilderDelegate(
             (_, int index) => _buildHomeItem(items[0],photos[index]),
             childCount: photos.length),
-      ):Center(child: Container(
+      ):SliverToBoxAdapter(
+          child:Center(child: Container(
         alignment: FractionalOffset.center,
         child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -346,7 +347,7 @@ class _HomePageState extends State<HomePage>
             )
           ],
         ),
-      ),);
+      ),));
     }
 
     if (state is WidgetsLoadFailed) {
@@ -383,7 +384,8 @@ class _HomePageState extends State<HomePage>
         delegate: SliverChildBuilderDelegate(
                 (_, int index) => _buildHomeItem(items[index],photos[index]),
             childCount: photos.length),
-      ):Center(child: Container(
+      ):SliverToBoxAdapter(
+          child:Center(child: Container(
         alignment: FractionalOffset.center,
         child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -402,7 +404,7 @@ class _HomePageState extends State<HomePage>
             )
           ],
         ),
-      ),);
+      ),));
     }
     if (state is DelImgSuccess) {
       List<WidgetModel> items = state.widgets;
@@ -412,7 +414,8 @@ class _HomePageState extends State<HomePage>
         delegate: SliverChildBuilderDelegate(
                 (_, int index) => _buildHomeItem(items[index],photos[index]),
             childCount: photos.length),
-      ):Center(child: Container(
+      ):SliverToBoxAdapter(
+          child:Center(child: Container(
         alignment: FractionalOffset.center,
         child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -431,7 +434,7 @@ class _HomePageState extends State<HomePage>
             )
           ],
         ),
-      ),);
+      ),));
     }
     return SliverToBoxAdapter(
       child: Container(),

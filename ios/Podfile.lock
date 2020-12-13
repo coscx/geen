@@ -44,11 +44,26 @@ PODS:
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
+  - fluwx (0.0.1):
+    - Flutter
+    - WechatOpenSDK (= 1.8.7.1)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - image_picker (0.0.1):
     - Flutter
+  - JCore (2.2.5)
+  - JPush (3.3.6):
+    - JCore (< 3.0.0, >= 2.0.0)
+  - jpush_flutter (0.0.2):
+    - Flutter
+    - JPush
+  - JVerification (2.6.6):
+    - JCore (< 6.0.0, >= 2.1.6)
+  - jverify (0.0.1):
+    - Flutter
+    - JCore (= 2.2.5)
+    - JVerification (= 2.6.6)
   - libwebp (1.1.0):
     - libwebp/demux (= 1.1.0)
     - libwebp/mux (= 1.1.0)
@@ -86,6 +101,7 @@ PODS:
   - video_thumbnail (0.0.1):
     - Flutter
     - libwebp
+  - WechatOpenSDK (1.8.7.1)
 
 DEPENDENCIES:
   - audioplayers (from `.symlinks/plugins/audioplayers/ios`)
@@ -98,7 +114,10 @@ DEPENDENCIES:
   - flutter_record (from `.symlinks/plugins/flutter_record/ios`)
   - flutter_webview_plugin (from `.symlinks/plugins/flutter_webview_plugin/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - fluwx (from `.symlinks/plugins/fluwx/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
+  - jpush_flutter (from `.symlinks/plugins/jpush_flutter/ios`)
+  - jverify (from `.symlinks/plugins/jverify/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - share (from `.symlinks/plugins/share/ios`)
@@ -112,6 +131,9 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - FMDB
+    - JCore
+    - JPush
+    - JVerification
     - libwebp
     - Masonry
     - MBProgressHUD
@@ -119,6 +141,7 @@ SPEC REPOS:
     - Reachability
     - SDWebImage
     - Toast
+    - WechatOpenSDK
 
 EXTERNAL SOURCES:
   audioplayers:
@@ -141,8 +164,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_webview_plugin/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
+  fluwx:
+    :path: ".symlinks/plugins/fluwx/ios"
   image_picker:
     :path: ".symlinks/plugins/image_picker/ios"
+  jpush_flutter:
+    :path: ".symlinks/plugins/jpush_flutter/ios"
+  jverify:
+    :path: ".symlinks/plugins/jverify/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   permission_handler:
@@ -173,8 +202,14 @@ SPEC CHECKSUMS:
   flutter_record: 40cf8e821466913d1b3b4fdf6005dc6b201ae358
   flutter_webview_plugin: ed9e8a6a96baf0c867e90e1bce2673913eeac694
   fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
+  fluwx: 07a55ed66bf3a4961e836a2a411b02dcada32902
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
+  JCore: d75c0306dc99875d323d23e5a063b3a3ef22335a
+  JPush: a401b946dcc76b37335422487201bc1ecc8dd296
+  jpush_flutter: 69133df35eaf9135e540549b154d992c44f8ee44
+  JVerification: 0009b64571442930ab307cfcde745fd3451bda90
+  jverify: 848dbe16b672911d5693f258393e35c1faa664aa
   libwebp: 946cb3063cea9236285f7e9a8505d806d30e07f3
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
@@ -191,6 +226,7 @@ SPEC CHECKSUMS:
   vibration: 528f5ef88e90d4a8fd1ef04afbf0ed3ac7c9801d
   video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
   video_thumbnail: c4e2a3c539e247d4de13cd545344fd2d26ffafd1
+  WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 

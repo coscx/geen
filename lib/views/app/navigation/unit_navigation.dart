@@ -54,25 +54,29 @@ class _UnitNavigationState extends State<UnitNavigation> {
       if(ss !="" || ss != null){
 
         login(success: () {
-
+          listenNative();
+          BlocProvider.of<ChatBloc>(context).add(EventNewMessage(null));
         });
 
       }else{
 
-        login(success: () {
-
+        loginByToken(ss,success: () {
+          listenNative();
+          BlocProvider.of<ChatBloc>(context).add(EventNewMessage(null));
         });
       }
-      BlocProvider.of<ChatBloc>(context).add(EventNewMessage(null));
+
       BlocProvider.of<GlobalBloc>(context).add(EventSetMemberId(tfSender));
-
-
 
     });
 
 
+
+
+
+
     initPlatformState();
-    listenNative();
+
 
   }
 // Platform messages are asynchronous, so we initialize in an async method.

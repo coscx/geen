@@ -120,7 +120,7 @@ class ImConversationListPage extends StatelessWidget{
                       constraints: BoxConstraints(maxWidth: 260),
                       margin: EdgeInsets.only(top: 2,left: 10),
                       child: Text(
-                        conversation.name,
+                        conversation.cid,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black, fontSize: 15),

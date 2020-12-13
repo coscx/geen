@@ -963,7 +963,7 @@ class ChatsState extends State<ChatsPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _headPortrait(entity.uuid, 1),
+            _headPortrait('', 1),
             SizedBox(width: 10),
             new Expanded(
                 child: Column(
@@ -1040,7 +1040,7 @@ class ChatsState extends State<ChatsPage> {
                   ],
                 )),
             SizedBox(width: 10),
-            _headPortrait(entity.uuid, 0),
+            _headPortrait('', 0),
           ],
         ),
       );
