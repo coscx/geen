@@ -16,6 +16,7 @@ import 'package:flutter_geen/views/pages/gallery/gallery_page.dart';
 import 'package:flutter_geen/views/pages/issues_point/issues_detail.dart';
 import 'package:flutter_geen/views/pages/issues_point/issues_point_page.dart';
 import 'package:flutter_geen/views/pages/login/login_page.dart';
+import 'package:flutter_geen/views/pages/login/logins.dart';
 import 'package:flutter_geen/views/pages/search/serach_page.dart';
 import 'package:flutter_geen/views/pages/setting/code_style_setting.dart';
 import 'package:flutter_geen/views/pages/setting/font_setting.dart';
@@ -64,6 +65,7 @@ class UnitRouter {
   static const String index_page = 'IndexPage';
   static const String brower = 'Brower';
   static const String recommended_card = 'RecommendedCard';
+  static const String login_phone = 'LoginPhone';
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       //根据名称跳转相应页面
@@ -114,6 +116,8 @@ class UnitRouter {
         return Right2LeftRouter(child: IssuesDetailPage());
       case index_page:
         return Right2LeftRouter(child: IndexPage());
+      case login_phone:
+        return Right2LeftRouter(child: LoginPhone());
       case recommended_card:
         return Right2LeftRouter(child: RecommendedCard());
       case time_line:

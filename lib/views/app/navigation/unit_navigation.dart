@@ -5,6 +5,7 @@ import 'package:flt_im_plugin/value_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_geen/views/pages/about/bottom_sheet.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_geen/app/res/cons.dart';
 import 'package:flutter_geen/app/router.dart';
@@ -290,7 +291,10 @@ class _UnitNavigationState extends State<UnitNavigation> {
         width: 65,
         child: Image.asset("assets/packages/images/tab_match.webp"),
       ),
-      onTap: () => Navigator.of(context).pushNamed(UnitRouter.search),
+      onTap: () {
+        showBottomPop(context);
+      }
+      //Navigator.of(context).pushNamed(UnitRouter.search),
     );
   }
 
