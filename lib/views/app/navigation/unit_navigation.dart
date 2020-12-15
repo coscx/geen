@@ -24,6 +24,7 @@ import 'package:flutter_geen/views/pages/home/home_drawer.dart';
 import 'package:flutter_geen/views/pages/home/home_page.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 /// 说明: 主题结构 左右滑页 + 底部导航栏
 
@@ -292,7 +293,15 @@ class _UnitNavigationState extends State<UnitNavigation> {
         child: Image.asset("assets/packages/images/tab_match.webp"),
       ),
       onTap: () {
-        showBottomPop(context);
+        //showBottomPop(context);
+        showCupertinoModalBottomSheet(
+          expand: true,
+          bounce:false,
+          context: context,
+          duration: const Duration(milliseconds: 200),
+          backgroundColor: Colors.white,
+          builder: (context) => PhotoShareBottomSheet(),
+        );
       }
       //Navigator.of(context).pushNamed(UnitRouter.search),
     );
