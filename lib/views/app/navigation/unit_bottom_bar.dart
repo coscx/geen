@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gifimage/flutter_gifimage.dart';
 import 'package:flutter_svg/svg.dart';
 
 
@@ -20,13 +21,14 @@ class UnitBottomBar extends StatefulWidget {
 
 class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProviderStateMixin{
   int _position = 0;
-  AnimationController _ctrl0;
-
+  //AnimationController _ctrl0;
+  GifController controllers;
   int first =0;
   @override
   void initState() {
     // TODO: implement initState
-    _ctrl0= AnimationController(vsync:this,duration: Duration(milliseconds: 300),);
+    //_ctrl0= AnimationController(vsync:this,duration: Duration(milliseconds: 300),);
+    controllers= GifController(vsync: this);
     super.initState();
   }
 
@@ -93,10 +95,14 @@ class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProvider
               //   parent: _ctrl0,
               //   curve: Curves.linear,
               // ),
-              child: Image.asset(
-                i==0?"assets/packages/images/tab_home.webp":"assets/packages/images/tab_me.webp",
-                repeat:ImageRepeat.noRepeat,
+              child:  GifImage(
+                controller: controllers,
+                image:  Image.asset(
+                  i==0?"assets/packages/images/tab_home.webp":"assets/packages/images/tab_me.webp",
+                  repeat:ImageRepeat.noRepeat,
+                ).image,
               ),
+
             ):SvgPicture.asset(
               i==0?"assets/packages/images/tab_home.svg":"assets/packages/images/tab_me.svg",
               color: Colors.black87,
@@ -135,11 +141,15 @@ class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProvider
           // parent: _ctrl0,
           //   curve: Curves.linear,
           // ),
-          child: Image.asset(
-
-            i==0?"assets/packages/images/tab_msg.webp":"assets/packages/images/tab_discovery.webp",
-            repeat:ImageRepeat.noRepeat,
+          child:GifImage(
+            controller: controllers,
+            image:   Image.asset(
+              i==0?"assets/packages/images/tab_msg.webp":"assets/packages/images/tab_discovery.webp",
+            ).image,
           ),
+
+
+
         ):SvgPicture.asset(
               i==0?"assets/packages/images/tab_msg.svg":"assets/packages/images/tab_discovery.svg",
         color: Colors.black87,
@@ -153,6 +163,11 @@ class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProvider
     first++;
     setState(() {
       _position = i;
+      // jumpTo thrid frame(index from 0)
+      controllers.value = 0;
+      controllers.duration=Duration(milliseconds:500);
+      // from current frame to 26 frame
+      controllers.animateTo(14);
       //_ctrl0.reset();
       //_ctrl0.forward();
       if (widget.onItemClick != null) {

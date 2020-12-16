@@ -31,7 +31,7 @@ class _BottomSheetState extends State<BottomSheet> {
       isScrollControlled: true, //可滚动 解除showModalBottomSheet最大显示屏幕一半的限制
       shape: RoundedRectangleBorder(
         //圆角
-        //borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+        //borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (BuildContext context) {
         return AnimatedPadding(
@@ -45,7 +45,7 @@ class _BottomSheetState extends State<BottomSheet> {
               maxHeight: MediaQuery.of(context).size.height / 1, //设置最大高度（必要）
             ),
             padding: EdgeInsets.only(top: 34, bottom: 48),
-            decoration: BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(30)), color: Colors.white), //圆角
+            decoration: BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(20)), color: Colors.white), //圆角
             child:
 
                 ListView(
@@ -167,7 +167,7 @@ class PhotoShareBottomSheet extends StatelessWidget {
     return BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
         child: Material(
-            color: Colors.lightBlue,
+            color: Colors.black12,
             child: Scaffold(
               backgroundColor: CupertinoTheme.of(context)
                   .scaffoldBackgroundColor
@@ -208,25 +208,45 @@ class PhotoShareBottomSheet extends StatelessWidget {
                       //color: Colors.red,
                       decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30))),
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))),
                       margin: EdgeInsets.fromLTRB(10,10,10,0),
                       child:Column(
-
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
+                            SizedBox(
+                              height: 15,
+                            ),
+                           Row(
+
+                             children: <Widget>[
+                               SizedBox(
+                                 width: 15,
+                               ),
+                                Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    height: 65,
+                                    width: 65,
+                                    alignment: FractionalOffset.topLeft,
+                                    child: Image.asset("assets/packages/images/tab_match.webp"),
+                                  ),
+                       
+                                  ]),
+
+
+
+                             ],
+                           ),
 
                             Container(
-                              height: 65,
-                              width: 65,
-                              child: Image.asset("assets/packages/images/tab_match.webp"),
-                            ),
-                            Container(
-                              height: 235,
+                              height: 240,
                               //color: Colors.red,
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
                                   BorderRadius.circular(5)),
-                              margin: EdgeInsets.fromLTRB(10,10,10,0),
+                              margin: EdgeInsets.fromLTRB(10,0,10,0),
                               child:
                               SingleChildScrollView(
                                   physics: const BouncingScrollPhysics (),
@@ -234,52 +254,160 @@ class PhotoShareBottomSheet extends StatelessWidget {
 
                                       children: <Widget>[
                                         SizedBox(
-                                          height: 45,
+                                          height: 20,
                                         ),
                                         Wrap(
                                           spacing: 10,
-                                          runSpacing: 10,
+                                         // runSpacing: 10,
                                           children:<Widget> [
                                             Container(
-                                              height: 75,
+                                              height: 115,
                                               width: 75,
-                                              child: Image.asset("assets/packages/images/tab_match.webp"),
+                                              child: Column(
+
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                      height: 2,
+                                                    ),
+                                                    Image.asset("assets/packages/images/game_guess.png"),
+                                                    Text("开始匹配"
+                                                        ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                    SizedBox(
+                                                      height: 18,
+                                                    )
+                                                  ])
+
+
                                             ),
                                             Container(
-                                              height: 75,
-                                              width: 75,
-                                              child: Image.asset("assets/packages/images/tab_match.webp"),
+                                                height: 115,
+                                                width: 75,
+                                                child: Column(
+
+                                                    children: <Widget>[
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
+                                                      Image.asset("assets/packages/images/game_rpg.png"),
+                                                      Text("开始匹配"
+                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                      SizedBox(
+                                                        height: 18,
+                                                      )
+                                                    ])
+
+
+                                            ), Container(
+                                                height: 115,
+                                                width: 75,
+                                                child: Column(
+
+                                                    children: <Widget>[
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
+                                                      Image.asset("assets/packages/images/game_under.png"),
+                                                      Text("开始匹配"
+                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                      SizedBox(
+                                                        height: 18,
+                                                      )
+                                                    ])
+
+
+                                            ), Container(
+                                                height: 115,
+                                                width: 75,
+                                                child: Column(
+
+                                                    children: <Widget>[
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
+                                                      Image.asset("assets/packages/images/game_wolf.png"),
+                                                      Text("开始匹配"
+                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                      SizedBox(
+                                                        height: 18,
+                                                      )
+                                                    ])
+
+
                                             ),
                                             Container(
-                                              height: 75,
-                                              width: 75,
-                                              child: Image.asset("assets/packages/images/tab_match.webp"),
+                                                height: 115,
+                                                width: 75,
+                                                child: Column(
+
+                                                    children: <Widget>[
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
+                                                      Image.asset("assets/packages/images/game_guess.png"),
+                                                      Text("开始匹配"
+                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                      SizedBox(
+                                                        height: 18,
+                                                      )
+                                                    ])
+
+
                                             ),
                                             Container(
-                                              height: 75,
-                                              width: 75,
-                                              child: Image.asset("assets/packages/images/tab_match.webp"),
+                                                height: 115,
+                                                width: 75,
+                                                child: Column(
+
+                                                    children: <Widget>[
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
+                                                      Image.asset("assets/packages/images/game_rpg.png"),
+                                                      Text("开始匹配"
+                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                      SizedBox(
+                                                        height: 18,
+                                                      )
+                                                    ])
+
+
+                                            ), Container(
+                                                height: 115,
+                                                width: 75,
+                                                child: Column(
+
+                                                    children: <Widget>[
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
+                                                      Image.asset("assets/packages/images/game_under.png"),
+                                                      Text("开始匹配"
+                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                      SizedBox(
+                                                        height: 18,
+                                                      )
+                                                    ])
+
+
+                                            ), Container(
+                                                height: 115,
+                                                width: 75,
+                                                child: Column(
+
+                                                    children: <Widget>[
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
+                                                      Image.asset("assets/packages/images/game_wolf.png"),
+                                                      Text("开始匹配"
+                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                      SizedBox(
+                                                        height: 18,
+                                                      )
+                                                    ])
+
+
                                             ),
-                                            Container(
-                                              height: 75,
-                                              width: 75,
-                                              child: Image.asset("assets/packages/images/tab_match.webp"),
-                                            ),
-                                            Container(
-                                              height: 75,
-                                              width: 75,
-                                              child: Image.asset("assets/packages/images/tab_match.webp"),
-                                            ),
-                                            Container(
-                                              height: 75,
-                                              width: 75,
-                                              child: Image.asset("assets/packages/images/tab_match.webp"),
-                                            ),
-                                            Container(
-                                              height: 75,
-                                              width: 75,
-                                              child: Image.asset("assets/packages/images/tab_match.webp"),
-                                            )
                                           ],
                                         ),
 

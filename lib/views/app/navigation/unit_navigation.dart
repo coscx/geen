@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_geen/views/pages/about/bottom_sheet.dart';
+import 'package:flutter_gifimage/flutter_gifimage.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_geen/app/res/cons.dart';
 import 'package:flutter_geen/app/router.dart';
@@ -33,7 +34,7 @@ class UnitNavigation extends StatefulWidget {
   _UnitNavigationState createState() => _UnitNavigationState();
 }
 
-class _UnitNavigationState extends State<UnitNavigation> {
+class _UnitNavigationState extends State<UnitNavigation> with SingleTickerProviderStateMixin{
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   PageController _controller; //页面控制器，初始0
   //List<Conversion> conversions = [];
@@ -41,9 +42,11 @@ class _UnitNavigationState extends State<UnitNavigation> {
   FltImPlugin im = FltImPlugin();
   JPush jpush = new JPush();
   static String tfSender = "";
+
   @override
   void initState() {
     super.initState();
+
     FltImPlugin().init(host: "mm.3dsqq.com", apiURL: "http://mm.3dsqq.com:8000");
     _controller = PageController();
     tfSender = ValueUtil.toStr(2);
