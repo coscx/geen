@@ -171,7 +171,7 @@ class PhotoShareBottomSheet extends StatelessWidget {
             child: Scaffold(
               backgroundColor: CupertinoTheme.of(context)
                   .scaffoldBackgroundColor
-                  .withOpacity(0.5),
+                  .withOpacity(1),
               extendBodyBehindAppBar: true,
               appBar: appBar(context),
               body: CustomScrollView(
@@ -182,7 +182,7 @@ class PhotoShareBottomSheet extends StatelessWidget {
                     bottom: false,
                     sliver: SliverToBoxAdapter(
                       child: Container(
-                        height: 318,
+                        height: ScreenUtil().setHeight(500),
                         child: ListView(
                           padding: EdgeInsets.all(12).copyWith(
                               right:
@@ -200,11 +200,11 @@ class PhotoShareBottomSheet extends StatelessWidget {
 
                   //sliverContactsSection(context),
                   SliverToBoxAdapter(
-                    child: Container(height: 40),
+                    child: Container(height: ScreenUtil().setHeight(10),),
                   ),
                   SliverToBoxAdapter(
                     child: Container(
-                      height: ScreenUtil().setHeight(600),
+                      height: ScreenUtil().setHeight(620),
                       //color: Colors.red,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -257,11 +257,11 @@ class PhotoShareBottomSheet extends StatelessWidget {
                                           height: ScreenUtil().setHeight(0),
                                         ),
                                         Wrap(
-                                          spacing: 10,
+                                          spacing: ScreenUtil().setWidth(20),
                                           //runSpacing: 10,
                                           children:<Widget> [
                                           Container( color:Colors.white,
-                                            height: ScreenUtil().setHeight(170),
+                                            height: ScreenUtil().setHeight(200),
                                             width: ScreenUtil().setWidth( 130),
                                             child: Column(
 
@@ -282,7 +282,7 @@ class PhotoShareBottomSheet extends StatelessWidget {
 
 
                                         ) ,Container( color:Colors.white,
-                                            height: ScreenUtil().setHeight(170),
+                                            height: ScreenUtil().setHeight(200),
                                             width: ScreenUtil().setWidth( 130),
                                             child: Column(
 
@@ -303,7 +303,7 @@ class PhotoShareBottomSheet extends StatelessWidget {
 
 
                                         ) ,Container( color:Colors.white,
-                                            height: ScreenUtil().setHeight(170),
+                                            height: ScreenUtil().setHeight(200),
                                             width: ScreenUtil().setWidth( 130),
                                             child: Column(
 
@@ -324,7 +324,7 @@ class PhotoShareBottomSheet extends StatelessWidget {
 
 
                                         ) ,Container( color:Colors.white,
-                                            height: ScreenUtil().setHeight(170),
+                                            height: ScreenUtil().setHeight(200),
                                             width: ScreenUtil().setWidth( 130),
                                             child: Column(
 
@@ -345,7 +345,7 @@ class PhotoShareBottomSheet extends StatelessWidget {
 
 
                                         ) ,Container( color:Colors.white,
-                                            height: ScreenUtil().setHeight(170),
+                                            height: ScreenUtil().setHeight(200),
                                             width: ScreenUtil().setWidth( 130),
                                             child: Column(
 
