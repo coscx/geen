@@ -246,7 +246,7 @@ class PhotoShareBottomSheet extends StatelessWidget {
                                   color: Colors.white,
                                   borderRadius:
                                   BorderRadius.circular(5)),
-                              margin: EdgeInsets.fromLTRB(10,5,10,0),
+                              margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(10),ScreenUtil().setHeight(5),ScreenUtil().setWidth(10),0),
                               child:
                               SingleChildScrollView(
                                   physics: const BouncingScrollPhysics (),
@@ -257,7 +257,7 @@ class PhotoShareBottomSheet extends StatelessWidget {
                                           height: ScreenUtil().setHeight(0),
                                         ),
                                         Wrap(
-                                          spacing: ScreenUtil().setWidth(20),
+                                          spacing: ScreenUtil().setWidth(40),
                                           //runSpacing: 10,
                                           children:<Widget> [
                                           Container( color:Colors.white,
