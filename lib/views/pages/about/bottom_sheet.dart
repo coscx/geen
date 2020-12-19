@@ -171,7 +171,7 @@ class PhotoShareBottomSheet extends StatelessWidget {
             child: Scaffold(
               backgroundColor: CupertinoTheme.of(context)
                   .scaffoldBackgroundColor
-                  .withOpacity(1),
+                  .withOpacity(0.7),
               extendBodyBehindAppBar: true,
               appBar: appBar(context),
               body: CustomScrollView(
@@ -200,11 +200,11 @@ class PhotoShareBottomSheet extends StatelessWidget {
 
                   //sliverContactsSection(context),
                   SliverToBoxAdapter(
-                    child: Container(height: ScreenUtil().setHeight(10),),
+                    child: Container(height: ScreenUtil().setHeight(50),),
                   ),
                   SliverToBoxAdapter(
                     child: Container(
-                      height: ScreenUtil().setHeight(620),
+                      height: ScreenUtil().setHeight(600),
                       //color: Colors.red,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -246,7 +246,7 @@ class PhotoShareBottomSheet extends StatelessWidget {
                                   color: Colors.white,
                                   borderRadius:
                                   BorderRadius.circular(5)),
-                              margin: EdgeInsets.fromLTRB(10,10,10,0),
+                              margin: EdgeInsets.fromLTRB(10,5,10,0),
                               child:
                               SingleChildScrollView(
                                   physics: const BouncingScrollPhysics (),
