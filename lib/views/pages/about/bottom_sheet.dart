@@ -1,6 +1,6 @@
 
 import 'dart:ui';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -200,11 +200,11 @@ class PhotoShareBottomSheet extends StatelessWidget {
 
                   //sliverContactsSection(context),
                   SliverToBoxAdapter(
-                    child: Container(height: 29),
+                    child: Container(height: 40),
                   ),
                   SliverToBoxAdapter(
                     child: Container(
-                      height: 350,
+                      height: ScreenUtil().setHeight(600),
                       //color: Colors.red,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -214,20 +214,20 @@ class PhotoShareBottomSheet extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             SizedBox(
-                              height: 15,
+                              height: ScreenUtil().setHeight(15),
                             ),
                            Row(
 
                              children: <Widget>[
                                SizedBox(
-                                 width: 15,
+                                 width: ScreenUtil().setHeight(30),
                                ),
                                 Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Container(
-                                    height: 65,
-                                    width: 65,
+                                    height: ScreenUtil().setHeight(160),
+                                    width: ScreenUtil().setWidth(160),
                                     alignment: FractionalOffset.topLeft,
                                     child: Image.asset("assets/packages/images/tab_match.webp"),
                                   ),
@@ -240,13 +240,13 @@ class PhotoShareBottomSheet extends StatelessWidget {
                            ),
 
                             Container(
-                              height: 240,
+                              height: ScreenUtil().setHeight(400),
                               //color: Colors.red,
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
                                   BorderRadius.circular(5)),
-                              margin: EdgeInsets.fromLTRB(10,0,10,0),
+                              margin: EdgeInsets.fromLTRB(10,10,10,0),
                               child:
                               SingleChildScrollView(
                                   physics: const BouncingScrollPhysics (),
@@ -254,163 +254,123 @@ class PhotoShareBottomSheet extends StatelessWidget {
 
                                       children: <Widget>[
                                         SizedBox(
-                                          height: 20,
+                                          height: ScreenUtil().setHeight(0),
                                         ),
                                         Wrap(
                                           spacing: 10,
-                                         // runSpacing: 10,
+                                          //runSpacing: 10,
                                           children:<Widget> [
-                                            Container(
-                                              height: 115,
-                                              width: 75,
-                                              child: Column(
+                                          Container( color:Colors.white,
+                                            height: ScreenUtil().setHeight(170),
+                                            width: ScreenUtil().setWidth( 130),
+                                            child: Column(
 
-                                                  children: <Widget>[
-                                                    SizedBox(
-                                                      height: 2,
-                                                    ),
-                                                    Image.asset("assets/packages/images/game_guess.png"),
-                                                    Text("开始匹配"
-                                                        ,style: TextStyle(color: Colors.black, fontSize: 13)),
-                                                    SizedBox(
-                                                      height: 18,
-                                                    )
-                                                  ])
-
-
-                                            ),
-                                            Container(
-                                                height: 115,
-                                                width: 75,
-                                                child: Column(
-
-                                                    children: <Widget>[
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Image.asset("assets/packages/images/game_rpg.png"),
-                                                      Text("开始匹配"
-                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
-                                                      SizedBox(
-                                                        height: 18,
-                                                      )
-                                                    ])
+                                                children: <Widget>[
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(2),
+                                                  ),
+                                                  Image.asset("assets/packages/images/game_guess.png"),
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(8),
+                                                  ),
+                                                  Text("开始匹配"
+                                                      ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(18),
+                                                  )
+                                                ])
 
 
-                                            ), Container(
-                                                height: 115,
-                                                width: 75,
-                                                child: Column(
+                                        ) ,Container( color:Colors.white,
+                                            height: ScreenUtil().setHeight(170),
+                                            width: ScreenUtil().setWidth( 130),
+                                            child: Column(
 
-                                                    children: <Widget>[
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Image.asset("assets/packages/images/game_under.png"),
-                                                      Text("开始匹配"
-                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
-                                                      SizedBox(
-                                                        height: 18,
-                                                      )
-                                                    ])
-
-
-                                            ), Container(
-                                                height: 115,
-                                                width: 75,
-                                                child: Column(
-
-                                                    children: <Widget>[
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Image.asset("assets/packages/images/game_wolf.png"),
-                                                      Text("开始匹配"
-                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
-                                                      SizedBox(
-                                                        height: 18,
-                                                      )
-                                                    ])
+                                                children: <Widget>[
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(2),
+                                                  ),
+                                                  Image.asset("assets/packages/images/game_guess.png"),
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(8),
+                                                  ),
+                                                  Text("开始匹配"
+                                                      ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(18),
+                                                  )
+                                                ])
 
 
-                                            ),
-                                            Container(
-                                                height: 115,
-                                                width: 75,
-                                                child: Column(
+                                        ) ,Container( color:Colors.white,
+                                            height: ScreenUtil().setHeight(170),
+                                            width: ScreenUtil().setWidth( 130),
+                                            child: Column(
 
-                                                    children: <Widget>[
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Image.asset("assets/packages/images/game_guess.png"),
-                                                      Text("开始匹配"
-                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
-                                                      SizedBox(
-                                                        height: 18,
-                                                      )
-                                                    ])
-
-
-                                            ),
-                                            Container(
-                                                height: 115,
-                                                width: 75,
-                                                child: Column(
-
-                                                    children: <Widget>[
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Image.asset("assets/packages/images/game_rpg.png"),
-                                                      Text("开始匹配"
-                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
-                                                      SizedBox(
-                                                        height: 18,
-                                                      )
-                                                    ])
+                                                children: <Widget>[
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(2),
+                                                  ),
+                                                  Image.asset("assets/packages/images/game_guess.png"),
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(8),
+                                                  ),
+                                                  Text("开始匹配"
+                                                      ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(18),
+                                                  )
+                                                ])
 
 
-                                            ), Container(
-                                                height: 115,
-                                                width: 75,
-                                                child: Column(
+                                        ) ,Container( color:Colors.white,
+                                            height: ScreenUtil().setHeight(170),
+                                            width: ScreenUtil().setWidth( 130),
+                                            child: Column(
 
-                                                    children: <Widget>[
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Image.asset("assets/packages/images/game_under.png"),
-                                                      Text("开始匹配"
-                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
-                                                      SizedBox(
-                                                        height: 18,
-                                                      )
-                                                    ])
-
-
-                                            ), Container(
-                                                height: 115,
-                                                width: 75,
-                                                child: Column(
-
-                                                    children: <Widget>[
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Image.asset("assets/packages/images/game_wolf.png"),
-                                                      Text("开始匹配"
-                                                          ,style: TextStyle(color: Colors.black, fontSize: 13)),
-                                                      SizedBox(
-                                                        height: 18,
-                                                      )
-                                                    ])
+                                                children: <Widget>[
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(2),
+                                                  ),
+                                                  Image.asset("assets/packages/images/game_guess.png"),
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(8),
+                                                  ),
+                                                  Text("开始匹配"
+                                                      ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(18),
+                                                  )
+                                                ])
 
 
-                                            ),
+                                        ) ,Container( color:Colors.white,
+                                            height: ScreenUtil().setHeight(170),
+                                            width: ScreenUtil().setWidth( 130),
+                                            child: Column(
+
+                                                children: <Widget>[
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(2),
+                                                  ),
+                                                  Image.asset("assets/packages/images/game_guess.png"),
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(8),
+                                                  ),
+                                                  Text("开始匹配"
+                                                      ,style: TextStyle(color: Colors.black, fontSize: 13)),
+                                                  SizedBox(
+                                                    height: ScreenUtil().setHeight(18),
+                                                  )
+                                                ])
+
+
+                                        )
                                           ],
                                         ),
-
+                                        SizedBox(
+                                          height: ScreenUtil().setHeight(100),
+                                        ),
                                       ])
 
 

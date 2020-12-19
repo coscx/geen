@@ -24,5 +24,5 @@ abstract class DYBase {
   static final double statusBarHeight = MediaQueryData.fromWindow(window).padding.top;
 
   // flutter_screenutil px转dp
-  num dp(double dessignValue) => ScreenUtil.getInstance().setWidth(dessignValue);
+
 }
