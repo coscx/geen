@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_geen/views/app/navigation/unit_navigation.dart';
 import 'package:flutter_geen/views/pages/about/about_me_page.dart';
 import 'package:flutter_geen/views/pages/about/about_app_page.dart';
+import 'package:flutter_geen/views/pages/about/person_center_page.dart';
 import 'package:flutter_geen/views/pages/about/recommendedCard.dart';
 import 'package:flutter_geen/views/pages/about/time_line.dart';
 import 'package:flutter_geen/views/pages/about/version_info.dart';
@@ -66,6 +67,7 @@ class UnitRouter {
   static const String brower = 'Brower';
   static const String recommended_card = 'RecommendedCard';
   static const String login_phone = 'LoginPhone';
+  static const String person_page ='PersonCenterPage';
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       //根据名称跳转相应页面
@@ -120,6 +122,9 @@ class UnitRouter {
         return Right2LeftRouter(child: LoginPhone());
       case recommended_card:
         return Right2LeftRouter(child: RecommendedCard());
+      case person_page:
+        return Right2LeftRouter(child: MinePage());
+
       case time_line:
         return Right2LeftRouter(child: TimelinePage(title: settings.arguments,));
       case brower:

@@ -244,9 +244,10 @@ class ChatsState extends State<ChatsPage> {
     // TODO: implement build
     Widget widgets = MaterialApp(
         theme: ThemeData(
-            primaryColor: ObjectUtil.getThemeColor(),
-            primarySwatch: ObjectUtil.getThemeSwatchColor(),
-            platform: TargetPlatform.iOS),
+          appBarTheme: AppBarTheme.of(context).copyWith(
+            brightness: Brightness.light,
+          ),
+        ),
         home: Scaffold(
           appBar: _appBar(),
           body: BlocListener<PeerBloc, PeerState>(
@@ -267,9 +268,12 @@ class ChatsState extends State<ChatsPage> {
     return MoreWidgets.buildAppBar(
       context, widget.model.name,
       centerTitle: true,
-      elevation: 2.0,
+      elevation: 0.0,
       leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+          ),
           onPressed: () {
             Navigator.pop(context);
           }),
@@ -280,6 +284,7 @@ class ChatsState extends State<ChatsPage> {
                 child: Icon(
                   Icons.more_horiz,
                   size: 22,
+                  color: Colors.black,
                 )),
             onTap: () {
               MoreWidgets.buildDefaultMessagePop(context, _popString,
@@ -331,7 +336,8 @@ class ChatsState extends State<ChatsPage> {
   }
 
   _body(BuildContext context, PeerState peerState) {
-    return Column(children: <Widget>[
+    return Column(
+        children: <Widget>[
       Flexible(
           child: InkWell(
         child: _messageListView(context, peerState),

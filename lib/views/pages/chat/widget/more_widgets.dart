@@ -29,7 +29,8 @@ class MoreWidgets {
             child: AppBar(
               elevation: elevation, //阴影
               centerTitle: centerTitle,
-              title: Text(text, style: TextStyle(fontSize: fontSize)),
+              title: Text(text, style: TextStyle(fontSize: fontSize,color: Colors.black),),
+              backgroundColor: Colors.white,
               leading: leading,
               actions: actions,
             )),

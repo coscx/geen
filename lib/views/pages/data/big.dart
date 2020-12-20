@@ -152,15 +152,23 @@ class _FocusPage extends State<FocusPage> with DYBase, TickerProviderStateMixin 
   /// 所以在整个页面的最外层使用底层[Listener]监听原始触摸事件，判断手势需要自己取坐标计算。
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Theme(
+        data: ThemeData(
+        appBarTheme: AppBarTheme.of(context).copyWith(
+      brightness: Brightness.light,
+    ),
+    ),
+    child:Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("大数据"),
+        title: Text("大数据",style: TextStyle(color: Colors.black, fontSize: 25,fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
       body: BlocBuilder<BigDataBloc, BigDataState>(builder: _buildContent),
 
 
-    );
+    ));
   }
 
 

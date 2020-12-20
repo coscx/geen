@@ -14,7 +14,9 @@ import 'package:flutter_geen/blocs/peer/peer_event.dart';
 import 'package:flutter_geen/blocs/peer/peer_state.dart';
 import 'package:flutter_geen/views/pages/chat/view/util/date.dart';
 import 'package:flutter_geen/views/pages/chat/widget/more_widgets.dart';
+import 'package:flutter_geen/views/pages/home/home_page.dart';
 import 'package:flutter_geen/views/pages/utils/dialog_util.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flt_im_plugin/flt_im_plugin.dart';
 import 'package:flt_im_plugin/conversion.dart';
@@ -53,24 +55,202 @@ class ImConversationListPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Theme(
+        data: ThemeData(
+        appBarTheme: AppBarTheme.of(context).copyWith(
+      brightness: Brightness.light,
+    ),
+    ),
+    child:Scaffold(
       appBar: AppBar(
-        title: const Text('Demo'),
-      ),
-      body: SmartRefresher(
-        enablePullDown: true,
-        enablePullUp: false,
-        header: imRefreshHeader(),
-        controller: _refreshController,
-        onRefresh: _onRefresh,
-        child: BlocBuilder<ChatBloc, ChatState>(builder: _buildContent),
-      ),
-    );
-  }
+        title: const Text('消息',style: TextStyle(color: Colors.black, fontSize: 25,fontWeight: FontWeight.bold)),
+        //leading:const Text('Demo',style: TextStyle(color: Colors.black, fontSize: 15)),
+        backgroundColor: Colors.white,
+        elevation: 0, //去掉Appbar底部阴影
+        actions:<Widget> [
 
+          Container(
+            height: 20,
+            width: 20,
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              icon: Icon(
+                Icons.add_circle_outline,
+                size: 24.0,
+                color: Colors.black,
+              ),
+              onPressed: null,
+            ),
+          ),
+        SizedBox(
+          width: 20,
+        )
+        ],
+      ),
+      body:Column(
+        children: <Widget>[
+
+          Container(
+               height: 105,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: Colors.white,
+                boxShadow: [BoxShadow(color: Color(0x08000000), offset: Offset(0.5, 0.5),  blurRadius: 1.5, spreadRadius: 1.5),  BoxShadow(color: Colors.white)],
+              ),
+              margin: EdgeInsets.fromLTRB(20,10,20,0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Row(
+                    children: <Widget>[
+                      SizedBox(
+                        width: ScreenUtil().setWidth(10),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(
+                            top: 15.0,
+                            bottom: 15.0,
+                            left: 20,
+                            right: 25
+                        ),
+                        child:  Column(children: <Widget>[
+                          Container(
+                            height: ScreenUtil().setHeight(90),
+                            width: ScreenUtil().setWidth(90),
+                            alignment: FractionalOffset.topLeft,
+                            child: Image.asset("assets/packages/images/ic_chat_match.webp"),
+                          ),
+                          Text(
+                            "心动速配",
+                            style: new TextStyle(color: Colors.black54, fontSize: 12.0),
+                          ),
+
+                        ]),
+                      ),
+
+
+                      Container(
+                        padding: const EdgeInsets.only(
+                            top: 15.0,
+                            bottom: 15.0,
+                            left: 10,
+                            right: 25
+                        ),
+                        child:  Column(children: <Widget>[
+                          Container(
+                            height: ScreenUtil().setHeight(90),
+                            width: ScreenUtil().setWidth(90),
+                            alignment: FractionalOffset.topLeft,
+                            child: Image.asset("assets/packages/images/ic_moment_notice.webp"),
+                          ),
+                          Text(
+                            "互动消息",
+                            style: new TextStyle(color: Colors.black54, fontSize: 12.0),
+                          ),
+
+                        ]),
+                      ),
+
+                      Container(
+                        padding: const EdgeInsets.only(
+                            top: 15.0,
+                            bottom: 15.0,
+                            left: 10,
+                            right: 25
+                        ),
+                        child:  Column(children: <Widget>[
+                          Container(
+                            height: ScreenUtil().setHeight(90),
+                            width: ScreenUtil().setWidth(90),
+                            alignment: FractionalOffset.topLeft,
+                            child: Image.asset("assets/packages/images/ic_visitor.webp"),
+                          ),
+                          Text(
+                            "访客记录",
+                            style: new TextStyle(color: Colors.black54, fontSize: 12.0),
+                          ),
+
+                        ]),
+                      ),
+
+                      Container(
+                        padding: const EdgeInsets.only(
+                            top: 15.0,
+                            bottom: 15.0,
+                            left: 10,
+                            right: 25
+                        ),
+                        child:  Column(children: <Widget>[
+                          Container(
+                            height: ScreenUtil().setHeight(90),
+                            width: ScreenUtil().setWidth(90),
+                            alignment: FractionalOffset.topLeft,
+                            child: Image.asset("assets/packages/images/ic_playing.webp"),
+                          ),
+                          Text(
+                            "好友在玩",
+                            style: new TextStyle(color: Colors.black54, fontSize: 12.0),
+                          ),
+
+                        ]),
+                      ),
+
+
+
+                    ],
+                  ))),
+          SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child:  SmartRefresher(
+              enablePullDown: true,
+              enablePullUp: false,
+              header: imRefreshHeader(),
+              controller: _refreshController,
+              onRefresh: _onRefresh,
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Container(
+                color: Colors.white,
+                child: BlocBuilder<ChatBloc, ChatState>(builder: _buildContent),
+              )
+
+
+            ),
+          ),
+        ],
+      ),
+
+
+
+    ));
+  }
+  List<PopupMenuItem<String>> buildItems() {
+    final map = {
+      "待审": Icons.zoom_in,
+      "已审": Icons.check,
+      "隐藏": Icons.app_blocking,
+    };
+    return map.keys
+        .toList()
+        .map((e) => PopupMenuItem<String>(
+        value: e,
+        child: Wrap(
+          spacing: 10,
+          children: <Widget>[
+            Icon(
+              map[e],
+              color: Colors.blue,
+            ),
+            Text(e),
+          ],
+        )))
+        .toList();
+  }
   Widget _buildListItem(Conversion conversation) {
     return Container(
+      color:Colors.white,
       padding: const EdgeInsets.only(top: 10),
+
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -88,7 +268,8 @@ class ImConversationListPage extends StatelessWidget{
                   borderRadius: BorderRadius.circular(23.0),
                   // image url 去要到自己的服务器上去请求回来再赋值，这里使用一张默认值即可
                   image: DecorationImage(
-                      image: NetworkImage(conversation.avatarURL==""?"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606922115065&di=29da8ee4b3f8b33012622f12141fea1d&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202007%2F08%2F20200708231202_ucvgx.thumb.400_0.jpeg":conversation.avatarURL)),
+                      image: conversation.avatarURL==""? Image.asset("assets/packages/images/chat_hi.png").image:NetworkImage(conversation.avatarURL==""?"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606922115065&di=29da8ee4b3f8b33012622f12141fea1d&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202007%2F08%2F20200708231202_ucvgx.thumb.400_0.jpeg":conversation.avatarURL)
+                  ),
                 ),
               )
                   : Badge(
@@ -106,7 +287,8 @@ class ImConversationListPage extends StatelessWidget{
                     borderRadius: BorderRadius.circular(23.0),
                     // image url 去要到自己的服务器上去请求回来再赋值，这里使用一张默认值即可
                     image: DecorationImage(
-                        image: NetworkImage(conversation.avatarURL==""?"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606922115065&di=29da8ee4b3f8b33012622f12141fea1d&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202007%2F08%2F20200708231202_ucvgx.thumb.400_0.jpeg":conversation.avatarURL)),
+                        image: conversation.avatarURL==""? Image.asset("assets/packages/images/chat_hi.png").image:NetworkImage(conversation.avatarURL==""?"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606922115065&di=29da8ee4b3f8b33012622f12141fea1d&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202007%2F08%2F20200708231202_ucvgx.thumb.400_0.jpeg":conversation.avatarURL)
+                    ),
                   ),
                 ),
               ),
@@ -151,41 +333,44 @@ class ImConversationListPage extends StatelessWidget{
 
   Widget _buildContent(BuildContext context, ChatState state) {
     if (state is ChatMessageSuccess) {
-      return ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: state.message.length,
-          itemBuilder: (BuildContext context, int index) {
-            return InkWell(
-                onTap: ()  {
-                  BlocProvider.of<PeerBloc>(context).add(EventFirstLoadMessage(memberId,state.message[index].cid));
-                  if (state.message[index].newMsgCount>0){
-                    FltImPlugin im = FltImPlugin();
-                    im.clearReadCount(cid:state.message[index].cid);
-                    BlocProvider.of<ChatBloc>(context).add(EventFreshMessage());
-                  }
-                  Navigator.pushNamed(context, UnitRouter.to_chats, arguments: state.message[index]);
-                },
-                onLongPress: (){
+      return ScrollConfiguration(
+        behavior: DyBehaviorNull(),
+        child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: state.message.length,
+            itemBuilder: (BuildContext context, int index) {
+              return InkWell(
+                  onTap: ()  {
+                    BlocProvider.of<PeerBloc>(context).add(EventFirstLoadMessage(memberId,state.message[index].cid));
+                    if (state.message[index].newMsgCount>0){
+                      FltImPlugin im = FltImPlugin();
+                      im.clearReadCount(cid:state.message[index].cid);
+                      BlocProvider.of<ChatBloc>(context).add(EventFreshMessage());
+                    }
+                    Navigator.pushNamed(context, UnitRouter.to_chats, arguments: state.message[index]);
+                  },
+                  onLongPress: (){
 
-                  MoreWidgets.buildConversionMessagePop(context, _popString,
-                      onItemClick: (res) {
-                        switch (res) {
-                          case 'one':
-                            DialogUtil.showBaseDialog(context, '即将删除该对话的全部聊天记录',
-                                right: '删除', left: '再想想', rightClick: (res) {
-                                  FltImPlugin im = FltImPlugin();
-                                  im.deleteConversation(cid:state.message[index].cid);
-                                  BlocProvider.of<ChatBloc>(context).add(EventFreshMessage());
-                                  return null;
-                                });
-                            break;
+                    MoreWidgets.buildConversionMessagePop(context, _popString,
+                        onItemClick: (res) {
+                          switch (res) {
+                            case 'one':
+                              DialogUtil.showBaseDialog(context, '即将删除该对话的全部聊天记录',
+                                  right: '删除', left: '再想想', rightClick: (res) {
+                                    FltImPlugin im = FltImPlugin();
+                                    im.deleteConversation(cid:state.message[index].cid);
+                                    BlocProvider.of<ChatBloc>(context).add(EventFreshMessage());
+                                    return null;
+                                  });
+                              break;
 
-                        }
-                        return null;
-                      });
-                },
-                child: _buildListItem(state.message[index]));
-          });
+                          }
+                          return null;
+                        });
+                  },
+                  child: _buildListItem(state.message[index]));
+            }),
+      );
 
     }
 
