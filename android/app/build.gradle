@@ -49,7 +49,8 @@ android {
         applicationId "com.coscx.gold"
         ndk {
             //选择要添加的对应 cpu 类型的 .so 库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a','x86', 'x86_64'
+            //abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a','x86', 'x86_64'
+            abiFilters 'armeabi-v7a'
             // 还可以添加  'mips', 'mips64'
         }
 

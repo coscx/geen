@@ -165,7 +165,7 @@ class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProvider
       _position = i;
       // jumpTo thrid frame(index from 0)
       controllers.value = 0;
-      controllers.duration=Duration(milliseconds:500);
+      controllers.duration=Duration(milliseconds:700);
       // from current frame to 26 frame
       controllers.animateTo(14);
       //_ctrl0.reset();
