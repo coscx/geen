@@ -100,6 +100,38 @@ class EventSetMemberId extends GlobalEvent {
   @override
   List<Object> get props => [memberId];
 }
+class EventSetBar1 extends GlobalEvent {
+  final int memberId;
+
+  const EventSetBar1(this.memberId);
+
+  @override
+  List<Object> get props => [memberId];
+}
+class EventSetBar2 extends GlobalEvent {
+  final int memberId;
+
+  const EventSetBar2(this.memberId);
+
+  @override
+  List<Object> get props => [memberId];
+}
+class EventSetBar3 extends GlobalEvent {
+  final int memberId;
+
+  const EventSetBar3(this.memberId);
+
+  @override
+  List<Object> get props => [memberId];
+}
+class EventSetBar4 extends GlobalEvent {
+  final int memberId;
+
+  const EventSetBar4(this.memberId);
+
+  @override
+  List<Object> get props => [memberId];
+}
 class EventSetIndexMode extends GlobalEvent {
   final int mode;
 

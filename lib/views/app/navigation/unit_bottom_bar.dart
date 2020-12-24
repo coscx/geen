@@ -1,5 +1,10 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_geen/blocs/global/global_bloc.dart';
+import 'package:flutter_geen/blocs/global/global_event.dart';
 import 'package:flutter_gifimage/flutter_gifimage.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 
@@ -115,15 +120,22 @@ class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProvider
   Widget _buildChilds(BuildContext context, int i, int p,Color color) {
     final bool active = p == _position;
     final bool left = i == 0;
-
+    final int bar2 =  BlocProvider.of<GlobalBloc>(context).state.bar2;
+    final int bar3 =  BlocProvider.of<GlobalBloc>(context).state.bar3;
     return GestureDetector(
-      onTap: () => _tapTab(p),
+      onTap: () {
+
+       _tapTab(p);
+       },
       onLongPress: () => _onLongPress(context, i),
       child: Container(
         height: 60,
         //elevation: 0,
         //shape: RoundedRectangleBorder(borderRadius: left ? borderTR : borderTL),
         child: Container(
+          child:
+
+          Container(
             margin: left ? paddingTR : paddingTL,
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -132,7 +144,11 @@ class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProvider
             ),
             height: 40,
             width: 40,
-            child:
+            child:Badge(
+                showBadge: i==1 ?(bar2 ==0?false:true):(bar3 ==0?false:true),
+                position:BadgePosition.topEnd(top: -ScreenUtil().setHeight(5),end: -ScreenUtil().setWidth(5)),
+                toAnimate: false,
+                child:
             first==0 ?SvgPicture.asset(
           i==0?"assets/packages/images/tab_msg.svg":"assets/packages/images/tab_discovery.svg",
           color: Colors.black87,
@@ -155,7 +171,7 @@ class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProvider
         color: Colors.black87,
         ))
 
-        ),
+        ))),
       ),
     );
   }
@@ -163,6 +179,10 @@ class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProvider
     first++;
     setState(() {
       _position = i;
+      if (i==0){ BlocProvider.of<GlobalBloc>(context).add(EventSetBar1(0));}
+      if (i==1){ BlocProvider.of<GlobalBloc>(context).add(EventSetBar2(0));}
+      if (i==2){ BlocProvider.of<GlobalBloc>(context).add(EventSetBar3(0));}
+      if (i==3){ BlocProvider.of<GlobalBloc>(context).add(EventSetBar4(0));}
       // jumpTo thrid frame(index from 0)
       controllers.value = 0;
       controllers.duration=Duration(milliseconds:700);

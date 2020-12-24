@@ -29,6 +29,11 @@ class GlobalState extends Equatable {
   final List<String> headNum;
   final int sex;
   final String memberId;
+  final int bar1;
+  final int bar2;
+  final int bar3;
+  final int bar4;
+
   const GlobalState({
     this.fontFamily = 'ComicNeue',
     this.themeColor = Colors.blue,
@@ -40,7 +45,11 @@ class GlobalState extends Equatable {
     this.headNum,
     this.sex=1,
     this.currentPhotoMode=1,
-    this.memberId="0"
+    this.memberId="0",
+    this.bar1 =0,
+    this.bar2 =0,
+    this.bar3 =0,
+    this.bar4 =0,
   });
 
   @override
@@ -55,7 +64,11 @@ class GlobalState extends Equatable {
         headNum,
         sex,
         currentPhotoMode,
-        memberId
+        memberId,
+        bar1,
+        bar2,
+        bar3,
+        bar4
       ];
 
   GlobalState copyWith({
@@ -70,7 +83,11 @@ class GlobalState extends Equatable {
     List<String> headNum,
     int sex,
     int currentPhotoMode,
-    String memberId
+    String memberId,
+    int bar1,
+    int bar2,
+    int bar3,
+    int bar4
   }) =>
       GlobalState(
         fontFamily: fontFamily ?? this.fontFamily,
@@ -83,7 +100,13 @@ class GlobalState extends Equatable {
           headNum:headNum??this.headNum,
           sex:sex??this.sex,
           currentPhotoMode:currentPhotoMode??this.currentPhotoMode,
-          memberId: memberId?? this.memberId
+          memberId: memberId?? this.memberId,
+          bar1:bar1??this.bar1,
+          bar2:bar2??this.bar2,
+          bar3:bar3??this.bar3,
+          bar4:bar4??this.bar4,
+
+
       );
 
   @override

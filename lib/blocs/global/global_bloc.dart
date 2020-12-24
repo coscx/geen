@@ -77,6 +77,22 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
       page++;
       yield state.copyWith(indexPhotoPage: page);
     }
+    if (event is EventSetBar1) {
+      var page = event.memberId;
+      yield state.copyWith(bar1: page);
+    }
+    if (event is EventSetBar2) {
+      var page = event.memberId;
+      yield state.copyWith(bar2: page);
+    }
+    if (event is EventSetBar3) {
+      var page = event.memberId;
+      yield state.copyWith(bar3: page);
+    }
+    if (event is EventSetBar4) {
+      var page = event.memberId;
+      yield state.copyWith(bar4: page);
+    }
     // 首页图片审核分页当前第几页
     if (event is EventResetIndexPhotoPage) {
       yield state.copyWith(indexPhotoPage: 1);

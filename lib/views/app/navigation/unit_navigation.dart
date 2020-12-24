@@ -76,7 +76,7 @@ class _UnitNavigationState extends State<UnitNavigation> with SingleTickerProvid
 
     });
 
-
+    BlocProvider.of<GlobalBloc>(context).add(EventSetBar3(1));
 
 
 
