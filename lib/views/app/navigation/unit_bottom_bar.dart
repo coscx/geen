@@ -80,7 +80,7 @@ class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProvider
       onTap: () => _tapTab(p),
       onLongPress: () => _onLongPress(context, i),
       child: Container(
-        height: 60,
+        height: 55,
         //elevation: 0,
         //shape: RoundedRectangleBorder(borderRadius: left ? borderTR : borderTL),
         child: Container(
@@ -129,7 +129,7 @@ class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProvider
        },
       onLongPress: () => _onLongPress(context, i),
       child: Container(
-        height: 60,
+        height: 55,
         //elevation: 0,
         //shape: RoundedRectangleBorder(borderRadius: left ? borderTR : borderTL),
         child: Container(
@@ -145,6 +145,7 @@ class _UnitBottomBarState extends State<UnitBottomBar> with SingleTickerProvider
             height: 40,
             width: 40,
             child:Badge(
+                elevation: 0,
                 showBadge: i==1 ?(bar2 ==0?false:true):(bar3 ==0?false:true),
                 position:BadgePosition.topEnd(top: -ScreenUtil().setHeight(5),end: -ScreenUtil().setWidth(5)),
                 toAnimate: false,

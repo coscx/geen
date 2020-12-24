@@ -23,6 +23,7 @@ import 'package:flutter_geen/views/pages/data/big.dart';
 import 'package:flutter_geen/views/pages/data/card.dart';
 import 'package:flutter_geen/views/pages/data/info.dart';
 import 'package:flutter_geen/views/pages/home/home_drawer.dart';
+import 'package:flutter_geen/views/pages/index/index_page.dart';
 import 'package:flutter_geen/views/pages/home/home_page.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -173,7 +174,7 @@ class _UnitNavigationState extends State<UnitNavigation> with SingleTickerProvid
               controller: _controller,
               children: <Widget>[
                 HomePage(),
-                FocusPage(),
+                IndexPages(),
                 ImConversationListPage(memberId: id,),
                 MinePage(),
 
@@ -292,8 +293,8 @@ class _UnitNavigationState extends State<UnitNavigation> with SingleTickerProvid
       //backgroundColor: Colors.white,
 
       child: Container(
-        height: 65,
-        width: 65,
+        height: 70,
+        width: 70,
         child: Image.asset("assets/packages/images/tab_match.webp"),
       ),
       onTap: () {
