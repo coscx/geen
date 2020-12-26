@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_geen/views/pages/data/CustomLoadMore.dart';
+import 'package:flutter_geen/views/pages/home/home_page.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_geen/components/imageview/image_preview_page.dart';
 import 'package:flutter_geen/components/imageview/image_preview_view.dart';
@@ -87,6 +88,7 @@ class ChatsState extends State<ChatsPage> {
   String tfSender="0" ;
   FltImPlugin im = FltImPlugin();
   FRefreshController controller3;
+  bool _isLoading = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -112,6 +114,33 @@ class ChatsState extends State<ChatsPage> {
       }
 
     });
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent) {
+
+        if (_isLoading) {
+          return;
+        }
+
+        if (mounted) {
+          setState(() {
+            _isLoading = true;
+          });
+        }
+
+        Future.delayed(Duration(milliseconds: 150), () {
+          _onRefresh();
+          if (mounted) {
+            setState(() {
+              _isLoading = false;
+            });
+          }
+        });
+
+
+
+
+      }
+    });
   }
 
   @override
@@ -131,6 +160,7 @@ class ChatsState extends State<ChatsPage> {
           _isShowFace = false;
           _isShowVoice = false;
           try {
+            if(mounted)
             _scrollController.position.jumpTo(0);
           } catch (e) {}
         });
@@ -261,7 +291,8 @@ class ChatsState extends State<ChatsPage> {
               listener: (ctx, state) {
                 if (state is PeerMessageSuccess) {
                   //_scrollToBottom();
-                  //_scrollController.position.jumpTo(0);
+                  if(mounted)
+                  _scrollController.position.jumpTo(0);
                 }
               },
               child:BlocBuilder<PeerBloc, PeerState>(builder: (ctx, state) {
@@ -350,11 +381,14 @@ class ChatsState extends State<ChatsPage> {
         child: _messageListView(context, peerState),
         onTap: () {
           _hideKeyBoard();
-          setState(() {
-            _isShowVoice = false;
-            _isShowFace = false;
-            _isShowTools = false;
-          });
+          if(_isShowVoice == true ||_isShowFace == true||_isShowTools == true){
+            setState(() {
+              _isShowVoice = false;
+              _isShowFace = false;
+              _isShowTools = false;
+            });
+          }
+
         },
       )),
       Divider(height: 1.0),
@@ -851,30 +885,69 @@ class ChatsState extends State<ChatsPage> {
   }
 
   _messageListView(BuildContext context, PeerState peerState) {
-     return Container(
-        color: ColorT.gray_f0,
-        child: Column(
-          //如果只有一条数据，listView的高度由内容决定了，所以要加列，让listView看起来是满屏的
-          children: <Widget>[
-            Flexible(
+    if (peerState is PeerMessageSuccess) {
+
+      return Container(
+          color: ColorT.gray_f0,
+          child: Column(
+            //如果只有一条数据，listView的高度由内容决定了，所以要加列，让listView看起来是满屏的
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left: 10,right: 10,top: 0,bottom: 0),
+                    child: Text('',
+                      style:
+                      TextStyle(
+                        fontSize: 12,
+                        color: Theme.of(context).disabledColor,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Flexible(
                 //外层是Column，所以在Column和ListView之间需要有个灵活变动的控件
-                child: _buildContent(context, peerState))
-          ],
-        ));
+                  child: _buildContent(context, peerState))
+            ],
+          ));
+    }
+    if (peerState is LoadMorePeerMessageSuccess) {
+      bool isLastPage=peerState.noMore;
+      return Container(
+          color: ColorT.gray_f0,
+          child: Column(
+            //如果只有一条数据，listView的高度由内容决定了，所以要加列，让listView看起来是满屏的
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left: 10,right: 10,top: 0,bottom: 0),
+                    child: _isLoading
+                        ? CupertinoActivityIndicator()
+                        : Container(),
+                  )
+                ],
+              ),
+
+              Flexible(
+                //外层是Column，所以在Column和ListView之间需要有个灵活变动的控件
+                  child: _buildContent(context, peerState))
+            ],
+          ));
+    }
+    return Container();
+
   }
   Widget _buildContent(BuildContext context, PeerState state) {
     if (state is PeerMessageSuccess) {
 
-      return  CustomerRefreshLoadmore(
-          onRefresh: null,
-          onLoadmore: () async {
-            await Future.delayed(Duration(milliseconds: 200), () {
-              BlocProvider.of<PeerBloc>(context).add(EventLoadMoreMessage());
-            });
-          },
-          noMoreText: 'No more data, you are at the end',
-          isLastPage: false,
-          child: ListView.builder(
+      return     ScrollConfiguration(
+          behavior: DyBehaviorNull(),
+          child:ListView.builder(
+              padding: EdgeInsets.only(left: 10,right: 10,top: 0,bottom: 0),
           itemBuilder: (BuildContext context, int index) {
             return _messageListViewItem(state.messageList,index,tfSender);
           },
@@ -885,25 +958,15 @@ class ChatsState extends State<ChatsPage> {
           //所以应该让listView高度由内容决定
           shrinkWrap: true,
           controller: _scrollController,
-          physics: const BouncingScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           itemCount: state.messageList.length));
     }
     if (state is LoadMorePeerMessageSuccess) {
-      bool isLastPage=false;
-      if (state.noMore ==true){
-        isLastPage=true;
-        }
-      return   CustomerRefreshLoadmore(
-          onRefresh:null,
-          onLoadmore: () async {
-            await Future.delayed(Duration(milliseconds: 200), () {
-              BlocProvider.of<PeerBloc>(context).add(EventLoadMoreMessage());
-            });
 
-          },
-          noMoreText: '没有更多聊天记录了',
-          isLastPage: isLastPage,
+      return     ScrollConfiguration(
+          behavior: DyBehaviorNull(),
           child: ListView.builder(
+              padding: EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 0),
           itemBuilder: (BuildContext context, int index) {
             return _messageListViewItem(state.messageList,index,tfSender);
           },
@@ -914,7 +977,7 @@ class ChatsState extends State<ChatsPage> {
           //所以应该让listView高度由内容决定
           shrinkWrap: true,
           controller: _scrollController,
-          physics: const BouncingScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           itemCount: state.messageList.length));
     }
     return Container();
@@ -935,41 +998,43 @@ class ChatsState extends State<ChatsPage> {
     bool _isShowTime = true;
     var showTime; //最终显示的时间
     if (null == nextEntity) {
-      _isShowTime = true;
+      //_isShowTime = true;
     } else {
       //如果当前消息的时间和上条消息的时间相差，大于3分钟，则要显示当前消息的时间，否则不显示
-      if ((entity.timestamp - nextEntity.timestamp).abs() >
-          3 * 60 * 1000) {
+      if ((entity.timestamp*1000 - nextEntity.timestamp*1000).abs() > 3 * 60 * 1000) {
         _isShowTime = true;
       } else {
         _isShowTime = false;
       }
     }
     //获取当前的时间,yyyy-MM-dd HH:mm
-    String nowTime = DateUtil.getDateStrByMs(
-        new DateTime.now().millisecondsSinceEpoch,
-        format: DateFormat.YEAR_MONTH_DAY_HOUR_MINUTE);
+    String nowTime = DateUtil.getDateStrByMs(new DateTime.now().millisecondsSinceEpoch, format: DateFormat.ZH_MONTH_DAY_HOUR_MINUTE);
     //当前消息的时间,yyyy-MM-dd HH:mm
-    String indexTime = DateUtil.getDateStrByMs(entity.timestamp*1000,
-        format: DateFormat.YEAR_MONTH_DAY_HOUR_MINUTE);
+    String indexTime = DateUtil.getDateStrByMs(entity.timestamp*1000, format: DateFormat.ZH_YEAR_MONTH_DAY_HOUR_MINUTE);
 
-    if (DateUtil.formatDateTime1(indexTime, DateFormat.YEAR) !=
-        DateUtil.formatDateTime1(nowTime, DateFormat.YEAR)) {
+    if (DateUtil.formatDateTime1(indexTime, DateFormat.YEAR) != DateUtil.formatDateTime1(nowTime, DateFormat.YEAR)) {
       //对比年份,不同年份，直接显示yyyy-MM-dd HH:mm
       showTime = indexTime;
-    } else if (DateUtil.formatDateTime1(indexTime, DateFormat.YEAR_MONTH) !=
-        DateUtil.formatDateTime1(nowTime, DateFormat.YEAR_MONTH)) {
+    } else if (DateUtil.formatDateTime1(indexTime, DateFormat.ZH_YEAR_MONTH) != DateUtil.formatDateTime1(nowTime, DateFormat.ZH_YEAR_MONTH)) {
       //年份相同，对比年月,不同月或不同日，直接显示MM-dd HH:mm
-      showTime =
-          DateUtil.formatDateTime1(indexTime, DateFormat.MONTH_DAY_HOUR_MINUTE);
-    } else if (DateUtil.formatDateTime1(indexTime, DateFormat.YEAR_MONTH_DAY) !=
-        DateUtil.formatDateTime1(nowTime, DateFormat.YEAR_MONTH_DAY)) {
+
+
+      if ((entity.timestamp*1000-DateTime.now().millisecondsSinceEpoch).abs() < 1*24*3600*1000 && (entity.timestamp*1000-DateTime.now().millisecondsSinceEpoch).abs() > 10000){
+        showTime=""+DateUtil.formatDateTime1(indexTime, DateFormat.ZH_HOUR_MINUTE).substring( "MM月dd日 ".length,);
+      } else if ((entity.timestamp*1000-DateTime.now().millisecondsSinceEpoch).abs() < 2*24*3600*1000 && (entity.timestamp*1000-DateTime.now().millisecondsSinceEpoch).abs() > 1*24*3600*1000){
+        showTime="昨天 "+DateUtil.formatDateTime1(indexTime, DateFormat.ZH_HOUR_MINUTE).substring( "MM月dd日 ".length,);
+      }else if ((entity.timestamp*1000-DateTime.now().millisecondsSinceEpoch).abs() < 7*24*3600*1000 && (entity.timestamp*1000-DateTime.now().millisecondsSinceEpoch).abs() > 2*24*3600*1000){
+        showTime=DateUtil.getZHWeekDay(DateTime.fromMillisecondsSinceEpoch(entity.timestamp*1000, isUtc: false))+" "+DateUtil.formatDateTime1(indexTime, DateFormat.ZH_HOUR_MINUTE).substring( "MM月dd日 ".length,);
+      } else{
+        showTime = DateUtil.formatDateTime1(indexTime, DateFormat.ZH_MONTH_DAY_HOUR_MINUTE);
+      }
+
+    } else if (DateUtil.formatDateTime1(indexTime, DateFormat.ZH_MONTH_DAY) != DateUtil.formatDateTime1(nowTime, DateFormat.ZH_MONTH_DAY)) {
       //年份相同，对比年月,不同月或不同日，直接显示MM-dd HH:mm
-      showTime =
-          DateUtil.formatDateTime1(indexTime, DateFormat.MONTH_DAY_HOUR_MINUTE);
+      showTime = DateUtil.formatDateTime1(indexTime, DateFormat.ZH_MONTH_DAY_HOUR_MINUTE);
     } else {
       //否则HH:mm
-      showTime = DateUtil.formatDateTime1(indexTime, DateFormat.HOUR_MINUTE);
+      showTime = DateUtil.formatDateTime1(indexTime, DateFormat.ZH_HOUR_MINUTE);
     }
 
     return Container(
@@ -980,7 +1045,7 @@ class ChatsState extends State<ChatsPage> {
               heightFactor: 2,
               child: Text(
                 showTime,
-                style: TextStyle(color: ColorT.transparent_50),
+                style: TextStyle(color: ColorT.transparent_80),
               ))
               : SizedBox(height: 0),
           _chatItemWidget(entity, onResend, onItemClick,tfSender)

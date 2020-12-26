@@ -136,13 +136,13 @@ class DateUtil {
       case DateFormat.ZH_NORMAL: //yyyy年MM月dd日 HH时mm分ss秒
         time = time.substring(
             0,
-            "yyyy年MM月dd日 HH时mm分ss秒".length -
+            "yyyy年MM月dd日 HH:mm:ss".length -
                 (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
         break;
       case DateFormat.ZH_YEAR_MONTH_DAY_HOUR_MINUTE: //yyyy年MM月dd日 HH时mm分
         time = time.substring(
-            0,
-            "yyyy年MM月dd日 HH时mm分".length -
+            "yyyy年".length,
+            "yyyy年MM月dd日 HH:mm".length -
                 (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
         break;
       case DateFormat.ZH_YEAR_MONTH_DAY: //yyyy年MM月dd日
@@ -157,19 +157,19 @@ class DateUtil {
       case DateFormat.ZH_MONTH_DAY_HOUR_MINUTE: //MM月dd日 HH时mm分
         time = time.substring(
             "yyyy年".length,
-            "yyyy年MM月dd日 HH时mm分".length -
+            "yyyy年MM月dd日 HH:mm".length -
                 (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
         break;
       case DateFormat.ZH_HOUR_MINUTE_SECOND: //HH时mm分ss秒
         time = time.substring(
             "yyyy年MM月dd日 ".length,
-            "yyyy年MM月dd日 HH时mm分ss秒".length -
+            "yyyy年MM月dd日 HH:mm:ss".length -
                 (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
         break;
       case DateFormat.ZH_HOUR_MINUTE: //HH时mm分
         time = time.substring(
             "yyyy年MM月dd日 ".length,
-            "yyyy年MM月dd日 HH时mm分".length -
+            "yyyy年MM月dd日 HH:mm".length -
                 (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
         break;
       default:
@@ -209,7 +209,7 @@ class DateUtil {
         time = time.substring("yyyy-".length, "yyyy-MM-dd".length);
         break;
       case DateFormat.MONTH_DAY_HOUR_MINUTE: //MM-dd HH:mm
-        time = time.substring("yyyy-".length, "yyyy-MM-dd HH:mm".length);
+        time = time.substring("yyyy-".length, "MM-dd HH:mm".length);
         break;
       case DateFormat.HOUR_MINUTE_SECOND: //HH:mm:ss
         time =
@@ -244,10 +244,10 @@ class DateUtil {
     time = time.replaceFirst("-", "月");
     time = time.replaceFirst(" ", "日 ");
     if (timeSeparate == null || timeSeparate.isEmpty) {
-      time = time.replaceFirst(":", "时");
-      time = time.replaceFirst(":", "分");
-      time = time.replaceFirst(".", "秒");
-      time = time + "毫秒";
+     // time = time.replaceFirst(":", "时");
+      //time = time.replaceFirst(":", "分");
+      //time = time.replaceFirst(".", "秒");
+      //time = time + "毫秒";
     } else {
       time = time.replaceAll(":", timeSeparate);
     }
@@ -318,25 +318,25 @@ class DateUtil {
     String weekday;
     switch (dateTime.weekday) {
       case 1:
-        weekday = "星期一";
+        weekday = "周一";
         break;
       case 2:
-        weekday = "星期二";
+        weekday = "周二";
         break;
       case 3:
-        weekday = "星期三";
+        weekday = "周三";
         break;
       case 4:
-        weekday = "星期四";
+        weekday = "周四";
         break;
       case 5:
-        weekday = "星期五";
+        weekday = "周五";
         break;
       case 6:
-        weekday = "星期六";
+        weekday = "周六";
         break;
       case 7:
-        weekday = "星期日";
+        weekday = "周日";
         break;
       default:
         break;

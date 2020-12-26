@@ -2,6 +2,7 @@ library refresh_loadmore;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_geen/views/pages/home/home_page.dart';
 
 class CustomerRefreshLoadmore extends StatefulWidget {
   /// callback function on pull down to refresh | 下拉刷新时的回调函数
@@ -39,16 +40,16 @@ class _RefreshCustomerLoadmoreState extends State<CustomerRefreshLoadmore> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
   GlobalKey<RefreshIndicatorState>();
 
-  ScrollController _scrollController;
+  ScrollController _scrollControllers;
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
-    _scrollController.addListener(() async {
-      if (_scrollController.position.pixels >=
-          _scrollController.position.maxScrollExtent) {
+    _scrollControllers = ScrollController();
+    _scrollControllers.addListener(() async {
+      if (_scrollControllers.position.pixels >=
+          _scrollControllers.position.maxScrollExtent) {
         if (_isLoading) {
           return;
         }
@@ -74,25 +75,31 @@ class _RefreshCustomerLoadmoreState extends State<CustomerRefreshLoadmore> {
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _scrollControllers.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget mainWiget = ListView(
+    Widget mainWiget =
+
+    ScrollConfiguration(
+        behavior: DyBehaviorNull(),
+        child:
+        ListView(
+      padding: EdgeInsets.only(left: 0,right: 0,top: 0,bottom: 0),
       /// Solve the problem that there are too few items to pull down and refresh | 解决item太少，无法下拉刷新的问题
       reverse: true,
       shrinkWrap: true,
-      physics: BouncingScrollPhysics(),
-      controller: _scrollController,
+      physics: AlwaysScrollableScrollPhysics(),
+      controller: _scrollControllers,
       children: <Widget>[
         widget.child,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(left: 10,right: 10,top: 0,bottom: 0),
+              padding: EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 0),
               child: _isLoading
                   ? CupertinoActivityIndicator()
                   : Text(
@@ -109,7 +116,7 @@ class _RefreshCustomerLoadmoreState extends State<CustomerRefreshLoadmore> {
           ],
         )
       ],
-    );
+    ));
 
     if (widget.onRefresh == null) {
       return Scrollbar(child: mainWiget);
