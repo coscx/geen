@@ -174,7 +174,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: e16576b36e6d1b6423066c2f420933e014967f33
+      resolved-ref: "20b5aab137c78d232144ff000bbdaef25e6daebb"
       url: "https://github.com/coscx/lat.git"
     source: git
     version: "1.0.0"
@@ -347,6 +347,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.4.2"
+  frefresh:
+    dependency: "direct main"
+    description:
+      name: frefresh
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.0"
   getwidget:
     dependency: "direct main"
     description:

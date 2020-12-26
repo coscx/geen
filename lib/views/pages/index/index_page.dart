@@ -83,7 +83,6 @@ class _IndexPagesState extends State<IndexPages> with TickerProviderStateMixin {
                         child: IconButton(
                           icon: Icon(
                             Icons.search,
-                            size: 50.w,
                             color: Colors.black87,
                           ),
                           onPressed: () {

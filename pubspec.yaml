@@ -69,6 +69,7 @@ dependencies:
   flutter_svg: ^0.18.1
   modal_bottom_sheet: ^1.0.0+1
   flutter_gifimage: ^1.0.0
+  frefresh: ^1.1.0
 
 dev_dependencies:
   flutter_test:

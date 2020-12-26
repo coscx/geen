@@ -171,6 +171,7 @@ class PeerBloc extends Bloc<PeerEvent, PeerState> {
            List<Message> newMessages=[] ;
            FltImPlugin im = FltImPlugin();
            Map response;
+           bool noMore =false;
           List<Message> history=[];
           if (state is PeerMessageSuccess){
 
@@ -192,16 +193,18 @@ class PeerBloc extends Bloc<PeerEvent, PeerState> {
           }
 
           var  messages = ValueUtil.toArr(response["data"]).map((e) => Message.fromMap(ValueUtil.toMap(e))).toList().reversed.toList();
+          if (messages.length==0){
+            noMore=true;
+          }
           if(history.last!=null){
-
-
             newMessages.addAll(history);
             newMessages.addAll(messages);
           }else{
+
             newMessages.addAll(messages);
           }
 
-        yield LoadMorePeerMessageSuccess(newMessages);
+        yield LoadMorePeerMessageSuccess(newMessages,noMore);
       } catch (err) {
         print(err);
         yield GetPeerFailed();

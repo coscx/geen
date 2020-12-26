@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -12,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_geen/views/pages/data/CustomLoadMore.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_geen/components/imageview/image_preview_page.dart';
 import 'package:flutter_geen/components/imageview/image_preview_view.dart';
@@ -34,6 +36,7 @@ import 'package:flutter_geen/views/pages/utils/functions.dart';
 import 'package:flutter_geen/views/pages/utils/image_util.dart';
 import 'package:flutter_geen/views/pages/utils/object_util.dart';
 import 'package:flutter_record/flutter_record.dart';
+import 'package:frefresh/frefresh.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vibration/vibration.dart';
 
@@ -83,6 +86,7 @@ class ChatsState extends State<ChatsPage> {
   AudioPlayer _fixedPlayer;
   String tfSender="0" ;
   FltImPlugin im = FltImPlugin();
+  FRefreshController controller3;
   @override
   void initState() {
     // TODO: implement initState
@@ -97,7 +101,10 @@ class ChatsState extends State<ChatsPage> {
     _initData();
     _checkBlackList();
     _getPermission();
-
+    controller3 = FRefreshController();
+    controller3.setOnStateChangedCallback((state) {
+      print('state = $state');
+    });
     Future.delayed(Duration(milliseconds: 1)).then((e) async {
       var memberId = await LocalStorage.get("memberId");
       if(memberId != "" && memberId != null){
@@ -172,12 +179,12 @@ class ChatsState extends State<ChatsPage> {
     //     }
     //   },
     // );
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        _onRefresh();
-      }
-    });
+    // _scrollController.addListener(() {
+    //   if (_scrollController.position.pixels ==
+    //       _scrollController.position.maxScrollExtent) {
+    //     _onRefresh();
+    //   }
+    // });
   }
 
   _checkBlackList() {
@@ -254,7 +261,7 @@ class ChatsState extends State<ChatsPage> {
               listener: (ctx, state) {
                 if (state is PeerMessageSuccess) {
                   //_scrollToBottom();
-                  _scrollController.position.jumpTo(0);
+                  //_scrollController.position.jumpTo(0);
                 }
               },
               child:BlocBuilder<PeerBloc, PeerState>(builder: (ctx, state) {
@@ -858,7 +865,16 @@ class ChatsState extends State<ChatsPage> {
   Widget _buildContent(BuildContext context, PeerState state) {
     if (state is PeerMessageSuccess) {
 
-      return   ListView.builder(
+      return  CustomerRefreshLoadmore(
+          onRefresh: null,
+          onLoadmore: () async {
+            await Future.delayed(Duration(milliseconds: 200), () {
+              BlocProvider.of<PeerBloc>(context).add(EventLoadMoreMessage());
+            });
+          },
+          noMoreText: 'No more data, you are at the end',
+          isLastPage: false,
+          child: ListView.builder(
           itemBuilder: (BuildContext context, int index) {
             return _messageListViewItem(state.messageList,index,tfSender);
           },
@@ -869,12 +885,25 @@ class ChatsState extends State<ChatsPage> {
           //所以应该让listView高度由内容决定
           shrinkWrap: true,
           controller: _scrollController,
-          physics: BouncingScrollPhysics(),
-          itemCount: state.messageList.length);
+          physics: const BouncingScrollPhysics(),
+          itemCount: state.messageList.length));
     }
     if (state is LoadMorePeerMessageSuccess) {
+      bool isLastPage=false;
+      if (state.noMore ==true){
+        isLastPage=true;
+        }
+      return   CustomerRefreshLoadmore(
+          onRefresh:null,
+          onLoadmore: () async {
+            await Future.delayed(Duration(milliseconds: 200), () {
+              BlocProvider.of<PeerBloc>(context).add(EventLoadMoreMessage());
+            });
 
-      return   ListView.builder(
+          },
+          noMoreText: '没有更多聊天记录了',
+          isLastPage: isLastPage,
+          child: ListView.builder(
           itemBuilder: (BuildContext context, int index) {
             return _messageListViewItem(state.messageList,index,tfSender);
           },
@@ -885,8 +914,8 @@ class ChatsState extends State<ChatsPage> {
           //所以应该让listView高度由内容决定
           shrinkWrap: true,
           controller: _scrollController,
-          physics: BouncingScrollPhysics(),
-          itemCount: state.messageList.length);
+          physics: const BouncingScrollPhysics(),
+          itemCount: state.messageList.length));
     }
     return Container();
   }
