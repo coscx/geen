@@ -648,11 +648,8 @@ class ChatsState extends State<ChatsPage> {
       voiceBackground = ColorT.divider;
     });
     //flutterRecord这个框架把文件都存在了根目录，所以要在MainActivity创建文件../BHMFlutter/voice/
-    _voiceFileName =
-        'BHMFlutter/voice/' + DateTime.now().millisecondsSinceEpoch.toString();
-    _flutterRecord
-        .startRecorder(path: _voiceFileName, maxVolume: 10.0)
-        .then((voiceFilePath) {
+    _voiceFileName = 'BHMFlutter/voice/' + DateTime.now().millisecondsSinceEpoch.toString();
+    _flutterRecord.startRecorder(path: _voiceFileName, maxVolume: 10.0).then((voiceFilePath) {
       print('voice file path-- ' + voiceFilePath);
       _voiceFilePath = voiceFilePath;
     });
@@ -1007,6 +1004,12 @@ class ChatsState extends State<ChatsPage> {
         _isShowTime = false;
       }
     }
+    int zeroTmp = DateTime.now().millisecondsSinceEpoch;
+    var today = DateTime.now();
+    var times =today.year.toString()+"-" +today.month.toString()+"-"+today.day.toString() +" 00:00:00";
+    var dd =DateTime.parse(times).millisecondsSinceEpoch;
+    zeroTmp=dd;
+    int nows=zeroTmp - (zeroTmp + 8 * 3600 *1000) % (86400*1000);
     //获取当前的时间,yyyy-MM-dd HH:mm
     String nowTime = DateUtil.getDateStrByMs(new DateTime.now().millisecondsSinceEpoch, format: DateFormat.ZH_MONTH_DAY_HOUR_MINUTE);
     //当前消息的时间,yyyy-MM-dd HH:mm
@@ -1019,11 +1022,11 @@ class ChatsState extends State<ChatsPage> {
       //年份相同，对比年月,不同月或不同日，直接显示MM-dd HH:mm
 
 
-      if ((entity.timestamp*1000-DateTime.now().millisecondsSinceEpoch).abs() < 1*24*3600*1000 && (entity.timestamp*1000-DateTime.now().millisecondsSinceEpoch).abs() > 10000){
+      if ((entity.timestamp*1000)> nows ){
         showTime=""+DateUtil.formatDateTime1(indexTime, DateFormat.ZH_HOUR_MINUTE).substring( "MM月dd日 ".length,);
-      } else if ((entity.timestamp*1000-DateTime.now().millisecondsSinceEpoch).abs() < 2*24*3600*1000 && (entity.timestamp*1000-DateTime.now().millisecondsSinceEpoch).abs() > 1*24*3600*1000){
+      } else if ((entity.timestamp*1000> nows-1*24*3600*1000) && (entity.timestamp*1000<nows)){
         showTime="昨天 "+DateUtil.formatDateTime1(indexTime, DateFormat.ZH_HOUR_MINUTE).substring( "MM月dd日 ".length,);
-      }else if ((entity.timestamp*1000-DateTime.now().millisecondsSinceEpoch).abs() < 7*24*3600*1000 && (entity.timestamp*1000-DateTime.now().millisecondsSinceEpoch).abs() > 2*24*3600*1000){
+      }else if ((entity.timestamp*1000) > nows-7*24*3600*1000 && (entity.timestamp*1000) < nows-1*24*3600*1000){
         showTime=DateUtil.getZHWeekDay(DateTime.fromMillisecondsSinceEpoch(entity.timestamp*1000, isUtc: false))+" "+DateUtil.formatDateTime1(indexTime, DateFormat.ZH_HOUR_MINUTE).substring( "MM月dd日 ".length,);
       } else{
         showTime = DateUtil.formatDateTime1(indexTime, DateFormat.ZH_MONTH_DAY_HOUR_MINUTE);

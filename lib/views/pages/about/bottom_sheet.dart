@@ -39,12 +39,12 @@ class _BottomSheetState extends State<BottomSheet> {
           padding: MediaQuery.of(context).viewInsets, //边距（必要）
           duration: const Duration(milliseconds: 100), //时常 （必要）
           child: Container(
-             height: 1080,
+             height: 1080.h,
             constraints: BoxConstraints(
-              minHeight: 90, //设置最小高度（必要）
+              minHeight: 90.h, //设置最小高度（必要）
               maxHeight: MediaQuery.of(context).size.height / 1, //设置最大高度（必要）
             ),
-            padding: EdgeInsets.only(top: 34, bottom: 48),
+            padding: EdgeInsets.only(top: 34.h, bottom: 48.h),
             decoration: BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(20)), color: Colors.white), //圆角
             child:
 
@@ -390,21 +390,21 @@ class PhotoShareBottomSheet extends StatelessWidget {
   Widget sliverContactsSection(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        height: 132,
-        padding: EdgeInsets.only(top: 12),
+        height: 132.h,
+        padding: EdgeInsets.only(top: 12.h),
         child: ListView.builder(
           padding: EdgeInsets.all(10),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             final person = people[index];
             return Container(
-              width: 72,
+              width: 72.w,
               margin: EdgeInsets.symmetric(horizontal: 4),
               child: Column(
                 children: <Widget>[
 
 
-                  SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   Text(
                     person.title,
                     maxLines: 2,
@@ -438,13 +438,13 @@ class PhotoShareBottomSheet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
 
-                      SizedBox(width: 18),
+                      SizedBox(width: ScreenUtil().setWidth(18)),
                       GestureDetector(
                         onTap: () => Navigator.of(context).pop(),
                         child: Align(
                           alignment: Alignment.topCenter,
                           child: Container(
-                            margin: EdgeInsets.only(top: 14),
+                            margin: EdgeInsets.only(top: ScreenUtil().setHeight(14)),
                             padding: EdgeInsets.all(4),
                             decoration: BoxDecoration(
                               color: Colors.black.withOpacity(0.1),
@@ -458,7 +458,7 @@ class PhotoShareBottomSheet extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 12),
+                      SizedBox(width: ScreenUtil().setWidth(10)),
                       Expanded(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -470,11 +470,11 @@ class PhotoShareBottomSheet extends StatelessWidget {
                             ],
                           )),
 
-                      SizedBox(width: 14),
+                      SizedBox(width: ScreenUtil().setWidth(14)),
                     ],
                   ),
                 ),
-                Container(height: 1),
+                Container(height:ScreenUtil().setHeight(1) ),
               ],
             ),
           ),

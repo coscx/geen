@@ -2,7 +2,7 @@ import 'package:flt_im_plugin/flt_im_plugin.dart';
 import 'package:flt_im_plugin/value_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_geen/app/router.dart';
@@ -70,8 +70,8 @@ class ImConversationListPage extends StatelessWidget{
         actions:<Widget> [
 
           Container(
-            height: 20,
-            width: 20,
+            height: 20.h,
+            width: 20.w,
             child: IconButton(
               padding: EdgeInsets.zero,
               icon: Icon(
@@ -83,7 +83,7 @@ class ImConversationListPage extends StatelessWidget{
             ),
           ),
         SizedBox(
-          width: 20,
+          width: 40.w,
         )
         ],
       ),
@@ -91,13 +91,14 @@ class ImConversationListPage extends StatelessWidget{
         children: <Widget>[
 
           Container(
-               height: 105,
+               height: 195.h,
+               width: ScreenUtil().screenWidth,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(10.w),
                 color: Colors.white,
                 boxShadow: [BoxShadow(color: Color(0x08000000), offset: Offset(0.5, 0.5),  blurRadius: 1.5, spreadRadius: 1.5),  BoxShadow(color: Colors.white)],
               ),
-              margin: EdgeInsets.fromLTRB(20,10,20,0),
+              margin: EdgeInsets.fromLTRB(20.w,10.h,20.w,0.h),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Row(
@@ -106,11 +107,11 @@ class ImConversationListPage extends StatelessWidget{
                         width: ScreenUtil().setWidth(10),
                       ),
                       Container(
-                        padding: const EdgeInsets.only(
-                            top: 15.0,
-                            bottom: 15.0,
-                            left: 20,
-                            right: 25
+                        padding:  EdgeInsets.only(
+                            top: 35.h,
+                            bottom: 15.h,
+                            left: 40.w,
+                            right: 35.w
                         ),
                         child:  Column(children: <Widget>[
                           Container(
@@ -129,11 +130,11 @@ class ImConversationListPage extends StatelessWidget{
 
 
                       Container(
-                        padding: const EdgeInsets.only(
-                            top: 15.0,
-                            bottom: 15.0,
-                            left: 10,
-                            right: 25
+                        padding:  EdgeInsets.only(
+                            top: 35.h,
+                            bottom: 15.h,
+                            left: 40.w,
+                            right: 35.w
                         ),
                         child:  Column(children: <Widget>[
                           Container(
@@ -151,11 +152,11 @@ class ImConversationListPage extends StatelessWidget{
                       ),
 
                       Container(
-                        padding: const EdgeInsets.only(
-                            top: 15.0,
-                            bottom: 15.0,
-                            left: 10,
-                            right: 25
+                        padding:  EdgeInsets.only(
+                            top: 35.h,
+                            bottom: 15.h,
+                            left: 40.w,
+                            right: 35.w
                         ),
                         child:  Column(children: <Widget>[
                           Container(
@@ -173,11 +174,11 @@ class ImConversationListPage extends StatelessWidget{
                       ),
 
                       Container(
-                        padding: const EdgeInsets.only(
-                            top: 15.0,
-                            bottom: 15.0,
-                            left: 10,
-                            right: 25
+                        padding:  EdgeInsets.only(
+                            top: 35.h,
+                            bottom: 15.h,
+                            left: 40.w,
+                            right: 35.w
                         ),
                         child:  Column(children: <Widget>[
                           Container(
@@ -199,7 +200,7 @@ class ImConversationListPage extends StatelessWidget{
                     ],
                   ))),
           SizedBox(
-            height: 10,
+            height: 10.h,
           ),
           Expanded(
             child:  SmartRefresher(
